@@ -1,11 +1,11 @@
 
 body {
     font-weight: 300;
-    font-family: 'Helvetica Neue', 'Source Sans Pro', 'Open Sans',Helvetica,Arial,sans-serif;
+    font-family: 'Dejavu Sans', 'Arial', 'Verdana', sans-serif;
 }
 
 h1 {
-	font-size: 35px;
+	font-size: 45px;
 }
 
 h2 {
@@ -18,12 +18,12 @@ h3 {
 
 .description {
 	margin-top: 50px;
-	margin-bottom: 80px;
-	font-size: 18px;
+	margin-bottom: 50px;
+	font-size: 20px;
 }
 
 .section-description {
-	font-size: 18px;
+	font-size: 20px;
 }
 
 .container {
@@ -32,7 +32,7 @@ h3 {
 }
 
 .intro-section .section-description{
-	background: #000cab;
+	background: #20bfb4;
 	padding-top: 50px;
 	padding-bottom: 20px;
 	color: white;
@@ -73,12 +73,12 @@ h3 {
 
 .section-title {
 	/*background-color: #2e89ebe3;*/
-	background-color: #9521b3e3;
+	background-color: #21b38f33;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	margin-top: 30px;
 	margin-bottom: 15px;
-	color: white;
+	color: black;
 }
 
 .principle {
@@ -184,7 +184,7 @@ h3 {
 
 .author {
 	margin-top: 80px;
-	background-color: #f7f6f1; 
+	background-color: #FFFFFF;
 	color: black;
 	/*text-align: center;*/
 	font-size: 19px;
@@ -198,20 +198,21 @@ h3 {
 	color: white;
 }
 
-.logo-section {
+#team {
+	/*display: flex; */
+	width: 100%;
 	text-align: center;
 }
 
-.logo {
-	margin-top: 15px;
-	margin-bottom: 15px;
-	width: 60%;
+.team-card {
+	display: inline-block;
+    min-width: 0;
 }
 
-#um-logo {
-	width: 40%;
-}
-
-#and-also-too-logo {
-	width: 40%;
+.circle-img {
+    object-fit: cover;
+    border-radius: 100%;
+    margin: 10px 50px 10px 50px;
+    height: 170px;
+    width: 170px;
 }
