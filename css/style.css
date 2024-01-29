@@ -40,7 +40,7 @@ h3 {
 
 .intro-section .section-description a {
 	color:  #e5f3bd;
-	font-weight: bold;
+	font-weight: 450;
 }
 
 .navbar-nav li {
@@ -207,15 +207,15 @@ h3 {
 .team-card {
 	display: inline-block;
     min-width: 0;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 40px;
+    margin-right: 40px;
     margin-bottom: 20px;
 }
 
 .circle-img {
     object-fit: cover;
     border-radius: 100%;
-    margin: 0px 90px 10px 90px;
+    margin: 0px 40px 10px 40px;
     height: 200px;
     width: 200px;
 }
