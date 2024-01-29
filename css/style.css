@@ -1,7 +1,7 @@
 
 body {
-    font-weight: 300;
-    font-family: 'Dejavu Sans', 'Arial', 'Verdana', sans-serif;
+    font-weight: 240;
+    /*font-family: 'Dejavu Sans', 'Arial', 'Verdana', sans-serif;*/
 }
 
 h1 {
@@ -215,4 +215,9 @@ h3 {
     margin: 10px 50px 10px 50px;
     height: 170px;
     width: 170px;
+}
+
+#moa-wave {
+	width: 42px; 
+	padding-bottom: 6px;
 }
