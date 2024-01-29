@@ -209,13 +209,13 @@ h3 {
     min-width: 0;
     margin-left: 50px;
     margin-right: 50px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .circle-img {
     object-fit: cover;
     border-radius: 100%;
-    margin: 10px 90px 10px 90px;
+    margin: 0px 90px 10px 90px;
     height: 200px;
     width: 200px;
 }
