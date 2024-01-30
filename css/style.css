@@ -5,15 +5,23 @@ body {
 }
 
 h1 {
-	font-size: 45px;
+	font-size: 50px;
+	font-weight: 300;
 }
 
 h2 {
 	font-size: 30px;
+	
+	font-weight: 200;
 }
 
 h3 {
 	font-size: 25px;
+	font-weight: 200;
+}
+
+b {
+	font-weight: 300;
 }
 
 .description {
@@ -31,6 +39,11 @@ h3 {
     padding-right: 10px;
 }
 
+.intro-section p {
+	font-weight: 300;
+	font-size: 20px;
+}
+
 .intro-section .section-description{
 	background: #20bfb4;
 	padding-top: 50px;
@@ -39,8 +52,9 @@ h3 {
 }
 
 .intro-section .section-description a {
-	color:  #e5f3bd;
-	font-weight: 450;
+	color: #dcffd5;
+	font-weight: 300;
+	font-size: 20px;
 }
 
 .navbar-nav li {
