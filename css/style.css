@@ -11,7 +11,6 @@ h1 {
 
 h2 {
 	font-size: 30px;
-	
 	font-weight: 200;
 }
 
@@ -21,7 +20,7 @@ h3 {
 }
 
 b {
-	font-weight: 300;
+	font-weight: 400;
 }
 
 .description {
@@ -229,7 +228,7 @@ b {
 .circle-img {
     object-fit: cover;
     border-radius: 100%;
-    margin: 0px 70px 10px 70px;
+    margin: 0px 50px 10px 50px;
     height: 200px;
     width: 200px;
 }
