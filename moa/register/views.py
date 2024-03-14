@@ -24,7 +24,8 @@ def register(response):
 			password = make_password(form.cleaned_data['password']))
 		context = {"email": user.email}
 		# return HttpResponseRedirect("../core")
-		return redirect(reverse("core:index"), email=user.email)
+		print(context)
+		return redirect(reverse("main"), context)
 	else:
 		form = RegisterForm()
 		return render(response, "register/register.html", {"form":form})
