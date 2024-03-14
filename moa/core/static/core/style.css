@@ -108,6 +108,26 @@ b {
 	margin-bottom: 25px;
 }
 
+.advising-experience {
+	font-size: 15px;
+	background-color: #e9ecef;
+	color: black;
+	cursor: pointer;
+    border-style: none;
+    border-radius: 0.4rem;
+    padding: 5px 7px 5px 7px;
+}
+
+.advising-experience:hover {
+	font-size: 15px;
+	background-color: #ddd;
+	color: black;
+	cursor: pointer;
+    border-style: none;
+    border-radius: 0.4rem;
+    padding: 5px 7px 5px 7px;
+}
+
 .principle {
 	padding-bottom: 10px;
 	font-size: 18px;
