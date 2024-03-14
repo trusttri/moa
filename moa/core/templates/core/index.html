@@ -1,55 +1,19 @@
-{% load static %}
+{% extends "core/base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <meta charset="utf-8">
-    <head>
-        <title> Moa </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'core/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'core/style.css' %}">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- <link rel="shortcut icon" href="favicon.ico?" type="image/x-icon">
-        <link rel="icon" href="favicon.ico?" type="image/x-icon"> -->
-    </head>
-
-
-    <body>
-        <div class="intro-section">
-            <div class="section-description ">
-                <div class="container ">       
-                    <h1 id="site-title">Moa 모아 <img id="moa-wave" src="{% static 'core/images/wave.png' %}"></h1>
-                    <p>
-                        
-                    </p>
-                    <div class="section-links">
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="container description">
-                <h3>A software for consentfully connecting PhD students affected by faculty advisors’ mistreatment or abuse of power.</h3>
-            </div>
-
-            <div class="container" id="login">
-                <div>
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="uname" required>
-                </div>
-                <div>
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
-                    
-                </div>
-                <button type="submit">Login</button>
-            </div>
-
+{% block content %}
+    <div class="container" id="login">
+        <div>
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
         </div>
-
-        <div id="sign">
-            <!-- <small>This site is made by <a href="https://imjane.net">Jane Im</a>. Last updated 1/30/2024</small> -->
+        <div>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            
         </div>
-    </body>
-</html>
+        <button type="submit">Login</button>
+    </div>
+
+{% endblock %}
 
 
