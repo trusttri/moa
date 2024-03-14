@@ -24,8 +24,8 @@ b {
 }
 
 .description {
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 	font-size: 20px;
 }
 
@@ -54,8 +54,8 @@ b {
 
 .intro-section .section-description{
 	background: #20bfb4;
-	padding-top: 50px;
-	padding-bottom: 20px;
+	padding-top: 20px;
+	padding-bottom: 10px;
 	color: white;
 }
 
