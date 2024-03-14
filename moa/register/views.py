@@ -8,6 +8,7 @@ from core.models import User
 from django.contrib.auth.hashers import make_password
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib import messages
 
 
 
@@ -22,10 +23,9 @@ def register(response):
 		user = User.objects.create(stored_at=timezone.now(), 
 			email = form.cleaned_data['email'], 
 			password = make_password(form.cleaned_data['password']))
-		context = {"email": user.email}
-		# return HttpResponseRedirect("../core")
-		print(context)
-		return redirect(reverse("main"), context)
+
+		# login(request, user, backend=None)
+		return redirect(reverse("main"), {"form":form})
 	else:
 		form = RegisterForm()
 		return render(response, "register/register.html", {"form":form})

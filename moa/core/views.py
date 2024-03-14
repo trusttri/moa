@@ -14,4 +14,7 @@ def index(request):
 
 def main(request):
 	print("main")
+	print(request.POST.get('form'))
+	if request.user.is_authenticated:
+		print('hi')
 	return render(request, "core/main.html")
