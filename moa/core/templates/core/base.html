@@ -20,7 +20,7 @@
                 <div class="container">       
                     <h1 id="site-title">Moa 모아 <img id="moa-wave" src="{% static 'core/images/wave.png' %}"></h1>
                     <p>
-                        A software for consentfully connecting PhD students affected by faculty advisors’ mistreatment or abuse of power.
+                        A system for consentfully connecting PhD students affected by faculty advisors’ mistreatment or abuse of power.
                     </p>
                     <div class="section-links">
                         
@@ -29,8 +29,14 @@
             </div>
 
             <div class="container">
-                {% block content %}
-                {% endblock %}
+                <div>
+                    {% block title %}
+                    {% endblock %}
+                </div>
+                <div>
+                    {% block content %}
+                    {% endblock %}
+                </div>
             </div>
 
         </div>

@@ -25,8 +25,6 @@ SECRET_KEY = 'django-insecure-sl$ihqib=w%5j)u5r2db5ml2n@g-9k5+6r0bm)a_9ek7d*5qbz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# template for sign-up
-CRISPY_TEMPLATE_PACK="bootstrap4"
 
 ALLOWED_HOSTS = []
 
@@ -42,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "crispy_forms",
-    "crispy_bootstrap4",
+    "crispy_bootstrap5",
     'register.apps.RegisterConfig',
 ]
 
@@ -123,6 +121,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+CRISPY_TEMPLATE_PACK="bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

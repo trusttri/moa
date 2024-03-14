@@ -11,15 +11,12 @@ from django.template import loader
 def register(response):
 	if response.method == "POST":
 		form = RegisterForm(response.POST)
-	if response.method == "GET":
-		form = RegisterForm(response.GET)
 
-	if form.is_valid():
-		form.save()
-		return redirect("/home")
-	else:
-		form = RegisterForm()
-		return render(response, "register/register.html", {"form":form})
+		if form.is_valid():
+			pass
+		else:
+			form = RegisterForm()
+	return render(response, "register/register.html", {"form":form})
 
 
 def index(request):

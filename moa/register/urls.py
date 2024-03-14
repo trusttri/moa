@@ -5,5 +5,5 @@ from . import views
 app_name = "register"
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.register, name="register"),
 ]
