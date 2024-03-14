@@ -11,6 +11,8 @@ from django.template import loader
 def register(response):
 	if response.method == "POST":
 		form = RegisterForm(response.POST)
+	elif response.method == "GET":
+		form = RegisterForm(response.GET)
 
 		if form.is_valid():
 			pass
