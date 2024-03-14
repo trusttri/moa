@@ -1,0 +1,246 @@
+
+body {
+    font-weight: 240;
+    /*font-family: 'Dejavu Sans', 'Arial', 'Verdana', sans-serif;*/
+}
+
+h1 {
+	font-size: 50px;
+	font-weight: 300;
+}
+
+h2 {
+	font-size: 45px;
+	font-weight: 200;
+}
+
+h3 {
+	font-size: 40px;
+	font-weight: 100;
+}
+
+b {
+	font-weight: 400;
+}
+
+.description {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	font-size: 20px;
+}
+
+.section-description {
+	font-size: 20px;
+}
+
+.container {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.intro-section p {
+	font-weight: 300;
+	font-size: 20px;
+}
+
+.intro-section .section-description{
+	background: #20bfb4;
+	padding-top: 50px;
+	padding-bottom: 20px;
+	color: white;
+}
+
+.intro-section .section-description a {
+	color: #dcffd5;
+	font-weight: 300;
+	font-size: 20px;
+}
+
+.navbar-nav li {
+	padding-left: 20px;
+}
+
+.principle-container {
+	padding: 10px 20px 10px 20px;
+	margin-top: 40px;
+	margin-bottom: 60px;
+}
+
+.building-features-container {
+	padding-bottom: 20px;
+	margin-top: 30px;
+	margin-bottom: 15px;
+}
+
+.building-features-container .section-title {
+	background-color: #ca4660;
+}
+
+#site-title {
+	padding-top: 30px;
+}
+
+.section-links {
+	font-size: 19px;
+}
+
+.section-title {
+	/*background-color: #2e89ebe3;*/
+	background-color: #21b38f33;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 30px;
+	margin-bottom: 15px;
+	color: black;
+}
+
+.principle {
+	padding-bottom: 10px;
+	font-size: 18px;
+}
+
+.header {
+	font-size: 21px;
+}
+
+.building-blocks {
+	padding-left: 10px;
+}
+
+.building-blocks .block-row {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.building-blocks button {
+	font-size: 18px;
+	background-color: #802730;
+	color: white;
+	cursor: pointer;
+    border-style: none;
+    border-radius: 0.4rem;
+    padding: 5px 10px 5px 10px;
+}
+
+.example-button {
+	font-size: 13px;
+	background-color: #130295;
+	color: white;
+	cursor: pointer;
+    border-style: none;
+    border-radius: 0.4rem;
+    padding: 3px 7px 3px 7px;
+}
+
+.example-button:hover {
+	background-color: #0474ad;
+}
+
+.tag {
+	font-size: 13px;
+	background-color: #676987;
+	color: white;
+	/*cursor: pointer;*/
+    border-style: none;
+    border-radius: 0.4rem;
+    padding: 3px 8px 3px 8px;
+}
+
+.building-blocks button:hover {
+	background-color: #a54b82;
+	color: white;
+}
+
+.building-blocks .block-definition {
+	font-size: 16px;
+}
+
+.table {
+	margin-top: 30px;
+}
+
+.examples .header{
+	margin-top: 25px;
+	margin-bottom: 20px;
+}
+.example-figures {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.example-figures-col2 img {
+	width: 75%;
+}
+
+.example-figures-col3 img {
+	width: 90%;
+}
+
+.figure-description {
+	margin-top: 5px;
+	margin-bottom: 20px;
+	font-size: 13px;
+}
+
+#webcon-2 {
+	width: 100%;
+}
+
+.video {
+	margin-top: 80px; 
+	color: black;
+	background-color: #f1f5f7;
+	text-align: center;
+	font-size: 20px;
+}
+
+
+.author {
+	margin-top: 80px;
+	background-color: #FFFFFF;
+	color: black;
+	/*text-align: center;*/
+	font-size: 19px;
+}
+
+#sign {
+    text-align: center;
+}
+
+.white-text {
+	color: white;
+}
+
+#team {
+	/*display: flex; */
+	width: 100%;
+	text-align: center;
+}
+
+.team-card {
+	display: inline-block;
+    min-width: 0;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+}
+
+.circle-img {
+    object-fit: cover;
+    border-radius: 100%;
+    margin: 0px 50px 10px 50px;
+    height: 200px;
+    width: 200px;
+}
+
+#moa-wave {
+	width: 80px; 
+	padding-bottom: 17px;
+}
+
+#login {
+	text-align: center;
+	font-size: 25px;
+}

@@ -25,18 +25,25 @@ SECRET_KEY = 'django-insecure-sl$ihqib=w%5j)u5r2db5ml2n@g-9k5+6r0bm)a_9ek7d*5qbz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# template for sign-up
+CRISPY_TEMPLATE_PACK="bootstrap4"
+
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "crispy_forms",
+    "crispy_bootstrap4",
+    'register.apps.RegisterConfig',
 ]
 
 MIDDLEWARE = [
