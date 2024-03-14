@@ -20,7 +20,7 @@ from register import views as v
 
 urlpatterns = [
 	path('', index, name='index'),
-	path("core/", include("core.urls")),
+	path("core/", include("core.urls"), name='core'),
     path('admin/', admin.site.urls),
-    path("register/", include("register.urls")), 
+    path("register/", include("register.urls"), name='register'), 
 ]

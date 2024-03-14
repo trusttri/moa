@@ -1,6 +1,6 @@
 MYSQL = {
     'NAME' : 'moa',
     'USER' : 'root',
-    'PASSWORD' : '[password]',
+    'PASSWORD' : 'Chaerin605!',
     'HOST' : 'localhost',
 }

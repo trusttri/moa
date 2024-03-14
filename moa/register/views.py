@@ -1,9 +1,13 @@
 
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from core.models import User
+from django.contrib.auth.hashers import make_password
+from django.utils import timezone
+from django.urls import reverse
 
 
 
@@ -14,11 +18,16 @@ def register(response):
 	elif response.method == "GET":
 		form = RegisterForm(response.GET)
 
-		if form.is_valid():
-			pass
-		else:
-			form = RegisterForm()
-	return render(response, "register/register.html", {"form":form})
+	if form.is_valid():
+		user = User.objects.create(stored_at=timezone.now(), 
+			email = form.cleaned_data['email'], 
+			password = make_password(form.cleaned_data['password']))
+		context = {"email": user.email}
+		# return HttpResponseRedirect("../core")
+		return redirect(reverse("core:index"), email=user.email)
+	else:
+		form = RegisterForm()
+		return render(response, "register/register.html", {"form":form})
 
 
 def index(request):
