@@ -40,16 +40,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'core',
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # THIRD PARTY
     "crispy_forms",
     "crispy_bootstrap5",
-    'register.apps.RegisterConfig',
+    "allauth",
+    "allauth.account",
+    # LOCAL
+    'core',
+    'register',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'moa.urls'
@@ -106,6 +111,8 @@ DATABASES = {
 }
 
 
+AUTH_USER_MODEL = "register.CustomUser"
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -150,3 +157,5 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "home"
