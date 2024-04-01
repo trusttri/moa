@@ -1,5 +1,5 @@
 # from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model # this imports CustomUser -- looks to the AUTH_USER_MODEL config in settings.py
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 # from django.contrib.auth.models import User
 
@@ -11,6 +11,14 @@ class CustomUserCreationForm(UserCreationForm):
 			"email",
 			"username",
 
+		)
+
+class CustomUserChangeForm(UserChangeForm):
+	class Meta:
+		model = get_user_model()
+		fields = (
+			"email",
+			"username",
 		)
 
 # class RegisterForm(forms.Form):
