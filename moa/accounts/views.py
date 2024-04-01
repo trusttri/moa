@@ -13,7 +13,7 @@ from django.contrib import messages
 
 
 # Create your views here.
-def register(response):
+def accounts(response):
 	if response.method == "POST":
 		form = RegisterForm(response.POST)
 	elif response.method == "GET":

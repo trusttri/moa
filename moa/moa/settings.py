@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "allauth.account",
     # LOCAL
     'core',
-    'register',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +111,7 @@ DATABASES = {
 }
 
 
-AUTH_USER_MODEL = "register.CustomUser"
+AUTH_USER_MODEL = "accounts.CustomUser"
 
 
 # Password validation
