@@ -2,23 +2,17 @@
 
 {% block content %}
     <div class="container" id="login">
-        <div>
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
-        </div>
-        <div>
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-            
-        </div>
-        <button type="submit">Login</button>
+
+        {% if user.is_authenticated %}
+            <p>Hi {{ user.email }}! </p>
+        {% else %}
+            <p>You are not logged in </p>
+            <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
+
     </div>
 
-    <div class="container description">
-        <div id="signup-text">
-            Not registered yet? Sign up <a href="/accounts">here</a>.
-        </div>
-    </div>
+
 
 {% endblock %}
 
