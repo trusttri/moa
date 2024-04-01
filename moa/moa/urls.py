@@ -20,7 +20,7 @@ from core.views import index, main
 urlpatterns = [
 	path('', index, name='index'),
 	path("core/", include("core.urls"), name='core'),
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path("accounts/", include("accounts.urls"), name='accounts'), 
     path("main/", main, name='main')
 ]
