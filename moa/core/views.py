@@ -17,4 +17,4 @@ def main(request):
 	print(request.POST.get('form'))
 	if request.user.is_authenticated:
 		print('hi')
-	return render(request, "core/main.html")
+	return render(request, "main.html")

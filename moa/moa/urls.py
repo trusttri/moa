@@ -19,8 +19,9 @@ from core.views import index, main
 
 urlpatterns = [
 	# path("core/", include("core.urls"), name='core'),
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")), 
+    path("accounts/", include("accounts.urls")), # this needs to come after the above line
     path("", include("pages.urls"), name="home"),
     path("main/", main, name='main'),    
 ]
