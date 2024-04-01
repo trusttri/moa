@@ -18,9 +18,10 @@ from django.urls import path, include
 from core.views import index, main
 
 urlpatterns = [
-	path('', index, name='index'),
-	path("core/", include("core.urls"), name='core'),
+	# path('', index, name='home'),
+    path("", include("pages.urls"), name="home"),
+	# path("core/", include("core.urls"), name='core'),
     path('admin/', admin.site.urls),
     path("accounts/", include("accounts.urls"), name='accounts'), 
-    path("main/", main, name='main')
+    path("main/", main, name='main'),    
 ]

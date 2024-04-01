@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from environs import Env
 import pymysql
 
 pymysql.install_as_MySQLdb()
@@ -70,10 +71,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'moa.urls'
 
+
+
+env = Env()  # new
+env.read_env()  # new
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
