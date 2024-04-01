@@ -1,6 +1,6 @@
 
 from django.shortcuts import render, redirect
-# from .forms import RegisterForm
+from .forms import CustomUserCreationForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -15,9 +15,9 @@ from django.contrib import messages
 # Create your views here.
 def accounts(response):
 	if response.method == "POST":
-		form = RegisterForm(response.POST)
+		form = CustomUserCreationForm(response.POST)
 	elif response.method == "GET":
-		form = RegisterForm(response.GET)
+		form = CustomUserCreationForm(response.GET)
 
 	if form.is_valid():
 		user = User.objects.create(stored_at=timezone.now(), 
@@ -27,9 +27,9 @@ def accounts(response):
 		# login(request, user, backend=None)
 		return redirect(reverse("main"), {"form":form})
 	else:
-		form = RegisterForm()
-		return render(response, "register/register.html", {"form":form})
+		form = CustomUserCreationForm()
+		return render(response, "accounts/register.html", {"form":form})
 
 
 def index(request):
-	return render(request, "register/register.html")
+	return render(request, "accounts/register.html")
