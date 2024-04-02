@@ -23,6 +23,11 @@ b {
 	font-weight: 400;
 }
 
+#moa-nav {
+	font-size: 15px;
+	color: white;
+}
+
 .description {
 	margin-top: 30px;
 	margin-bottom: 30px;
@@ -48,8 +53,8 @@ b {
 }
 
 .intro-section p {
-	font-weight: 300;
-	font-size: 20px;
+	font-weight: 200;
+	font-size: 15px;
 }
 
 .intro-section .section-description{
@@ -268,8 +273,7 @@ b {
 }
 
 #moa-wave {
-	width: 80px; 
-	padding-bottom: 17px;
+	width: 40px; 
 }
 
 #account {

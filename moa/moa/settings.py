@@ -160,6 +160,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 CRISPY_TEMPLATE_PACK="bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
