@@ -181,14 +181,16 @@ EMAIL_HOST_PASSWORD = SENDGRID['API_KEY']
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-DEFAULT_FROM_EMAIL = SENDGRID['DEFAULT_FROM_EMAIL']
-
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# ACCOUNT_SESSION_REMEMBER = True
+# ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_UNIQUE_EMAIL = True
-# ACCOUNT_SESSION_REMEMBER = True
+
+DEFAULT_FROM_EMAIL = SENDGRID['DEFAULT_FROM_EMAIL']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
