@@ -1,8 +1,7 @@
-{% extends "_base.html" %}
+{% extends "_base_with_nav.html" %}
 
-{% block content %}
-    <div class="container" id="login">
-
+{% block main %}
+    <div id="login">
         {% if user.is_authenticated %}
             <p>Hi {{ user.email }}! </p>
             <p><a href="{% url 'account_logout' %}">Log Out</a></p>
@@ -12,10 +11,7 @@
             <br>
             <a href="{% url 'account_signup' %}">Sign Up</a>
         {% endif %}
-
     </div>
-
-
 
 {% endblock %}
 
