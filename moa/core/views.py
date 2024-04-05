@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from .models import Experience
 import json
 
 # Create your views here.
@@ -18,3 +19,8 @@ def main(request):
 	if request.user.is_authenticated:
 		print('hi')
 	return render(request, "main.html")
+
+def experiences(request):
+	experience_list = Experience.objects.all()
+	template_name = "experiences.html"
+	return render(request, template_name, {'experience_list': experience_list})
