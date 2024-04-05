@@ -1,61 +1,12 @@
-{% extends "_base.html" %}
+{% extends "_base_with_nav.html" %}
 
-{% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-                 <!-- Sidebar -->
-                  <nav
-                       id="sidebarMenu"
-                       class="collapse d-lg-block sidebar collapse bg-white"
-                       >
-                    <div class="position-sticky">
-                      <div class="list-group list-group-flush mx-3 mt-4">
-                        <a
-                           href="#"
-                           class="list-group-item list-group-item-action py-2 ripple active"
-                           >
-                          <i class="fas fa-chart-area fa-fw me-3"></i
-                            ><span>Share experience (create or be part of a covert)</span>
-                        </a>
-                        <a
-                           href="#"
-                           class="list-group-item list-group-item-action py-2 ripple"
-                           ><i class="fas fa-lock fa-fw me-3"></i><span>Coverts you're part of (customized and public)</span></a
-                          >
-                        <a
-                           href="#"
-                           class="list-group-item list-group-item-action py-2 ripple"
-                           >
-                          <i class="fas fa-chart-pie fa-fw me-3"></i><span>Safety & Privacy</span>
-                        </a>
-                        <a
-                           href="#"
-                           class="list-group-item list-group-item-action py-2 ripple"
-                           ><i class="fas fa-chart-bar fa-fw me-3"></i><span>Moderation</span></a
-                          >
-                        <a
-                           href="#"
-                           class="list-group-item list-group-item-action py-2 ripple"
-                           ><i class="fas fa-globe fa-fw me-3"></i
-                          ><span>Resources</span></a
-                          >
-                        
-                      </div>
-                    </div>
-                  </nav>
-                  <!-- Sidebar -->
-            </div>
 
-            <div class="landing-description col-xs-12 col-sm-12 col-md-8 col-lg-9">
-              {% for experience in experience_list %}
-                <h4> {{ experience.title}} </h4>
-                {{ experience.author }}
-              {% endfor %}
-            </div>
-        </div>
-    </div>
-
+{% block main %}
+  {% for experience in experience_list %}
+    <h4> {{ experience.title}} </h4>
+    {{ experience.author }}
+  {% endfor %}
 {% endblock %}
+
 
 
