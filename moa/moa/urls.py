@@ -23,5 +23,5 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("", include("pages.urls"), name="home"),
     path("main/", main, name='main'),    
-    path("experiences", experiences, name="experiences")
+    path("experiences/", experiences, name="experiences")
 ]
