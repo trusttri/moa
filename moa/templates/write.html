@@ -1,43 +1,40 @@
 {% extends "_base_with_nav.html" %}
+{% load crispy_forms_tags %}
 
 {% block main %}
   
-    <h4> Selectively share your experiences to a customized audience.</h4>
+    <h4> Create a covert to share your experience to a customized audience.</h4>
      Disclosing your experience about relationships with faculty can be anxiety-inducing. Below, you can write what you want to share to an audience you customize based on types of experiences, identities that are important to you, and name(s) of faculty members you want to associate (or avoid).
+    
+    <div>
+      <h5>Write your experience</h5>
+      
+    </div>
+
+    <div>textbox</div>
     <div class="audience-customize">
         <h5>Keywords describing your experience</h5>
         <div>
-            <span class="advising-experience">authorship issue</span>
-            <span class="advising-experience">labmate dynamic</span>
-            <span class="advising-experience">microaggression</span>
-            <span class="advising-experience">racism</span>
-            <span class="advising-experience">sexism</span>
-            <span class="advising-experience">gaslighting</span>
-            <span class="advising-experience">ghosting</span>
-            <span class="advising-experience">mishandling of credit</span>
-
-
-
+          {% for tag in tag_list %}
+            <span>{{ tag.keyword}}</span>
+          {% endfor %}
         </div>
     </div>
     <div class="audience-customize">
         <h5>Identity</h5>
-        <div>
-            Gender
-        </div>
-        <div>
-            Race
-        </div>
-        <div>
-            International student
-        </div>
-        <div>
-            Disability
-        </div>
+        {% for identity in identity_list %}
+          <span>{{ identity.category}}</span>
+        {% endfor %}
     </div>
     <div class="audience-customize">
         <h5>Faculty name(s)</h5>
     </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-success" type="submit">Save</button>
+    </form>
 
 {% endblock %}
 
