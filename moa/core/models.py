@@ -3,7 +3,16 @@ from django.contrib.auth import get_user_model
 from django.db.models import IntegerField, CharField, EmailField, TextField
 import uuid
 
-# Create your models here.
+class Tag(models.Model):
+	keyword = models.CharField(max_length=100)
+	explanation = models.TextField(blank=True)
+	
+	class Meta:
+		ordering = ["keyword"]
+
+	def __str__(self):
+		return self.keyword
+		
 class Experience(models.Model):
 	title = models.CharField(max_length=200)
 	author = models.ForeignKey(
@@ -11,9 +20,11 @@ class Experience(models.Model):
 				on_delete=models.CASCADE,
 		)
 	text = models.TextField(blank=True)
+	tags = models.ManyToManyField(Tag) 
 
 	def __str__(self):
 		return self.title
 
 	# def get_absolute_url(self):
 	# 	return reverse("experience", args=[str(self.id)])
+
