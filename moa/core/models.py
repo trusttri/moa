@@ -10,6 +10,8 @@ class Experience(models.Model):
 				get_user_model(),
 				on_delete=models.CASCADE,
 		)
+	text = models.TextField(blank=True)
+
 	def __str__(self):
 		return self.title
 
