@@ -12,18 +12,18 @@
     </div>
 
     <div>textbox</div>
-    <div class="audience-customize">
+    <div class="audience-customize experience">
         <h5>Keywords describing your experience</h5>
         <div>
           {% for tag in tag_list %}
-            <span>{{ tag.keyword}}</span>
+            <button>{{ tag.keyword}}</button>
           {% endfor %}
         </div>
     </div>
-    <div class="audience-customize">
+    <div class="audience-customize identity">
         <h5>Identity</h5>
         {% for identity in identity_list %}
-          <span>{{ identity.category}}</span>
+          <button>{{ identity.category}}</button>
         {% endfor %}
     </div>
     <div class="audience-customize">
