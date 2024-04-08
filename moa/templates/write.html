@@ -3,15 +3,23 @@
 
 {% block main %}
   
-    <h4> Create a covert to share your experience to a customized audience.</h4>
-     Disclosing your experience about relationships with faculty can be anxiety-inducing. Below, you can write what you want to share to an audience you customize based on types of experiences, identities that are important to you, and name(s) of faculty members you want to associate (or avoid).
-    
+    <div>
+      <h4> Create a covert to share your experience to a customized audience.</h4>
+      Disclosing your experience about relationships with faculty can be anxiety-inducing. Below, you can write what you want to share to an audience you customize based on types of experiences, identities that are important to you, and name(s) of faculty members you want to associate (or avoid).
+    </div>
+    <br>
     <div>
       <h5>Write your experience</h5>
-      
+      <div>
+          <label for="formExperienceTitle">Title</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+      </div>
+      <div>
+          <label for="formExperienceText">Experience</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
     </div>
-
-    <div>textbox</div>
+    <br>
     <div class="audience-customize experience">
         <h5>Keywords describing your experience</h5>
         <div>
@@ -20,15 +28,17 @@
           {% endfor %}
         </div>
     </div>
+    <br>
     <div class="audience-customize identity">
         <h5>Identity</h5>
         {% for identity in identity_list %}
           <button>{{ identity.category}}</button>
         {% endfor %}
     </div>
-    <div class="audience-customize">
+    <br>
+  <!--   <div class="audience-customize">
         <h5>Faculty name(s)</h5>
-    </div>
+    </div> -->
 
     <form method="post">
         {% csrf_token %}
