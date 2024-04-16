@@ -9,14 +9,16 @@ def index(request):
 	return render(request, "core/index.html")
 
 
-def write_experience(request):
+def render_experience_write(request):
 	template_name = "write.html"
 	tag_list = Tag.objects.all()
 	identity_list = Identity.objects.all()
 
 	return render(request, template_name, {'tag_list': tag_list, 'identity_list': identity_list})
 
+
 def experiences(request):
 	experience_list = Experience.objects.all()
 	template_name = "experiences.html"
 	return render(request, template_name, {'experience_list': experience_list})
+
