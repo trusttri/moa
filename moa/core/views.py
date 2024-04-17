@@ -27,10 +27,21 @@ def submit_experience(request):
 	# if request.is_ajax():
 	title = request.GET.get('title')
 	description = request.GET.get('description')
-	json_data = {'title': title, 'description': description}
+	tags = request.GET.get('tags')
+	
+	json_data = {'title': title, 'description': description, 'tags': tags}
+	print(json_data)
 
 	if title != '' and description != '':
-		print(title, description)
 		e = Experience.objects.create(title=title, text=description, author=request.user)
 
+		tags = json.loads(tags)
+		for tag in tags:
+			t = Tag.objects.filter(keyword=tag)[0]
+			e.tags.add(t)
+			e.save()
+
 	return HttpResponse(json_data, content_type='application/json')
+
+# def select_experience_tag(request):
+# 	return HttpResponse({}, content_type='application/json')

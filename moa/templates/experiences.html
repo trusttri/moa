@@ -5,6 +5,11 @@
   {% for experience in experience_list %}
     <h4> {{ experience.title}} </h4>
     {{ experience.author }}
+    <br>
+    tags:
+    {% for tag in experience.tags.all %}
+      {{ tag.keyword }}
+    {% endfor %}
   {% endfor %}
 {% endblock %}
 

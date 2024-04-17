@@ -57,15 +57,28 @@
   {% block scripts %}
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script>
+      function gatherSelectedTags() {
+        tags = []
+        $(".tag").each(function() {
+          if($(this).hasClass("selected")) {
+            tags.push($(this).text());
+          }
+        })
+        return tags
+      }
+
       function submitExperience() {
         var title = $("#experienceTitle").val();
         var description = $("#experienceText").val();
-
+        var tags = gatherSelectedTags();
+        console.log("----")
+        console.log(JSON.stringify(tags))
         $.ajax({
           url: "submit_experience",
           data: {
             'title': title,
             'description': description,
+            'tags': JSON.stringify(tags)
           },
           success: function(res){
           }
