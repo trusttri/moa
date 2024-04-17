@@ -22,3 +22,10 @@ def experiences(request):
 	template_name = "experiences.html"
 	return render(request, template_name, {'experience_list': experience_list})
 
+def submit_experience(request):
+	# if request.is_ajax():
+	title = request.GET.get('title', 'None')
+	description = request.GET.get('description', 'None')
+	print(title, description)
+	json_data = {'title': title, 'description': description}
+	return HttpResponse(json_data, content_type='application/json')
