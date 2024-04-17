@@ -28,5 +28,8 @@ def submit_experience(request):
 	title = request.GET.get('title', 'None')
 	description = request.GET.get('description', 'None')
 	print(title, description)
+	e = Experience.objects.create(title=title, text=description, author=request.user)
+
 	json_data = {'title': title, 'description': description}
+
 	return HttpResponse(json_data, content_type='application/json')
