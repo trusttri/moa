@@ -25,11 +25,11 @@ def experiences(request):
 
 def submit_experience(request):
 	# if request.is_ajax():
-	title = request.GET.get('title', 'None')
-	description = request.GET.get('description', 'None')
+	title = request.GET.get('title')
+	description = request.GET.get('description')
 	json_data = {'title': title, 'description': description}
 
-	if title != 'None' and description != 'None':
+	if title != '' and description != '':
 		print(title, description)
 		e = Experience.objects.create(title=title, text=description, author=request.user)
 
