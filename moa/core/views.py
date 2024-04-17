@@ -22,6 +22,7 @@ def experiences(request):
 	template_name = "experiences.html"
 	return render(request, template_name, {'experience_list': experience_list})
 
+
 def submit_experience(request):
 	# if request.is_ajax():
 	title = request.GET.get('title', 'None')
