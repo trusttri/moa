@@ -52,10 +52,8 @@
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script>
       function submitExperience() {
-        console.log("experience");
         var title = $("#experienceTitle").val();
         var description = $("#experienceText").val();
-        console.log(title);
 
         $.ajax({
           url: "submit_experience",
@@ -64,11 +62,9 @@
             'description': description,
           },
           success: function(res){
-            console.log(res);
           }
         });
       }
-      
 
       $('#submitExperience').click(function(event) {
           submitExperience();
