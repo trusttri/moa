@@ -56,26 +56,25 @@ b {
 	width: 40px; 
 }
 
-.experience button {
+.tag {
     font-size: 14px;
-    background-color: #007bff;
-    color: white;
+    background-color: white;
+    color: black;
     cursor: pointer;
-    border-style: none;
+    border-style: #007bff;
     border-radius: 0.4rem;
     padding: 5px 10px 5px 10px;
 }
 
-.identity button {
+.selected {
     font-size: 14px;
     background-color: #007bff;
     color: white;
     cursor: pointer;
-    border-style: none;
+    border-style: #007bff;
     border-radius: 0.4rem;
     padding: 5px 10px 5px 10px;
 }
-
 
 button:hover {
 	background-color: #004085;
