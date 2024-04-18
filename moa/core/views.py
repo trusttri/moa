@@ -28,9 +28,7 @@ def submit_experience(request):
 	title = request.GET.get('title')
 	description = request.GET.get('description')
 	tags = request.GET.get('tags')
-	
-	json_data = {'title': title, 'description': description, 'tags': tags}
-	print(json_data)
+	data = {}
 
 	if title != '' and description != '':
 		e = Experience.objects.create(title=title, text=description, author=request.user)
@@ -40,6 +38,10 @@ def submit_experience(request):
 			t = Tag.objects.filter(keyword=tag)[0]
 			e.tags.add(t)
 			e.save()
+
+		data = {'id': e.id}
+		json_data = json.dumps(data)
+		print(json_data)
 
 	return HttpResponse(json_data, content_type='application/json')
 

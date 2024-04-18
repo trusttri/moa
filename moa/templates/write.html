@@ -25,7 +25,7 @@
         <h5>Keywords describing your experience</h5>
         <div>
           {% for tag in tag_list %}
-            <button class="tag">{{ tag.keyword}}</button>
+            <button class="tag advising-experience">{{ tag.keyword}}</button>
           {% endfor %}
         </div>
         <br>
@@ -39,7 +39,7 @@
     <div class="audience-customize identity">
         <h5>Identity</h5>
         {% for identity in identity_list %}
-          <button class="tag">{{ identity.category}}</button>
+          <button class="tag identity">{{ identity.category}}</button>
         {% endfor %}
     </div>
     <br>
@@ -81,6 +81,8 @@
             'tags': JSON.stringify(tags)
           },
           success: function(res){
+            console.log("=====success=======")
+            console.log(res);
           }
         });
       }
