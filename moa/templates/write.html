@@ -71,8 +71,7 @@
         var title = $("#experienceTitle").val();
         var description = $("#experienceText").val();
         var tags = gatherSelectedTags();
-        console.log("----")
-        console.log(JSON.stringify(tags))
+
         $.ajax({
           url: "submit_experience",
           data: {
