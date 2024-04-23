@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import Experience, Tag, Identity
@@ -43,7 +43,16 @@ def submit_experience(request):
 		json_data = json.dumps(data)
 		print(json_data)
 
-	return HttpResponse(json_data, content_type='application/json')
+	return redirect('experiences')
+    # return HttpResponse(json_data, content_type='application/json')
 
-# def select_experience_tag(request):
-# 	return HttpResponse({}, content_type='application/json')
+def experience(request):
+	e_id = request.GET.get('id')
+	print(e_id)
+	experience = Experience.objects.filter(id=e_id)[0]
+	print(experience.title)
+	print(experience)
+	template_name = "experience.html"
+
+	return render(request, template_name, {'experience': experience})
+

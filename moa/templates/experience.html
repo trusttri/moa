@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+
+{% block content %}
+   <h4> {{ experience.title}} </h4>
+   {{ experience.author }}
+   <br>
+   tags:
+   {% for tag in experience.tags.all %}
+   	{{ tag.keyword }}
+   {% endfor %}
+
+{% endblock %}
