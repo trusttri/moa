@@ -1,7 +1,6 @@
 from django.urls import path, include
-from .views import SignupPageView
-
+from .views import SignupPageView, AccountConsentBoundaryView
 
 urlpatterns = [
-    path("signup/", SignupPageView.as_view(), name="signup")
+
 ]
