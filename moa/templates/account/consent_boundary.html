@@ -1,9 +1,49 @@
 {% extends "_base_with_nav.html" %}
 
 {% block main %}
-   <h4> Your consent boundary </h4>
- 
-   <br>
+	<h4> Your consent settings </h4>
+	<br>
+	<div>
+	   	Moa lets you have full control over who can see what you share -- based on your <b>consent boundaries</b>. 
+	   	This page is for indicating your overall boundaries (you can set your boundary for each experience post and comment as well).
+	</div>
+	<br>
+	<div>
+		<b>I want to ONLY show my experience posts and comments to people...</b>
+	</div>
+	<br>
+	<div>
+   		...who have indicated they have experienced the following.
+   		<div>
+   			{% for tag in tag_list %}
+            	<button class="tag advising-experience">{{ tag.keyword }}</button>
+         	{% endfor %}
+   		</div>
+	</div>
+	<br>
+	<div>
+		{% for identity in identity_list %}
+          		... who is an {{ identity.category }}
+        {% endfor %}
+	</div>
+	<br>
+	<div>
+   		...who attend the following institutions.
+   		<br>
+   		[dropdown list of institutions]
+	</div>
+	<br>
+	<div>
+		Other
+		<div class="form-group">
+    		<label for="exampleFormControlTextarea1"></label>
+    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  		</div>
+	</div>
+	<br>
+	<div>
+		<button class="btn btn-success" type="submit">Save</button>
+	</div>
 
 
 {% endblock %}

@@ -12,31 +12,29 @@
                     <div class="position-sticky">
                       <div class="list-group list-group-flush mx-3 mt-4">
                         <a
-                               href="{% url 'write' %}"
-                               class="list-group-item list-group-item-action py-2 ripple"
-                               >
-                              <i class="fas fa-chart-area fa-fw me-3"></i
-                          ><span>write your experience</span>
+                          href="{% url 'write' %}"
+                          class="list-group-item list-group-item-action py-2 ripple" id="write"
+                          ><i class="fas fa-chart-area fa-fw me-3"></i><span>write your experience</span>
                         </a>
                         <a
                            href="{% url 'experiences' %}"
-                           class="list-group-item list-group-item-action py-2 ripple"
+                           class="list-group-item list-group-item-action py-2 ripple" id="experiences"
                            ><i class="fas fa-lock fa-fw me-3"></i><span>experiences</span></a
                           >
                         <a
                            href="{% url 'account_consent_boundary' %}"
-                           class="list-group-item list-group-item-action py-2 ripple"
+                           class="list-group-item list-group-item-action py-2 ripple" id="consent"
                            >
-                          <i class="fas fa-chart-pie fa-fw me-3"></i><span>your consent boundary</span>
+                          <i class="fas fa-chart-pie fa-fw me-3"></i><span>your settings & consent</span>
                         </a>
                         <a
                            href="#"
-                           class="list-group-item list-group-item-action py-2 ripple"
+                           class="list-group-item list-group-item-action py-2 ripple" id="moderation"
                            ><i class="fas fa-chart-bar fa-fw me-3"></i><span>moderation</span></a
                           >
                         <a
                            href="#"
-                           class="list-group-item list-group-item-action py-2 ripple"
+                           class="list-group-item list-group-item-action py-2 ripple" id="resources"
                            ><i class="fas fa-globe fa-fw me-3"></i
                           ><span>resources</span></a
                           >
