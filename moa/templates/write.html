@@ -5,8 +5,9 @@
 {% block main %}
   
     <div>
-      <h4> Create a covert to share your experience to a customized audience.</h4>
+      <h4> Share your experience based on your consent boundaries.</h4>
       Disclosing your experience about relationships with faculty can be anxiety-inducing. Below, you can write what you want to share to an audience you customize based on types of experiences, identities that are important to you, and name(s) of faculty members you want to associate (or avoid).
+      Your message will only appear to those who meet the criteria that you set.
     </div>
     <br>
     <div>
@@ -22,11 +23,18 @@
     </div>
     <br>
     <div class="audience-customize experience">
-        <h5>Keywords describing your experience</h5>
+        <h5>Set consent boundary for this experience sharing</h5>
+        <!-- Feel free to customize your consent boundary for this individual experience. -->
+        <h6>I want to ONLY show this experience to people...</h6>
+        <br>
         <div>
+          <h6>...who have indicated they have experienced the following.</h6>
           {% for tag in tag_list %}
-            <button class="tag advising-experience">{{ tag.keyword}}</button>
+            <button class="tag advising-experience">{{ tag.keyword }}</button>
           {% endfor %}
+          <div>
+            <button id="new-experience-tag">add tag</button>
+          </div>
         </div>
         <br>
         <div>
@@ -37,15 +45,22 @@
     </div>
     <br>
     <div class="audience-customize identity">
-        <h5>Identity</h5>
+        <h6>...who share the same identities as mine, selected below.</h6>
         {% for identity in identity_list %}
           <button class="tag identity">{{ identity.category}}</button>
         {% endfor %}
     </div>
     <br>
+    <div>
+      <h6>...who attend the following institutions.</h6>
+    </div>
   <!--   <div class="audience-customize">
         <h5>Fa    tculty name(s)</h5>
     </div> -->
+
+    <div>
+      {% include 'message.html' %}
+    </div>
 
     <form method="post">
         {% csrf_token %}
@@ -98,6 +113,11 @@
           $(this).addClass("selected");
         }
       })
+
+      $('#write').click(function(event) {
+          console.log("click")
+          $(this).addClass("selected");
+      });
 
     </script>
   {% endblock %}

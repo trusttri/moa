@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
+from django.contrib import messages
 from .models import Experience, Tag, Identity
 import json
 
@@ -9,7 +10,7 @@ def index(request):
 	return render(request, "core/index.html")
 
 
-def render_experience_write(request):
+def experience_write(request):
 	template_name = "write.html"
 	tag_list = Tag.objects.all()
 	identity_list = Identity.objects.all()
@@ -42,6 +43,7 @@ def submit_experience(request):
 		data = {'id': e.id}
 		json_data = json.dumps(data)
 		print(json_data)
+		messages.success(request, "Experience is sent to those who meet your consent boundary criteria.", extra_tags='alert')
 
 	return redirect('experiences')
     # return HttpResponse(json_data, content_type='application/json')
