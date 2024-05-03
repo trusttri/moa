@@ -1,4 +1,5 @@
 from django import forms
 
-class NameForm(forms.Form):
-    your_name = forms.CharField(label="Your name", max_length=100)
+class ExperienceForm(forms.Form):
+    title = forms.CharField(label="experience title", max_length=200)
+    description = forms.CharField(label="experience description", widget=forms.Textarea)
