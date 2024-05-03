@@ -10,6 +10,14 @@
       Your message will only appear to those who meet the criteria that you set.
     </div>
     <br>
+    <!-- example -->
+    <form action="/your-name/" method="post">
+      {% csrf_token %}
+      <label for="your_name">Your name: </label>
+      <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+      <input type="submit" value="OK">
+    </form>
+
     <div>
       <h5>Write your experience</h5>
       <div>
@@ -22,6 +30,7 @@
       </div>
     </div>
     <br>
+
     <div class="audience-customize experience">
         <h5>Set consent boundary for this experience sharing</h5>
         <!-- Feel free to customize your consent boundary for this individual experience. -->
@@ -44,7 +53,7 @@
         </div>
     </div>
     <br>
-    <div class="audience-customize identity">
+    <!-- <div class="audience-customize identity">
         <h6>...who share the same identities as mine, selected below.</h6>
         {% for identity in identity_list %}
           <button class="tag identity">{{ identity.category}}</button>
@@ -53,7 +62,7 @@
     <br>
     <div>
       <h6>...who attend the following institutions.</h6>
-    </div>
+    </div> -->
   <!--   <div class="audience-customize">
         <h5>Fa    tculty name(s)</h5>
     </div> -->
