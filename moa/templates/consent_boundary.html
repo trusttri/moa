@@ -13,11 +13,10 @@
 	</div>
 	<br>
 	<div>
-		<form action="set-account-consent-boundary/" method="post">
+		<form action="set/" method="post">
 	        {% csrf_token %}
 	        <label for="phd_year">Year in PhD </label>
-	        <textarea class="form-control" id="phd_year" type="text" name="phd_year" value="" rows="1"></textarea>
-	        
+	        <textarea class="form-control" id="phd_year" type="text" name="phd_year" value="" rows="1"></textarea>      
 	        <br>
 	        <input type="submit" value="submit">
       	</form>
