@@ -21,12 +21,14 @@
     <div>
       <h5>Write your experience</h5>
 
-      <form action="get-experience/" method="post">
+      <form action="submit-experience/" method="post">
         {% csrf_token %}
         <label for="title">Title </label>
         <textarea class="form-control" id="title" type="text" name="title" value="" rows="1"></textarea>
         <label for="description">Description </label>
         <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
+        
+        
         <br>
         <input type="submit" value="submit">
       </form>
