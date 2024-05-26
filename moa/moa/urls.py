@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import experience_write, experiences, experience, get_experience
+from core.views import experience_write, experiences, experience, submit_experience
 from accounts.views import SignupPageView, ConfirmEmailPageView, account_consent_boundary
 
 urlpatterns = [
@@ -29,5 +29,5 @@ urlpatterns = [
     path("experiences/", experiences, name="experiences"),
     path("experience/", experience, name="experience"),
     path("write", experience_write, name="write"),
-    path("get-experience/", get_experience, name="get-experience"),
+    path("submit-experience/", submit_experience, name="submit-experience"),
 ]

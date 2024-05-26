@@ -40,7 +40,7 @@ def experience(request):
 
 
 @login_required
-def get_experience(request):
+def submit_experience(request):
 	print("get name function")
 	# if this is a POST request we need to process the form data
 	if request.method == "POST":
