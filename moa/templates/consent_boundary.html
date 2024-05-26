@@ -13,6 +13,16 @@
 	</div>
 	<br>
 	<div>
+		<form action="set-account-consent-boundary/" method="post">
+	        {% csrf_token %}
+	        <label for="phd_year">Year in PhD </label>
+	        <textarea class="form-control" id="phd_year" type="text" name="phd_year" value="" rows="1"></textarea>
+	        
+	        <br>
+	        <input type="submit" value="submit">
+      	</form>
+	</div>
+	<div>
    		...who have indicated they have experienced the following.
    		<div>
    			{% for tag in tag_list %}

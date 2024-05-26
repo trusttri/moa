@@ -22,8 +22,3 @@ class SignupPageView(generic.CreateView):
 class ConfirmEmailPageView(generic.CreateView):
 	print("testing...")
 	success_url = reverse_lazy("account_consent_boundary")
-
-def account_consent_boundary(request):
-	template_name = "account/consent_boundary.html"
-	print("test consent boundary page")
-	return render(request, template_name, {})

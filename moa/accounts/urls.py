@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import SignupPageView, AccountConsentBoundaryView
+from .views import SignupPageView
 
 urlpatterns = [
 

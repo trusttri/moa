@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Experience, Tag, Identity
 import json
-from .forms import ExperienceForm
+from .forms import ExperienceForm, AccountConsentBoundaryForm
 
 def index(request):
 	print("core")
@@ -61,3 +61,31 @@ def submit_experience(request):
 	else:
 		form = ExperienceForm()
 	return render(request, "write.html", {"form": form})
+
+@login_required
+def account_consent_boundary(request):
+	template_name = "consent_boundary.html"
+	print("test consent boundary page")
+	return render(request, template_name, {})
+
+@login_required
+def set_account_consent_boundary(request):
+	# if this is a POST request we need to process the form data
+	if request.method == "POST":
+		# create a form instance and populate it with data from the request:
+		form = AccountConsentBoundaryForm(request.POST)
+		# check whether it's valid:
+		if form.is_valid():
+			# store the data
+			phd_year = form.cleaned_data["phd_year"]
+			print(phd_year)
+			# e = Experience.objects.create(title=title, text=description, author=request.user)
+			# e.save()
+			# return redirect("/experiences")
+
+	# if a GET (or any other method) we'll create a blank form
+	else:
+		form = AccountConsentBoundaryForm()
+	return render(request, "consent_boundary.html", {"form": form})
+
+
