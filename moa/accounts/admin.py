@@ -15,6 +15,9 @@ class CustomUserAdmin(UserAdmin):
 		"username",
 		"is_superuser",
 		"phd_year",
+		"international_student",
+		"first_gen",
+		"other_info"
 	]
 
 admin.site.register(CustomUser, CustomUserAdmin)
