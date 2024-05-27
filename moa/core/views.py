@@ -65,16 +65,19 @@ def submit_experience(request):
 @login_required
 def account_consent_boundary(request):
 	template_name = "consent_boundary.html"
-	return render(request, template_name, {})
+	return render(request, template_name, {'consent_form': AccountConsentBoundaryForm})
 
 @login_required
 def set_account_consent_boundary(request):
 	if request.method == "POST":
 		form = AccountConsentBoundaryForm(request.POST)
 		if form.is_valid():
-			phd_year = form.cleaned_data["phd_year"]
 			author = request.user
-			author.phd_year = phd_year
+			author.phd_year = form.cleaned_data["phd_year"]
+			author.other_info = form.cleaned_data["other_info"]
+			author.international_student = bool(int(form.cleaned_data["international_student"]))
+			author.first_gen = bool(int(form.cleaned_data["first_gen"]))
+
 			author.save()
 			return redirect("/consent_boundary")
 	else:

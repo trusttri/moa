@@ -16,42 +16,38 @@
 		<form action="set/" method="post">
 	        {% csrf_token %}
 	        <label for="phd_year">Year in PhD </label>
-	        <textarea class="form-control" id="phd_year" type="text" name="phd_year" value="" rows="1"></textarea>      
+	        <textarea class="form-control" id="phd_year" type="text" name="phd_year" value="" rows="1"></textarea>   
+	        
+	        <br>
+
+        	<fieldset>
+			    <label>{{ consent_form.international_student.label }}</label>
+			    {% for radio in consent_form.international_student %}
+			    <div class="">
+			        {{ radio }}
+			    </div>
+			    {% endfor %}
+			</fieldset>
+			
+			<br>
+
+			<fieldset>
+			    <label>{{ consent_form.first_gen.label }}</label>
+			    {% for radio in consent_form.first_gen %}
+			    <div class="">
+			        {{ radio }}
+			    </div>
+			    {% endfor %}
+			</fieldset>
+	        
+
+			<br>
+	        
+	        <label for="other_info">Any other information you would like the moderator to reference?</label>
+	        <textarea class="form-control" id="other_info" type="text" name="other_info" value="" rows="3"></textarea>      
 	        <br>
 	        <input type="submit" value="submit">
       	</form>
-	</div>
-	<div>
-   		...who have indicated they have experienced the following.
-   		<div>
-   			{% for tag in tag_list %}
-            	<button class="tag advising-experience">{{ tag.keyword }}</button>
-         	{% endfor %}
-   		</div>
-	</div>
-	<br>
-	<div>
-		{% for identity in identity_list %}
-          		... who is an {{ identity.category }}
-        {% endfor %}
-	</div>
-	<br>
-	<div>
-   		...who attend the following institutions.
-   		<br>
-   		[dropdown list of institutions]
-	</div>
-	<br>
-	<div>
-		Other
-		<div class="form-group">
-    		<label for="exampleFormControlTextarea1"></label>
-    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  		</div>
-	</div>
-	<br>
-	<div>
-		<button class="btn btn-success" type="submit">Save</button>
 	</div>
 
 
