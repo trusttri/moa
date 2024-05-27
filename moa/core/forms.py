@@ -7,24 +7,18 @@ class ExperienceForm(forms.Form):
 class AccountConsentBoundaryForm(forms.Form):
     phd_year = forms.IntegerField()
 
-    INTERNATIONAL_STUDENT_CHOICES = [
-        ('1', 'Yes'),
-        ('0', 'No'),
-    ]
-    international_student = forms.ChoiceField(
-        widget=forms.RadioSelect,
-        choices=INTERNATIONAL_STUDENT_CHOICES, 
-        label="Who is an international student",
+    international_student = forms.BooleanField(
+        widget=forms.CheckboxInput,
+        label="who is an international student",
+        required=False,
+        initial=False
     )
 
-    FIRST_GEN_CHOICES = [
-        ('1', 'Yes'),
-        ('0', 'No'),
-    ]
-    first_gen = forms.ChoiceField(
-        widget=forms.RadioSelect,
-        choices=FIRST_GEN_CHOICES, 
-        label="Who is an first-gen student",
+    first_gen = forms.BooleanField(
+        widget=forms.CheckboxInput,
+        label="who is an first-gen student",
+        required=False,
+        initial=False
     )
 
     other_info = forms.CharField()

@@ -16,11 +16,19 @@
 		<form action="set/" method="post">
 	        {% csrf_token %}
 	        <label for="phd_year">Year in PhD </label>
-	        <textarea class="form-control" id="phd_year" type="text" name="phd_year" value="" rows="1"></textarea>   
+	        <textarea class="form-control" id="phd_year" type="text" name="phd_year" value="" rows="1">{{ phd_year }}</textarea>   
 	        
 	        <br>
 
-        	<fieldset>
+		    <label for="international_student">{{ consent_form.international_student.label }}</label>
+		    <input id="international_student" type="checkbox" name="international_student" {% if international_student %} checked {% endif %}/>
+			
+		    <br>
+
+		    <label for="first_gen">{{ consent_form.first_gen.label }}</label>
+		    <input id="first_gen" type="checkbox" name="first_gen" {% if first_gen %} checked {% endif %}/>
+
+        	<!-- <fieldset>
 			    <label>{{ consent_form.international_student.label }}</label>
 			    {% for radio in consent_form.international_student %}
 			    <div class="">
@@ -28,8 +36,8 @@
 			    </div>
 			    {% endfor %}
 			</fieldset>
-			
-			<br>
+			 -->
+			<!-- <br>
 
 			<fieldset>
 			    <label>{{ consent_form.first_gen.label }}</label>
@@ -38,15 +46,15 @@
 			        {{ radio }}
 			    </div>
 			    {% endfor %}
-			</fieldset>
+			</fieldset> -->
 	        
 
 			<br>
 	        
 	        <label for="other_info">Any other information you would like the moderator to reference?</label>
-	        <textarea class="form-control" id="other_info" type="text" name="other_info" value="" rows="3"></textarea>      
+	        <textarea class="form-control" id="other_info" type="text" name="other_info" value="" rows="3">{{ other_info }}</textarea>      
 	        <br>
-	        <input type="submit" value="submit">
+	        <input type="submit" value="save">
       	</form>
 	</div>
 
