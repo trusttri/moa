@@ -29,12 +29,14 @@
 		    <label for="first_gen">{{ consent_form.first_gen.label }}</label>
 		    <input id="first_gen" type="checkbox" name="first_gen" {% if first_gen %} checked {% endif %}/>
 
-			<br>
-
-            who have experienced the following in their advising relationship(s)
-
-            <br>
-            <br>
+		    <br>
+			who have experienced the following in their advising relationship(s)
+          	<br>
+	        {% for tag in tag_list %}
+	        	<button class="tag advising-experience">{{ tag.keyword }}</button>
+	        {% endfor %}
+	        <br>
+	        <br>
 	        
 	        <label for="other_info">other information you would like the moderator to reference</label>
 	        <textarea class="form-control" id="other_info" type="text" name="other_info" value="" rows="3">{{ other_info }}</textarea>      

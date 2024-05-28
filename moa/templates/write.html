@@ -28,6 +28,14 @@
           <label for="description">Description </label>
           <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
         </div>
+
+        <div>
+          <label for="tags">Tags </label>
+          <br>
+          {% for tag in tag_list %}
+            <button class="tag advising-experience">{{ tag.keyword }}</button>
+          {% endfor %}
+        </div>
         
         <br>
         <br>
@@ -39,6 +47,7 @@
           <br>
           <!-- Feel free to customize your consent boundary for this individual experience. -->
           <h6>I want to ONLY show this experience to people...</h6>
+          <br>
           <div>
             <!-- <form action="set/" method="post"> -->
               <!-- {% csrf_token %} -->
@@ -58,7 +67,10 @@
               <br>
 
               who have experienced the following in their advising relationship(s)
-
+              <br>
+              {% for tag in tag_list %}
+                <button class="tag advising-experience">{{ tag.keyword }}</button>
+              {% endfor %}
               <br>
               <br>
               

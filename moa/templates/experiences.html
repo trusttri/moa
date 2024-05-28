@@ -3,14 +3,18 @@
 
 {% block main %}
   {% for experience in experience_list %}
-    <h4><a href="/experience?id={{ experience.id }}"> {{ experience.title}} </a></h4>
-    {{ experience.author }}
+    <div>
+      <h4><a href="/experience?id={{ experience.id }}"> {{ experience.title}} </a></h4>
+      {{ experience.author }}
+      <br>
+      tags:
+      {% for tag in experience.tags.all %}
+        {{ tag.keyword }}
+      {% endfor %}
+    </div>
     <br>
-    tags:
-    {% for tag in experience.tags.all %}
-      {{ tag.keyword }}
-    {% endfor %}
   {% endfor %}
+
 {% endblock %}
 
 

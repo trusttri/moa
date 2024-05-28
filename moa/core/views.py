@@ -14,8 +14,7 @@ def index(request):
 @login_required
 def experience_write(request):
 	template_name = "write.html"
-	# tag_list = Tag.objects.all()
-	# identity_list = Identity.objects.all()
+	tag_list = Tag.objects.all()
 
 	author = request.user
 	data = {'consent_form': AccountConsentBoundaryForm,
@@ -23,6 +22,7 @@ def experience_write(request):
 			'international_student': author.international_student,
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
+			'tag_list': tag_list
 	}
 
 	# return render(request, template_name, {'tag_list': tag_list, 'identity_list': identity_list})
@@ -85,11 +85,14 @@ def submit_experience(request):
 def account_consent_boundary(request):
 	template_name = "consent_boundary.html"
 	author = request.user
+	tag_list = Tag.objects.all()
 	data = {'consent_form': AccountConsentBoundaryForm,
 			'phd_year': author.phd_year,
 			'international_student': author.international_student,
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
+			'tag_list': tag_list,
+
 	}
 
 	print("-----data-----")
