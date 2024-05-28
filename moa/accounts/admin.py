@@ -15,6 +15,7 @@ class CustomUserAdmin(UserAdmin):
 		"username",
 		"is_superuser",
 		"phd_year",
+		"phd_year_boundary",
 		"international_student",
 		"first_gen",
 		"other_info"

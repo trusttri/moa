@@ -51,9 +51,21 @@
           <div>
             <!-- <form action="set/" method="post"> -->
               <!-- {% csrf_token %} -->
-              <label for="phd_year">who are in their X year in PhD (select a range)</label>
-              <textarea class="form-control" id="phd_year" type="text" name="phd_year" value="" rows="1">{{ phd_year }}</textarea>   
-              
+              <label for="phd_year">{{ consent_form.phd_year.label }}</label>
+              <br>
+              <fieldset>
+                <label for="id_phd_year_0"><input class="phd_year" type="checkbox" name="phd_year" value="1" id="id_phd_year_0" {% if '1' in phd_year_boundary %} checked {% endif %}>1</label>
+                <label for="id_phd_year_1"><input class="phd_year" type="checkbox" name="phd_year" value="2" id="id_phd_year_1" {% if '2' in phd_year_boundary %} checked {% endif %}>2</label>
+                <label for="id_phd_year_2"><input class="phd_year" type="checkbox" name="phd_year" value="3" id="id_phd_year_2" {% if '3' in phd_year_boundary %} checked {% endif %}>3</label>
+                <label for="id_phd_year_3"><input class="phd_year" type="checkbox" name="phd_year" value="4" id="id_phd_year_3" {% if '4' in phd_year_boundary %} checked {% endif %}>4</label>
+                <label for="id_phd_year_4"><input class="phd_year" type="checkbox" name="phd_year" value="5" id="id_phd_year_4" {% if '5' in phd_year_boundary %} checked {% endif %}>5</label>
+                <label for="id_phd_year_5"><input class="phd_year" type="checkbox" name="phd_year" value="6" id="id_phd_year_5" {% if '6' in phd_year_boundary %} checked {% endif %}>6</label>
+                <label for="id_phd_year_6"><input class="phd_year" type="checkbox" name="phd_year" value="7" id="id_phd_year_6" {% if '7' in phd_year_boundary %} checked {% endif %}>7</label>
+                <label for="id_phd_year_7"><input class="phd_year" type="checkbox" name="phd_year" value="8" id="id_phd_year_7" {% if '8' in phd_year_boundary %} checked {% endif %}>8</label>
+                <label for="id_phd_year_8"><input class="phd_year" type="checkbox" name="phd_year" value="9" id="id_phd_year_8" {% if '9' in phd_year_boundary %} checked {% endif %}>9</label>
+                <label for="id_phd_year_9"><input class="phd_year" type="checkbox" name="phd_year" value="10" id="id_phd_year_9" {% if '10' in phd_year_boundary %} checked {% endif %}>10</label>
+              </fieldset>
+                      
               <br>
 
               <label for="international_student">{{ consent_form.international_student.label }}</label>
@@ -64,6 +76,7 @@
               <label for="first_gen">{{ consent_form.first_gen.label }}</label>
               <input id="first_gen" type="checkbox" name="first_gen" {% if first_gen %} checked {% endif %}/>
 
+              <br>
               <br>
 
               who have experienced the following in their advising relationship(s)

@@ -19,6 +19,7 @@ def experience_write(request):
 	author = request.user
 	data = {'consent_form': AccountConsentBoundaryForm,
 			'phd_year': author.phd_year,
+			'phd_year_boundary': author.phd_year_boundary,
 			'international_student': author.international_student,
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
@@ -68,7 +69,7 @@ def submit_experience(request):
 			description = form.cleaned_data["description"]
 			print(title, description)
 			e = Experience.objects.create(title=title, text=description, author=request.user)
-			e.phd_year = form.cleaned_data["phd_year"]
+			e.phd_year_boundary = form.cleaned_data["phd_year"]
 			e.other_info = form.cleaned_data["other_info"]
 			e.international_student = form.cleaned_data["international_student"]
 			e.first_gen = form.cleaned_data["first_gen"]
@@ -88,6 +89,7 @@ def account_consent_boundary(request):
 	tag_list = Tag.objects.all()
 	data = {'consent_form': AccountConsentBoundaryForm,
 			'phd_year': author.phd_year,
+			'phd_year_boundary': author.phd_year_boundary,
 			'international_student': author.international_student,
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
@@ -107,7 +109,7 @@ def set_account_consent_boundary(request):
 		if form.is_valid():
 			print(form.cleaned_data)
 			author = request.user
-			author.phd_year = form.cleaned_data["phd_year"]
+			author.phd_year_boundary = form.cleaned_data["phd_year"]
 			author.other_info = form.cleaned_data["other_info"]
 			author.international_student = form.cleaned_data["international_student"]
 			author.first_gen = form.cleaned_data["first_gen"]

@@ -7,6 +7,7 @@ class CustomUser(AbstractUser):
 	# gender =
 	# race =  
 	# institution = 
+	phd_year_boundary = models.JSONField(null=True, blank=True)
 	international_student = models.BooleanField(null=True, blank=True)
 	first_gen = models.BooleanField(null=True, blank=True)
 	other_info = models.TextField(null=True, blank=True)

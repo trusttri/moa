@@ -75,6 +75,11 @@ b {
     border-radius: 0.4rem;
     padding: 5px 10px 5px 10px;
 }
+ 
+.phd_year input {
+	margin-left: 5px;
+	margin-right: 5px;
+}
 
 button:hover {
 	background-color: #004085;
