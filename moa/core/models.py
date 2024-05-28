@@ -33,6 +33,11 @@ class Experience(models.Model):
 	tags = models.ManyToManyField(Tag) 
 	identites = models.ManyToManyField(Identity)
 
+	phd_year = models.IntegerField(null=True, blank=True)
+	international_student = models.BooleanField(null=True, blank=True)
+	first_gen = models.BooleanField(null=True, blank=True)
+	other_info = models.TextField(null=True, blank=True)
+
 	def __str__(self):
 		return self.title
 
