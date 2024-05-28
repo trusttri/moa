@@ -18,44 +18,51 @@
       <input type="submit" value="OK">
     </form> -->
 
-    <div>
-      <h5>Write your experience</h5>
-
+    
       <form action="submit-experience/" method="post">
         {% csrf_token %}
-        <label for="title">Title </label>
-        <textarea class="form-control" id="title" type="text" name="title" value="" rows="1"></textarea>
-        <label for="description">Description </label>
-        <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
-        
-        
-        <br>
-        <input type="submit" value="submit">
-      </form>
-    </div>
-    <br>
-
-    <div class="audience-customize experience">
-        <h5>Set consent boundary for this experience sharing</h5>
-        <!-- Feel free to customize your consent boundary for this individual experience. -->
-        <h6>I want to ONLY show this experience to people...</h6>
-        <br>
         <div>
-          <h6>...who have indicated they have experienced the following.</h6>
-          {% for tag in tag_list %}
-            <button class="tag advising-experience">{{ tag.keyword }}</button>
-          {% endfor %}
+          <h5>1. Write your experience</h5>
+          <label for="title">Title </label>
+          <textarea class="form-control" id="title" type="text" name="title" value="" rows="1"></textarea>
+          <label for="description">Description </label>
+          <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
+        </div>
+        
+        <br>
+        <!-- <input type="submit" value="submit">
+      </form> -->
+
+        <div class="audience-customize experience">
+          <h5>2. Set consent boundary for this experience sharing</h5>
+          <!-- Feel free to customize your consent boundary for this individual experience. -->
+          <h6>I want to ONLY show this experience to people...</h6>
           <div>
-            <button id="new-experience-tag">add tag</button>
+            <!-- <form action="set/" method="post"> -->
+              <!-- {% csrf_token %} -->
+              <label for="phd_year">Year in PhD </label>
+              <textarea class="form-control" id="phd_year" type="text" name="phd_year" value="" rows="1">{{ phd_year }}</textarea>   
+              
+              <br>
+
+              <label for="international_student">{{ consent_form.international_student.label }}</label>
+              <input id="international_student" type="checkbox" name="international_student" {% if international_student %} checked {% endif %}/>
+            
+              <br>
+
+              <label for="first_gen">{{ consent_form.first_gen.label }}</label>
+              <input id="first_gen" type="checkbox" name="first_gen" {% if first_gen %} checked {% endif %}/>
+
+              <br>
+              
+              <label for="other_info">Any other information you would like the moderator to reference?</label>
+              <textarea class="form-control" id="other_info" type="text" name="other_info" value="" rows="3">{{ other_info }}</textarea>      
+              <br>
+              <input type="submit" value="submit">
           </div>
         </div>
-        <br>
-        <div>
-          <label for="tag-search">Search keywords:</label>
-          <input type="search" id="tag-search" name="q" />
-          <button>Search</button>
-        </div>
-    </div>
+      </form>
+    
     <br>
     <!-- <div class="audience-customize identity">
         <h6>...who share the same identities as mine, selected below.</h6>
@@ -76,7 +83,7 @@
     </div>
 
 
-  {% block scripts %}
+  <!-- {% block scripts %}
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script>
       function gatherSelectedTags() {
@@ -103,7 +110,7 @@
       });
 
     </script>
-  {% endblock %}
+  {% endblock %} -->
 
 {% endblock %}
 
