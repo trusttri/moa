@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Experience, Tag, Identity
+from .models import Experience, Tag
 import json
 from .forms import ExperienceForm, AccountConsentBoundaryForm
 

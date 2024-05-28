@@ -12,16 +12,6 @@ class Tag(models.Model):
 
 	def __str__(self):
 		return self.keyword
-
-class Identity(models.Model):
-	category = models.CharField(max_length=100)
-	explanation = models.TextField(blank=True)
-	
-	class Meta:
-		ordering = ["category"]
-
-	def __str__(self):
-		return self.category
 		
 class Experience(models.Model):
 	title = models.CharField(max_length=200)
@@ -31,7 +21,6 @@ class Experience(models.Model):
 		)
 	text = models.TextField(blank=True)
 	tags = models.ManyToManyField(Tag) 
-	identites = models.ManyToManyField(Identity)
 
 	phd_year = models.IntegerField(null=True, blank=True)
 	international_student = models.BooleanField(null=True, blank=True)

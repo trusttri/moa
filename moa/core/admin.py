@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Experience, Tag, Identity
+from .models import Experience, Tag
 
 # Register your models here.
 class ExperienceInline(admin.TabularInline):
@@ -17,11 +17,3 @@ class TagAdmin(admin.ModelAdmin):
 	list_display = ("keyword", "explanation")
 
 admin.site.register(Tag, TagAdmin)
-
-class IdentityInline(admin.TabularInline):
-	model = Identity
-
-class IdentityAdmin(admin.ModelAdmin):
-	list_display = ("category", "explanation")
-
-admin.site.register(Identity, IdentityAdmin)
