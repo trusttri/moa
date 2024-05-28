@@ -29,6 +29,11 @@ def experience_write(request):
 	return render(request, template_name, data)
 
 @login_required
+def notifications(request):
+	template_name = "notifications.html"
+	return render(request, template_name)
+
+@login_required
 def experiences(request):
 	print('experiences page')
 	experience_list = Experience.objects.all()
