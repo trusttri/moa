@@ -28,7 +28,10 @@ class Note(models.Model):
 	first_gen = models.BooleanField(null=True, blank=True)
 	other_info = models.TextField(null=True, blank=True)
 
-	reference = models.ManyToManyField('Note')
+	# reference = models.ManyToManyField('Note')
+	seed_note = models.ForeignKey('Note', on_delete=models.CASCADE)
+	is_seed_note = models.BooleanField()
+
 
 	def __str__(self):
 		return self.text
