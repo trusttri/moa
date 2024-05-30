@@ -29,7 +29,7 @@ class Note(models.Model):
 	other_info = models.TextField(null=True, blank=True)
 
 	# reference = models.ManyToManyField('Note')
-	seed_note = models.ForeignKey('Note', on_delete=models.CASCADE)
+	seed_note = models.ForeignKey('Note', on_delete=models.CASCADE, null=True, blank=True)
 	is_seed_note = models.BooleanField()
 
 
