@@ -1,14 +1,14 @@
 from django.contrib import admin
-from .models import Experience, Tag
+from .models import Note, Tag
 
 # Register your models here.
-class ExperienceInline(admin.TabularInline):
-	model = Experience
+class NoteInline(admin.TabularInline):
+	model = Note
 
-class ExperienceAdmin(admin.ModelAdmin):
+class NoteAdmin(admin.ModelAdmin):
 	list_display = ("title", "author")
 
-admin.site.register(Experience, ExperienceAdmin)
+admin.site.register(Note, NoteAdmin)
 
 class TagInline(admin.TabularInline):
 	model = Tag

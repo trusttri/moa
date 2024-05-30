@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Experience, Tag
+from .models import Note, Tag
 import json
 from .forms import ExperienceForm, AccountConsentBoundaryForm
 
@@ -37,7 +37,7 @@ def notifications(request):
 @login_required
 def experiences(request):
 	print('experiences page')
-	experience_list = Experience.objects.all()
+	experience_list = Note.objects.all()
 	template_name = "experiences.html"
 	return render(request, template_name, {'experience_list': experience_list})
 
@@ -46,7 +46,7 @@ def experiences(request):
 def experience(request):
 	e_id = request.GET.get('id')
 	print(e_id)
-	experience = Experience.objects.filter(id=e_id)[0]
+	experience = Note.objects.filter(id=e_id)[0]
 	print(experience.title)
 	print(experience)
 	template_name = "experience.html"
@@ -68,7 +68,7 @@ def submit_experience(request):
 			title = form.cleaned_data["title"]
 			description = form.cleaned_data["description"]
 			print(title, description)
-			e = Experience.objects.create(title=title, text=description, author=request.user)
+			e = Note.objects.create(title=title, text=description, author=request.user)
 			e.phd_year_boundary = form.cleaned_data["phd_year"]
 			e.other_info = form.cleaned_data["other_info"]
 			e.international_student = form.cleaned_data["international_student"]
@@ -81,6 +81,15 @@ def submit_experience(request):
 	else:
 		form = ExperienceForm()
 	return render(request, "write.html", {"form": form})
+
+@login_required
+def search_phd_students(request):
+	pass
+
+@login_required
+def send_message(experience):
+	search_phd_students(experience)
+	pass
 
 @login_required
 def account_consent_boundary(request):
