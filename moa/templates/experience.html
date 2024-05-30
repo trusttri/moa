@@ -1,12 +1,35 @@
 {% extends "_base_with_nav.html" %}
 
 {% block main %}
-   <h4> {{ experience.title}} </h4>
-   {{ experience.author }}
-   <br>
-   tags:
-   {% for tag in experience.tags.all %}
-   	{{ tag.keyword }}
-   {% endfor %}
+
+<div>
+Keep in mind that again, *everyone's consent boundaries are different*. Because of this, you can only see a message if your experiences, identities, and/or submitted faculty name(s) align with the sender's consent boundaries in terms of information sharing. *In short, everyone will likely see different sets of conversations and messages*.
+</div>
+
+<br>
+
+<div class="container message">
+	<div>
+	   <b> {{ experience.title}} </b>
+	   <br>
+	   {% for tag in experience.tags.all %}
+	   	<button class="tag advising-experience">{{ tag.keyword }}</button>
+	   {% endfor %}
+	</div>
+   <div class="author">
+   	{{ experience.author }}
+   </div>
+   <div>
+   	{{ experience.text }}
+   </div>
+   
+</div>
+
+<br>
+
+<div class="container">
+   	<textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
+   	<input type="submit" value="send">
+</div>
 
 {% endblock %}
