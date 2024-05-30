@@ -1,6 +1,6 @@
 from django import forms
 
-class ExperienceForm(forms.Form):
+class NoteForm(forms.Form):
     title = forms.CharField(label="experience title", max_length=200)
     description = forms.CharField(label="experience description", widget=forms.Textarea)
 
@@ -40,6 +40,8 @@ class ExperienceForm(forms.Form):
     )
 
     other_info = forms.CharField()
+
+    reference_note = forms.CharField(required=False, initial=False)
 
 
 class AccountConsentBoundaryForm(forms.Form):

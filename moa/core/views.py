@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Note, Tag
 import json
-from .forms import ExperienceForm, AccountConsentBoundaryForm
+from .forms import NoteForm, AccountConsentBoundaryForm
 
 def index(request):
 	print("core")
@@ -61,7 +61,7 @@ def submit_experience(request):
 	if request.method == "POST":
 		print("here")
 		# create a form instance and populate it with data from the request:
-		form = ExperienceForm(request.POST)
+		form = NoteForm(request.POST)
 		# check whether it's valid:
 		if form.is_valid():
 			# store the data
@@ -79,7 +79,7 @@ def submit_experience(request):
 
 	# if a GET (or any other method) we'll create a blank form
 	else:
-		form = ExperienceForm()
+		form = NoteForm()
 	return render(request, "write.html", {"form": form})
 
 @login_required
