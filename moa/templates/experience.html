@@ -28,7 +28,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 <br>
 
 
-<div class="container">
+<div class="container message">
 	Participate in the conversation -- make sure to choose your boundary.
 	<form action="send-note/" method="post">
         {% csrf_token %}
@@ -38,12 +38,10 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
         <br>
         <div class="audience-customize experience">
           <h6>I want to ONLY show this experience to people...</h6>
-          <br>
           <div>
             <!-- <form action="set/" method="post"> -->
               <!-- {% csrf_token %} -->
               <label for="phd_year">{{ note_form.phd_year.label }}</label>
-              <br>
               <fieldset>
                 <label for="id_phd_year_0"><input class="phd_year" type="checkbox" name="phd_year" value="1" id="id_phd_year_0" {% if '1' in phd_year_boundary %} checked {% endif %}>1</label>
                 <label for="id_phd_year_1"><input class="phd_year" type="checkbox" name="phd_year" value="2" id="id_phd_year_1" {% if '2' in phd_year_boundary %} checked {% endif %}>2</label>
