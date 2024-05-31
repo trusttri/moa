@@ -46,12 +46,11 @@ def experiences(request):
 def experience(request):
 	e_id = request.GET.get('id')
 	print(e_id)
-	experience = Note.objects.filter(id=e_id)[0]
-	print(experience.title)
-	print(experience)
+	seed_note = Note.objects.filter(id=e_id)[0]
+	branch_notes = Note.objects.filter(seed_note=seed_note) 
 	template_name = "experience.html"
 
-	return render(request, template_name, {'experience': experience, 'note_form': NoteForm})
+	return render(request, template_name, {'experience': seed_note, 'branch_notes': branch_notes, 'note_form': NoteForm})
 
 
 @login_required

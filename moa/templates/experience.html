@@ -25,6 +25,15 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
    
 </div>
 
+{% for note in branch_notes %}
+  <div class="container message">
+    <div class="author">
+      {{ note.author }}
+    </div>
+    {{ note.text }}
+  </div>
+{% endfor %}
+
 <br>
 
 
