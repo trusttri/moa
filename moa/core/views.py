@@ -37,7 +37,7 @@ def notifications(request):
 @login_required
 def experiences(request):
 	print('experiences page')
-	experience_list = Note.objects.all()
+	experience_list = Note.objects.filter(is_seed_note=True)
 	template_name = "experiences.html"
 	return render(request, template_name, {'experience_list': experience_list})
 
