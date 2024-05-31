@@ -10,7 +10,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
 <div class="container message">
 	<div>
-	   <b> {{ experience.title}} </b>
+	   <b> {{ experience.title }} </b>
 	   <br>
 	   {% for tag in experience.tags.all %}
 	   	<button class="tag advising-experience">{{ tag.keyword }}</button>
@@ -29,8 +29,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
 
 <div class="container message">
-	Participate in the conversation -- make sure to choose your boundary.
-	<form action="send-note/" method="post">
+	Participate in the conversation -- while making sure to choose your boundary.
+	<form action="send-note/?id={{ experience.id }}" method="post">
         {% csrf_token %}
         <div class="">
           <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>

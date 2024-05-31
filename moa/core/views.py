@@ -51,12 +51,11 @@ def experience(request):
 	print(experience)
 	template_name = "experience.html"
 
-	return render(request, template_name, {'experience': experience})
+	return render(request, template_name, {'experience': experience, 'note_form': NoteForm})
 
 
 @login_required
 def submit_experience(request):
-	print("get name function")
 	# if this is a POST request we need to process the form data
 	if request.method == "POST":
 		print("here")
@@ -74,6 +73,9 @@ def submit_experience(request):
 			e.international_student = form.cleaned_data["international_student"]
 			e.first_gen = form.cleaned_data["first_gen"]
 			e.save()
+		else:
+			for field in form:
+				print("Field Error:", field.name,  field.errors)
 
 			return redirect("/experiences")
 
@@ -82,14 +84,38 @@ def submit_experience(request):
 		form = NoteForm()
 	return render(request, "write.html", {"form": form})
 
-@login_required
-def search_phd_students(request):
-	pass
 
 @login_required
-def send_message(experience):
-	search_phd_students(experience)
-	pass
+def send_note(request):
+	n_id = request.GET.get('id')
+	if request.method == "POST":
+		form = NoteForm(request.POST)
+		if form.is_valid():
+			description = form.cleaned_data["description"]
+			n = Note.objects.create(text=description, author=request.user, is_seed_note=False)
+			n.phd_year_boundary = form.cleaned_data["phd_year"]
+			n.international_student = form.cleaned_data["international_student"]
+			n.first_gen = form.cleaned_data["first_gen"]
+			n.seed_note = Note.objects.get(id=n_id)
+			n.save()
+		else:
+			for field in form:
+				print("Field Error:", field.name,  field.errors)
+	else:
+		form = NoteForm()
+	
+	template_name = "experience.html"
+	return redirect("/experience?id=" + n_id)
+
+
+# @login_required
+# def search_phd_students(notes):
+# 	pass
+
+# @login_required
+# def send_message(notes):
+# 	search_phd_students(notes)
+# 	pass
 
 @login_required
 def account_consent_boundary(request):

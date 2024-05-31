@@ -1,7 +1,13 @@
 from django import forms
 
 class NoteForm(forms.Form):
-    title = forms.CharField(label="experience title", max_length=200)
+    title = forms.CharField(
+        label="experience title", 
+        max_length=200, 
+        required=False,
+        initial=False
+    )
+
     description = forms.CharField(label="experience description", widget=forms.Textarea)
 
     YEAR_CHOICES = [
@@ -39,7 +45,10 @@ class NoteForm(forms.Form):
         initial=False
     )
 
-    other_info = forms.CharField()
+    other_info = forms.CharField(
+        required=False,
+        initial=False
+    )
 
     reference_note = forms.CharField(required=False, initial=False)
 
