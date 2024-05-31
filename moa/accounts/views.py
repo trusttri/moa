@@ -14,11 +14,9 @@ from django.contrib import messages
 
 # Create your views here.
 class SignupPageView(generic.CreateView):
-	print("testing!")
 	form_class = CustomUserCreationForm
 	success_url = reverse_lazy("account_consent_boundary")
 	# template_name = "account/signup.html" # double check this
 
 class ConfirmEmailPageView(generic.CreateView):
-	print("testing...")
 	success_url = reverse_lazy("account_consent_boundary")

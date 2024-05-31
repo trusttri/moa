@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from core.views import experience_write, experiences, experience, submit_experience, account_consent_boundary, set_account_consent_boundary, notifications, send_note
+from core.views import room, index
 from accounts.views import SignupPageView, ConfirmEmailPageView
 
 urlpatterns = [
@@ -23,6 +24,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("", include("pages.urls"), name="home"),
+    # path("", index, name="home"),
+    path("chat/<str:room_name>/", room, name="room"),
     path("accounts/signup/", SignupPageView.as_view(), name="account_signup"),
     path("accounts/confirm-email/", ConfirmEmailPageView.as_view(), name="account_email_confirm"),
     path("consent_boundary/", account_consent_boundary, name="account_consent_boundary"),

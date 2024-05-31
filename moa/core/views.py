@@ -8,8 +8,11 @@ import json
 from .forms import NoteForm, AccountConsentBoundaryForm
 
 def index(request):
-	print("core")
 	return render(request, "core/index.html")
+
+# temporary code for learning channels
+def room(request, room_name):
+    return render(request, "chat/room.html", {"room_name": room_name})
 
 @login_required
 def experience_write(request):
@@ -130,9 +133,6 @@ def account_consent_boundary(request):
 			'tag_list': tag_list,
 
 	}
-
-	print("-----data-----")
-	print(data)
 
 	return render(request, template_name, data)
 
