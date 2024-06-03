@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Note, Tag
 import json
 from .forms import NoteForm, AccountConsentBoundaryForm
+import datetime
 
 def index(request):
 	return render(request, "core/index.html")
@@ -50,7 +51,7 @@ def experience(request):
 	e_id = request.GET.get('id')
 	print(e_id)
 	seed_note = Note.objects.filter(id=e_id)[0]
-	branch_notes = Note.objects.filter(seed_note=seed_note) 
+	branch_notes = Note.objects.filter(seed_note=seed_note).order_by('created_at')
 	template_name = "experience.html"
 	data = {'experience': seed_note, 
 			'branch_notes': branch_notes, 
@@ -74,7 +75,7 @@ def submit_experience(request):
 			title = form.cleaned_data["title"]
 			description = form.cleaned_data["description"]
 			print(title, description)
-			e = Note.objects.create(title=title, text=description, author=request.user)
+			e = Note.objects.create(title=title, text=description, author=request.user, is_seed_note=True)
 			e.phd_year_boundary = form.cleaned_data["phd_year"]
 			e.other_info = form.cleaned_data["other_info"]
 			e.international_student = form.cleaned_data["international_student"]
@@ -99,7 +100,8 @@ def send_note(request):
 	if request.method == "POST":
 		note_text = request.POST['note']
 		note_seed_id = request.POST['seed_id']
-		n = Note.objects.create(text=note_text, author=request.user, is_seed_note=False)
+		created_at = request.POST['created_at']
+		n = Note.objects.create(text=note_text, author=request.user, is_seed_note=False, created_at=datetime.datetime.fromtimestamp(created_at))
 		n.seed_note = Note.objects.get(id=note_seed_id)
 		n.save()
 		data = {'state': 'SUCCESS', 'result': 'Successfully stored.'}
