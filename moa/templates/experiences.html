@@ -1,18 +1,55 @@
 {% extends "_base_with_nav.html" %}
-
+{% load static %}
 
 {% block main %}
+
+  {% block scripts %}
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script>
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+    }
+    
+    const csrftoken = getCookie('csrftoken');
+
+    $(document).ready(function() {
+
+      $("#experiences")[0].classList.add("tab-selected");
+
+        
+    });
+
+  </script>
+  {% endblock %}
+
   {% for experience in experience_list %}
     <div>
       <h4><a href="/experience?id={{ experience.id }}"> {{ experience.title}} </a></h4>
       {% for tag in experience.tags.all %}
         <button class="tag advising-experience">{{ tag.keyword }}</button>
       {% endfor %}
+      <div class="datetime">
+        {{ experience.created_at }}
+      </div>
     </div>
     <br>
   {% endfor %}
-
 {% endblock %}
+
+
+
 
 
 

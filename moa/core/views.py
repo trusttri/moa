@@ -75,7 +75,7 @@ def submit_experience(request):
 			title = form.cleaned_data["title"]
 			description = form.cleaned_data["description"]
 			print(title, description)
-			e = Note.objects.create(title=title, text=description, author=request.user, is_seed_note=True)
+			e = Note.objects.create(title=title, text=description, author=request.user, is_seed_note=True, created_at=datetime.datetime.now())
 			e.phd_year_boundary = form.cleaned_data["phd_year"]
 			e.other_info = form.cleaned_data["other_info"]
 			e.international_student = form.cleaned_data["international_student"]
@@ -90,7 +90,8 @@ def submit_experience(request):
 	# if a GET (or any other method) we'll create a blank form
 	else:
 		form = NoteForm()
-	return render(request, "write.html", {"form": form})
+	# return render(request, "write.html", {"form": form})
+	return redirect("/experiences")
 
 
 
@@ -101,7 +102,7 @@ def send_note(request):
 		note_text = request.POST['note']
 		note_seed_id = request.POST['seed_id']
 		created_at = request.POST['created_at']
-		n = Note.objects.create(text=note_text, author=request.user, is_seed_note=False, created_at=datetime.datetime.fromtimestamp(created_at))
+		n = Note.objects.create(text=note_text, author=request.user, is_seed_note=False, created_at=datetime.datetime.now())
 		n.seed_note = Note.objects.get(id=note_seed_id)
 		n.save()
 		data = {'state': 'SUCCESS', 'result': 'Successfully stored.'}

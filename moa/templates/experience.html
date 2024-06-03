@@ -12,8 +12,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 <div class="container" id="notes-container">
   <div class="container message">
   	<div>
-  	   <b> {{ experience.title }} </b>
-  	   <br>
+  	   <div class="title"> {{ experience.title }} </div>
   	   {% for tag in experience.tags.all %}
   	   	<button class="tag advising-experience">{{ tag.keyword }}</button>
   	   {% endfor %}
@@ -24,15 +23,22 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
      <div>
      	{{ experience.text }}
      </div>
-     
+     <div class="datetime">
+      {{ experience.created_at }}
+     </div>
   </div>
 
   {% for note in branch_notes %}
     <div class="container message">
       <div class="author">
-        {{ note.author }}
+        {{ note.author }} 
       </div>
-      {{ note.text }}
+      <div>
+        {{ note.text }} 
+      </div>
+      <div class="datetime">
+        {{ note.created_at }}
+      </div>
     </div>
   {% endfor %}
 
@@ -62,6 +68,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
     const csrftoken = getCookie('csrftoken');
 
       $(document).ready(function() {
+        $("#experiences")[0].classList.add("tab-selected");
+
           const conversationName = JSON.parse(document.getElementById('conversation-name').textContent);
           const userName = JSON.parse(document.getElementById('username').textContent);
 
@@ -75,7 +83,9 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
           chatSocket.onmessage = function(e) {
               const data = JSON.parse(e.data);
-              var new_note_html = '<div class="container message"><div class="author">' + data.user + "</div>" +  data.note + '</div>';
+              var new_note_html = '<div class="container message"><div class="author">' + data.user + "</div>" 
+                                  + '<div>' + data.note + '</div>'
+                                  + '<div class="datetime">' + data.createdAt + '</div>';
               document.querySelector('#notes-container').innerHTML += new_note_html;
           };
 
@@ -86,9 +96,12 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
           function submitNote() {
             const noteInputDom = document.querySelector('#description');
             const note = noteInputDom.value;
+            const date = new Date();
             chatSocket.send(JSON.stringify({
                 'note': note,
-                'user': userName
+                'user': userName,
+                'createdAt': date.toLocaleString('en-us', { month:"long", day:"numeric", year:"numeric", 
+                                                            hour:"numeric", minute:"numeric"}) 
             }));
 
             noteInputDom.value = '';
@@ -101,7 +114,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
               data: {
                 'note': note,
                 'seed_id': conversationName,
-                'user': userName
+                'user': userName,
+                'created_at': date.toDateString()
               },
               success: function(res){
                 console.log('success!');

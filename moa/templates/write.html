@@ -109,35 +109,36 @@
       {% include 'message.html' %}
     </div>
 
+    {% block scripts %}
 
-  <!-- {% block scripts %}
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script>
-      function gatherSelectedTags() {
-        tags = []
-        $(".tag").each(function() {
-          if($(this).hasClass("selected")) {
-            tags.push($(this).text());
-          }
-        })
-        return tags
-      }
-
-      $('.tag').click(function(e) {
-        if($(this).hasClass("selected")) {
-          $(this).removeClass("selected");
-        } else {
-          $(this).addClass("selected");
+      console.log('hi');
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
         }
-      })
+        return cookieValue;
+      }
+      const csrftoken = getCookie('csrftoken');
 
-      $('#write').click(function(event) {
-          console.log("click")
-          $(this).addClass("selected");
+      $(document).ready(function() {
+
+        $("#write")[0].classList.add("tab-selected");
+          
       });
 
     </script>
-  {% endblock %} -->
+    {% endblock %}
 
 {% endblock %}
 
