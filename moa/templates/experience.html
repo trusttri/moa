@@ -39,6 +39,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 </div>
 
 {{ conversation_name|json_script:"conversation-name" }}
+{{ user.username|json_script:"username" }}
 
 {% block scripts %}
     <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -62,6 +63,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
       $(document).ready(function() {
           const conversationName = JSON.parse(document.getElementById('conversation-name').textContent);
+          const userName = JSON.parse(document.getElementById('username').textContent);
 
           const chatSocket = new WebSocket(
               'ws://'
@@ -73,7 +75,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
           chatSocket.onmessage = function(e) {
               const data = JSON.parse(e.data);
-              var new_note_html = '<div class="container message">' + data.note + '</div>';
+              var new_note_html = '<div class="container message"><div class="author">' + data.user + "</div>" +  data.note + '</div>';
               document.querySelector('#notes-container').innerHTML += new_note_html;
           };
 
@@ -85,7 +87,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
             const noteInputDom = document.querySelector('#description');
             const note = noteInputDom.value;
             chatSocket.send(JSON.stringify({
-                'note': note
+                'note': note,
+                'user': userName
             }));
 
             noteInputDom.value = '';
@@ -97,7 +100,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
               url: "send-note/",
               data: {
                 'note': note,
-                'seed_id': conversationName
+                'seed_id': conversationName,
+                'user': userName
               },
               success: function(res){
                 console.log('success!');
@@ -106,7 +110,6 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
           }
 
           $('#note-submit').click(function(event) {
-            console.log('ha click');
             submitNote();
             
           });
