@@ -6,6 +6,7 @@ import uuid
 class Tag(models.Model):
 	keyword = models.CharField(max_length=100)
 	explanation = models.TextField(blank=True)
+	created_at = models.DateTimeField(null=True, blank=True)
 	
 	class Meta:
 		ordering = ["keyword"]
@@ -21,7 +22,8 @@ class Note(models.Model):
 		)
 	title = models.CharField(max_length=200, null=True, blank=True)
 	text = models.TextField(blank=True)
-	tags = models.ManyToManyField(Tag) 
+	tags = models.ManyToManyField(Tag)
+	created_at = models.DateTimeField(null=True, blank=True)
 
 	phd_year = models.IntegerField(null=True, blank=True)
 	international_student = models.BooleanField(null=True, blank=True)
