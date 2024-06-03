@@ -1,4 +1,5 @@
 {% extends "_base_with_nav.html" %}
+{% load static %}
 
 {% block main %}
 
@@ -8,39 +9,124 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
 <br>
 
-<div class="container message">
-	<div>
-	   <b> {{ experience.title }} </b>
-	   <br>
-	   {% for tag in experience.tags.all %}
-	   	<button class="tag advising-experience">{{ tag.keyword }}</button>
-	   {% endfor %}
-	</div>
-   <div class="author">
-   	{{ experience.author }}
-   </div>
-   <div>
-   	{{ experience.text }}
-   </div>
-   
+<div class="container" id="notes-container">
+  <div class="container message">
+  	<div>
+  	   <b> {{ experience.title }} </b>
+  	   <br>
+  	   {% for tag in experience.tags.all %}
+  	   	<button class="tag advising-experience">{{ tag.keyword }}</button>
+  	   {% endfor %}
+  	</div>
+     <div class="author">
+     	{{ experience.author }}
+     </div>
+     <div>
+     	{{ experience.text }}
+     </div>
+     
+  </div>
+
+  {% for note in branch_notes %}
+    <div class="container message">
+      <div class="author">
+        {{ note.author }}
+      </div>
+      {{ note.text }}
+    </div>
+  {% endfor %}
+
 </div>
 
-{% for note in branch_notes %}
-  <div class="container message">
-    <div class="author">
-      {{ note.author }}
-    </div>
-    {{ note.text }}
-  </div>
-{% endfor %}
+{{ conversation_name|json_script:"conversation-name" }}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+      $(document).ready(function() {
+          const conversationName = JSON.parse(document.getElementById('conversation-name').textContent);
+
+          const chatSocket = new WebSocket(
+              'ws://'
+              + window.location.host
+              + '/experience/'
+              + conversationName
+              + '/'
+          );
+
+          chatSocket.onmessage = function(e) {
+              const data = JSON.parse(e.data);
+              var new_note_html = '<div class="container message">' + data.note + '</div>';
+              document.querySelector('#notes-container').innerHTML += new_note_html;
+          };
+
+          chatSocket.onclose = function(e) {
+              console.error('Chat socket closed unexpectedly');
+          };
+
+          function submitNote() {
+            const noteInputDom = document.querySelector('#description');
+            const note = noteInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'note': note
+            }));
+
+            noteInputDom.value = '';
+
+            $.ajax({
+              type: 'POST',
+              mode: 'same-origin',
+              headers: {'X-CSRFToken': csrftoken},
+              url: "send-note/",
+              data: {
+                'note': note,
+                'seed_id': conversationName
+              },
+              success: function(res){
+                console.log('success!');
+              }
+            });
+          }
+
+          $('#note-submit').click(function(event) {
+            console.log('ha click');
+            submitNote();
+            
+          });
+
+          $('#note-submit').keyup(function(event) {
+              if (e.key === 'Enter') {  // enter, return
+                  $('#note-submit').click();
+              }
+          });
+        });
+
+    </script>
+  {% endblock %}
 
 <br>
 
-
 <div class="container message">
 	Participate in the conversation -- while making sure to choose your boundary.
-	<form action="send-note/?id={{ experience.id }}" method="post">
-        {% csrf_token %}
+<!-- 	<form action="send-note/?id={{ experience.id }}" method="post">
+        {% csrf_token %} -->
         <div class="">
           <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
         </div>
@@ -81,10 +167,10 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
                 <button class="tag advising-experience">{{ tag.keyword }}</button>
               {% endfor %}
               <br>
-              <input type="submit" value="send">
+              <input type="submit" value="send" id="note-submit">
           </div>
         </div>
-      </form>
+      <!-- </form> -->
   </div>
 
 {% endblock %}

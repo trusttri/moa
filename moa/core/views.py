@@ -12,7 +12,7 @@ def index(request):
 
 # temporary code for learning channels
 def room(request, room_name):
-    return render(request, "chat/room.html", {"room_name": room_name})
+	return render(request, "chat/room.html", {"room_name": room_name})
 
 @login_required
 def experience_write(request):
@@ -52,8 +52,13 @@ def experience(request):
 	seed_note = Note.objects.filter(id=e_id)[0]
 	branch_notes = Note.objects.filter(seed_note=seed_note) 
 	template_name = "experience.html"
+	data = {'experience': seed_note, 
+			'branch_notes': branch_notes, 
+			'note_form': NoteForm,
+			'conversation_name': e_id
+			}
 
-	return render(request, template_name, {'experience': seed_note, 'branch_notes': branch_notes, 'note_form': NoteForm})
+	return render(request, template_name, data)
 
 
 @login_required
@@ -87,28 +92,38 @@ def submit_experience(request):
 	return render(request, "write.html", {"form": form})
 
 
+
 @login_required
 def send_note(request):
-	n_id = request.GET.get('id')
+	data = 'Fail'
 	if request.method == "POST":
-		form = NoteForm(request.POST)
-		if form.is_valid():
-			description = form.cleaned_data["description"]
-			n = Note.objects.create(text=description, author=request.user, is_seed_note=False)
-			n.phd_year_boundary = form.cleaned_data["phd_year"]
-			n.international_student = form.cleaned_data["international_student"]
-			n.first_gen = form.cleaned_data["first_gen"]
-			n.seed_note = Note.objects.get(id=n_id)
-			n.save()
-		else:
-			for field in form:
-				print("Field Error:", field.name,  field.errors)
+		note_text = request.POST['note']
+		note_seed_id = request.POST['seed_id']
+		n = Note.objects.create(text=note_text, author=request.user, is_seed_note=False)
+		n.seed_note = Note.objects.get(id=note_seed_id)
+		n.save()
+		data = {'state': 'SUCCESS', 'result': 'Successfully stored.'}
+		# form = NoteForm(request.POST)
+		# if form.is_valid():
+		# 	description = form.cleaned_data["description"]
+		# 	n = Note.objects.create(text=description, author=request.user, is_seed_note=False)
+		# 	n.phd_year_boundary = form.cleaned_data["phd_year"]
+		# 	n.international_student = form.cleaned_data["international_student"]
+		# 	n.first_gen = form.cleaned_data["first_gen"]
+		# 	n.seed_note = Note.objects.get(id=n_id)
+		# 	n.save()
+		# 	data = {'state': 'SUCCESS', 'result': 'Successfully stored.'}
+		# else:
+		# 	for field in form:
+		# 		print("Field Error:", field.name,  field.errors)
+		# 		data = {'state': 'ERROR', 'result': 'Error in field.'}
 	else:
 		form = NoteForm()
 	
-	template_name = "experience.html"
-	return redirect("/experience?id=" + n_id)
-
+	# template_name = "experience.html"
+	# return(request, template_name)
+	json_data = json.dumps(data)
+	return HttpResponse(json_data, content_type='application/json')
 
 # @login_required
 # def search_phd_students(notes):
