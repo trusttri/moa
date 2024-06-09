@@ -16,7 +16,7 @@ def room(request, room_name):
 	return render(request, "chat/room.html", {"room_name": room_name})
 
 @login_required
-def experience_write(request):
+def write_seed_note(request):
 	template_name = "write.html"
 	tag_list = Tag.objects.all()
 
@@ -39,31 +39,30 @@ def notifications(request):
 	return render(request, template_name)
 
 @login_required
-def experiences(request):
-	print('experiences page')
-	experience_list = Note.objects.filter(is_seed_note=True)
-	template_name = "experiences.html"
-	return render(request, template_name, {'experience_list': experience_list})
+def notes(request):
+	note_list = Note.objects.filter(is_seed_note=True)
+	template_name = "notes.html"
+	return render(request, template_name, {'note_list': note_list})
 
 
 @login_required
-def experience(request):
-	e_id = request.GET.get('id')
-	print(e_id)
-	seed_note = Note.objects.filter(id=e_id)[0]
+def note(request):
+	n_id = request.GET.get('id')
+	print(n_id)
+	seed_note = Note.objects.filter(id=n_id)[0]
 	branch_notes = Note.objects.filter(seed_note=seed_note).order_by('created_at')
-	template_name = "experience.html"
-	data = {'experience': seed_note, 
+	template_name = "note.html"
+	data = {'seed_note': seed_note, 
 			'branch_notes': branch_notes, 
 			'note_form': NoteForm,
-			'conversation_name': e_id
+			'conversation_name': n_id
 			}
 
 	return render(request, template_name, data)
 
 
 @login_required
-def submit_experience(request):
+def send_seed_note(request):
 	# if this is a POST request we need to process the form data
 	if request.method == "POST":
 		print("here")
@@ -85,13 +84,13 @@ def submit_experience(request):
 			for field in form:
 				print("Field Error:", field.name,  field.errors)
 
-			return redirect("/experiences")
+			return redirect("/notes")
 
 	# if a GET (or any other method) we'll create a blank form
 	else:
 		form = NoteForm()
 	# return render(request, "write.html", {"form": form})
-	return redirect("/experiences")
+	return redirect("/notes")
 
 
 
@@ -122,9 +121,7 @@ def send_note(request):
 		# 		data = {'state': 'ERROR', 'result': 'Error in field.'}
 	else:
 		form = NoteForm()
-	
-	# template_name = "experience.html"
-	# return(request, template_name)
+		
 	json_data = json.dumps(data)
 	return HttpResponse(json_data, content_type='application/json')
 

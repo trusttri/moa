@@ -5,8 +5,8 @@
 {% block main %}
   
     <div>
-      <h4> Share your experience based on your consent boundaries.</h4>
-      Disclosing your experience about relationships with faculty can be anxiety-inducing. Below, you can write what you want to share to an audience you customize based on types of experiences, identities that are important to you, and name(s) of faculty members you want to associate (or avoid).
+      <h4> Share your note about PhD advising relationships based on your consent boundaries.</h4>
+      Disclosing your thoughts or/and experiences about relationships with faculty can be anxiety-inducing. Below, you can write what you want to share to an audience you customize based on types of experiences, identities that are important to you, and name(s) of faculty members you want to associate (or avoid).
       Your message will only appear to those who meet the criteria that you set.
     </div>
     <br>
@@ -19,10 +19,10 @@
     </form> -->
 
     
-      <form action="submit-experience/" method="post">
+      <form action="send-seed-note/" method="post">
         {% csrf_token %}
         <div>
-          <h5>1. Write your experience</h5>
+          <h5>1. Write your note</h5>
           <label for="title">Title </label>
           <textarea class="form-control" id="title" type="text" name="title" value="" rows="1"></textarea>
           <label for="description">Description </label>
@@ -43,10 +43,10 @@
       </form> -->
 
         <div class="audience-customize experience">
-          <h5>2. Set consent boundary for this experience sharing</h5>
+          <h5>2. Set consent boundary for this note</h5>
           <br>
           <!-- Feel free to customize your consent boundary for this individual experience. -->
-          <h6>I want to ONLY show this experience to people...</h6>
+          <h6>I want to ONLY show this note to people...</h6>
           <br>
           <div>
             <!-- <form action="set/" method="post"> -->

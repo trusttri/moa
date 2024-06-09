@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import experience_write, experiences, experience, submit_experience, account_consent_boundary, set_account_consent_boundary, notifications, send_note
+from core.views import write_seed_note, notes, note, send_seed_note, account_consent_boundary, set_account_consent_boundary, notifications, send_note
 from core.views import room, index
 from accounts.views import SignupPageView, ConfirmEmailPageView
 
@@ -29,11 +29,11 @@ urlpatterns = [
     path("accounts/signup/", SignupPageView.as_view(), name="account_signup"),
     path("accounts/confirm-email/", ConfirmEmailPageView.as_view(), name="account_email_confirm"),
     path("consent_boundary/", account_consent_boundary, name="account_consent_boundary"),
-    path("experiences/", experiences, name="experiences"),
-    path("experience/", experience, name="experience"),
-    path("write", experience_write, name="write"),
+    path("notes/", notes, name="notes"),
+    path("note/", note, name="note"),
+    path("write", write_seed_note, name="write"),
     path("notifications/", notifications, name="notifications"),
-    path("submit-experience/", submit_experience, name="submit-experience"),
-    path("experience/send-note/", send_note, name="send-note"),
+    path("submit-note/", send_seed_note, name="send-seed-note"),
+    path("note/send-note/", send_note, name="send-note"),
     path("consent_boundary/set/", set_account_consent_boundary, name="set-account-consent-boundary"),
 ]

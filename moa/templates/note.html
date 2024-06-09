@@ -12,19 +12,19 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 <div class="container" id="notes-container">
   <div class="container message">
   	<div>
-  	   <div class="title"> {{ experience.title }} </div>
-  	   {% for tag in experience.tags.all %}
+  	   <div class="title"> {{ seed_note.title }} </div>
+  	   {% for tag in seed_note.tags.all %}
   	   	<button class="tag advising-experience">{{ tag.keyword }}</button>
   	   {% endfor %}
   	</div>
      <div class="author">
-     	{{ experience.author }}
+     	{{ seed_note.author }}
      </div>
      <div>
-     	{{ experience.text }}
+     	{{ seed_note.text }}
      </div>
      <div class="datetime">
-      {{ experience.created_at }}
+      {{ seed_note.created_at }}
      </div>
   </div>
 
@@ -68,7 +68,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
     const csrftoken = getCookie('csrftoken');
 
       $(document).ready(function() {
-        $("#experiences")[0].classList.add("tab-selected");
+        $("#notes")[0].classList.add("tab-selected");
 
           const conversationName = JSON.parse(document.getElementById('conversation-name').textContent);
           const userName = JSON.parse(document.getElementById('username').textContent);
@@ -76,7 +76,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
           const chatSocket = new WebSocket(
               'ws://'
               + window.location.host
-              + '/experience/'
+              + '/note/'
               + conversationName
               + '/'
           );
@@ -142,14 +142,14 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
 <div class="container message">
 	Participate in the conversation -- while making sure to choose your boundary.
-<!-- 	<form action="send-note/?id={{ experience.id }}" method="post">
+<!-- 	<form action="send-note/?id={{ note.id }}" method="post">
         {% csrf_token %} -->
         <div class="">
           <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
         </div>
         <br>
         <div class="audience-customize experience">
-          <h6>I want to ONLY show this experience to people...</h6>
+          <h6>I want to ONLY show this note to people...</h6>
           <div>
             <!-- <form action="set/" method="post"> -->
               <!-- {% csrf_token %} -->
