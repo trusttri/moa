@@ -104,7 +104,8 @@ button:hover {
 }
 
 .datetime {
-	font-size: 11px;
+	font-size: 13px;
+	color: #808080;
 }
 
 .title {
@@ -112,3 +113,7 @@ button:hover {
 	font-weight: 500;
 }
 
+.reply {
+	font-size: 13px;
+	font-weight: 400;
+}
