@@ -33,7 +33,7 @@ urlpatterns = [
     path("note/", note, name="note"),
     path("write", write_seed_note, name="write"),
     path("notifications/", notifications, name="notifications"),
-    path("submit-note/", send_seed_note, name="send-seed-note"),
+    path("send-seed-note/", send_seed_note, name="send-seed-note"),
     path("note/send-note/", send_note, name="send-note"),
     path("consent_boundary/set/", set_account_consent_boundary, name="set-account-consent-boundary"),
 ]

@@ -40,7 +40,7 @@ def notifications(request):
 
 @login_required
 def notes(request):
-	note_list = Note.objects.filter(is_seed_note=True)
+	note_list = Note.objects.filter(level=0).order_by('created_at')
 	template_name = "notes.html"
 	return render(request, template_name, {'note_list': note_list})
 
@@ -74,7 +74,7 @@ def send_seed_note(request):
 			title = form.cleaned_data["title"]
 			description = form.cleaned_data["description"]
 			print(title, description)
-			e = Note.objects.create(title=title, text=description, author=request.user, is_seed_note=True, created_at=datetime.datetime.now())
+			e = Note.objects.create(title=title, text=description, author=request.user, level=0, created_at=datetime.datetime.now())
 			e.phd_year_boundary = form.cleaned_data["phd_year"]
 			e.other_info = form.cleaned_data["other_info"]
 			e.international_student = form.cleaned_data["international_student"]
@@ -101,8 +101,9 @@ def send_note(request):
 		note_text = request.POST['note']
 		note_seed_id = request.POST['seed_id']
 		created_at = request.POST['created_at']
-		n = Note.objects.create(text=note_text, author=request.user, is_seed_note=False, created_at=datetime.datetime.now())
+		n = Note.objects.create(text=note_text, author=request.user, created_at=datetime.datetime.now())
 		n.seed_note = Note.objects.get(id=note_seed_id)
+		n.level = n.seed_note.level + 1
 		n.save()
 		data = {'state': 'SUCCESS', 'result': 'Successfully stored.'}
 		# form = NoteForm(request.POST)

@@ -32,7 +32,7 @@ class Note(models.Model):
 
 	# reference = models.ManyToManyField('Note')
 	seed_note = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
-	is_seed_note = models.BooleanField()
+	level = models.IntegerField(default=0)
 
 
 	def __str__(self):

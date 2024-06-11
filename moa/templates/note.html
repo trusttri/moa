@@ -29,7 +29,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
   </div>
 
   {% for note in branch_notes %}
-    <div class="container message">
+    <div class="container message" style="margin-left: {{ note.level }}em;">
       <div class="author">
         {{ note.author }} 
       </div>
