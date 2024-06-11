@@ -84,9 +84,11 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
           chatSocket.onmessage = function(e) {
               const data = JSON.parse(e.data);
-              var new_note_html = '<div class="container message"><div class="author">' + data.user + "</div>" 
+              var new_note_html = '<div class="container message" style="margin-left:' + data.level + 'em;">'
+                                  + '<div class="author">' + data.user + "</div>" 
                                   + '<div>' + data.note + '</div>'
-                                  + '<div class="datetime">' + data.createdAt + '</div>';
+                                  + '<div><span class="datetime">' + data.createdAt + '</span>'
+                                  + '<span class="reply"> reply </span></div>';
               document.querySelector('#notes-container').innerHTML += new_note_html;
           };
 
@@ -102,7 +104,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
                 'note': note,
                 'user': userName,
                 'createdAt': date.toLocaleString('en-us', { month:"long", day:"numeric", year:"numeric", 
-                                                            hour:"numeric", minute:"numeric"}) 
+                                                            hour:"numeric", minute:"numeric"}),
+                'level': 1
             }));
 
             noteInputDom.value = '';
@@ -116,7 +119,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
                 'note': note,
                 'seed_id': conversationName,
                 'user': userName,
-                'created_at': date.toDateString()
+                'created_at': date.toDateString(),
               },
               success: function(res){
                 console.log('success!');
