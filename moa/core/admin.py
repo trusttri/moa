@@ -6,7 +6,7 @@ class NoteInline(admin.TabularInline):
 	model = Note
 
 class NoteAdmin(admin.ModelAdmin):
-	list_display = ("title", "author")
+	list_display = ("title", "text", "author")
 
 admin.site.register(Note, NoteAdmin)
 
