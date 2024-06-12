@@ -138,3 +138,7 @@ button .reply-toggle:hover {
 	padding: 0.5px 2px 0.5px 2px;
 	font-size: 11px;
 }
+
+.reply-note-text {
+	width: 80%;
+}
