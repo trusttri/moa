@@ -23,11 +23,13 @@ class NoteConsumer(AsyncWebsocketConsumer):
 		note = note_data_json["note"]
 		user = note_data_json["user"]
 		created_at = note_data_json["createdAt"]
-		level = note_data_json["level"]
+		parent_id = note_data_json["parentID"]
+		level = int(note_data_json["parentLevel"]) + 1
 
 		# Send message to room group
 		await self.channel_layer.group_send(
-			self.conversation_group_name, {"type": "conversation.note", "note": note, "user": user, "createdAt": created_at, "level": level}
+			self.conversation_group_name, {"type": "conversation.note", "note": note, "user": user, 
+								  "createdAt": created_at, "parentID": parent_id, "level": level}
 		)
 
 	# Receive message from room group
@@ -35,9 +37,11 @@ class NoteConsumer(AsyncWebsocketConsumer):
 		note = event["note"]
 		user = event["user"]
 		created_at = event["createdAt"]
+		parent_id = event["parentID"]
 		level = event["level"]
 		# Send message to WebSocket
-		await self.send(text_data=json.dumps({"note": note, "user": user, "createdAt": created_at, "level": level}))
+		await self.send(text_data=json.dumps({"note": note, "user": user, 
+										"createdAt": created_at, "parentID": parent_id, "level": level}))
 
 
 class ChatConsumer(AsyncWebsocketConsumer):

@@ -101,8 +101,9 @@ def send_note(request):
 		note_text = request.POST['note']
 		note_seed_id = request.POST['seed_id']
 		created_at = request.POST['created_at']
+		parent_id = request.POST['parent_id']
 		n = Note.objects.create(text=note_text, author=request.user, created_at=datetime.datetime.now())
-		n.seed_note = Note.objects.get(id=note_seed_id)
+		n.seed_note = Note.objects.get(id=parent_id)
 		n.level = n.seed_note.level + 1
 		n.save()
 		data = {'state': 'SUCCESS', 'result': 'Successfully stored.'}

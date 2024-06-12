@@ -9,7 +9,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
 <br>
 
-<div class="container" id="notes-container">
+<div class="container" id="note-{{ seed_note_id }}">
   {% include "seed_note.html" %}
 
   {% for note in branch_notes %}
@@ -23,29 +23,6 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
 {% block scripts %}
     <script src="{% static 'js/jquery.min.js' %}"></script>
-
-    <script>
-    // Code for toggling the reply box for each note
-      $('.reply-toggle').click(function(event) {
-        if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
-          this.parentElement.querySelector(".reply-notebox").style.display = 'none';
-        else
-          this.parentElement.querySelector(".reply-notebox").style.display = 'block';
-      });
-
-      $('.reply-send').click(function(event) {
-        console.log('click submit');
-        console.log(this.parentElement);
-
-      });
-
-      $('.reply-cancel').click(function(event) {
-        if(this.parentElement.style.display == 'block')
-          this.parentElement.style.display = 'none';
-          this.parentElement.querySelector('.reply-note-text').value = '';
-      });
-    
-    </script>
 
     <script>
       function getCookie(name) {
@@ -86,23 +63,24 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
                                 + '<div>' + data.note + '</div>'
                                 + '<div><span class="datetime">' + data.createdAt + '</span>'
                                 + '<span class="reply-toggle"> reply </span></div>';
-            document.querySelector('#notes-container').innerHTML += new_note_html;
+            document.querySelector('#note-' + data.parentID).innerHTML += new_note_html;
         };
 
         chatSocket.onclose = function(e) {
             console.error('Chat socket closed unexpectedly');
         };
 
-        function submitNote() {
-          const noteInputDom = document.querySelector('#description');
-          const note = noteInputDom.value;
-          const date = new Date();
+        function submitNote(parentID, parentLevel, noteInputDom) {
+          var date = new Date();
+          var note = noteInputDom.value;
+          console.log(note);
           chatSocket.send(JSON.stringify({
               'note': note,
               'user': userName,
               'createdAt': date.toLocaleString('en-us', { month:"long", day:"numeric", year:"numeric", 
                                                           hour:"numeric", minute:"numeric"}),
-              'level': 1
+              'parentID': parentID,
+              'parentLevel': parentLevel,
           }));
 
           noteInputDom.value = '';
@@ -115,6 +93,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
             data: {
               'note': note,
               'seed_id': seedNoteID,
+              'parent_id': parentID,
               'user': userName,
               'created_at': date.toDateString(),
             },
@@ -125,14 +104,40 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
         }
 
         $('#note-submit').click(function(event) {
-          submitNote();
+          var noteInputDom = $('#description')[0];
+          submitNote(seedNoteID, 0, noteInputDom);
         });
+
+        // Code for toggling the reply box for each note
+        $('.reply-toggle').click(function(event) {
+          if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
+            this.parentElement.querySelector(".reply-notebox").style.display = 'none';
+          else
+            this.parentElement.querySelector(".reply-notebox").style.display = 'block';
+        });
+  
+        $('.reply-send').click(function(event) {
+          console.log('click submit');
+          var parentID = this.parentElement.parentElement.querySelector('#note_id').value;
+          var parentLevel = this.parentElement.parentElement.querySelector('#note_level').value;
+          console.log(parentID, parentLevel);
+          var noteInputDom = this.parentElement.querySelector('.reply-note-text');
+          submitNote(parentID, parentLevel, noteInputDom)
+        });
+  
+        $('.reply-cancel').click(function(event) {
+          if(this.parentElement.style.display == 'block')
+            this.parentElement.style.display = 'none';
+            this.parentElement.querySelector('.reply-note-text').value = '';
+        });
+      
 
       });
 
         
 
     </script>
+
   {% endblock %}
 
 <br>
