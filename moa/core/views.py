@@ -52,12 +52,18 @@ def note(request):
 	seed_note = Note.objects.filter(id=n_id)[0]
 	tag_list = Tag.objects.all()
 	branch_notes = Note.objects.filter(seed_note=seed_note).order_by('created_at')
+	author = request.user
+
 	template_name = "note.html"
 	data = {'seed_note': seed_note, 
 			'branch_notes': branch_notes, 
 			'note_form': NoteForm,
 			'seed_note_id': n_id,
 			'tag_list': tag_list,
+			'phd_year': author.phd_year,
+			'phd_year_boundary': author.phd_year_boundary,
+			'international_student': author.international_student,
+			'first_gen': author.first_gen,
 			}
 
 	return render(request, template_name, data)

@@ -1,11 +1,10 @@
 {% load static %}
 
-
 <div class="container audience-customize experience">
-    <h6>I want to ONLY show this note to people...</h6>
+    <h6>I want to ONLY show this note to people in this conversation who...</h6>
     <div>
-    <!-- <form action="set/" method="post"> -->
-        <!-- {% csrf_token %} -->
+    <form action="set/" method="post">
+        {% csrf_token %}
         <label for="phd_year">{{ note_form.phd_year.label }}</label>
         <fieldset>
         <label for="id_phd_year_0"><input class="phd_year" type="checkbox" name="phd_year" value="1" id="id_phd_year_0" {% if '1' in phd_year_boundary %} checked {% endif %}>1</label>
@@ -36,7 +35,7 @@
         {% for tag in tag_list %}
         <button class="tag advising-experience">{{ tag.keyword }}</button>
         {% endfor %}
-        
+    </form>
     </div>
 </div>
      
