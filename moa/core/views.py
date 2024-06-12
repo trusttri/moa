@@ -50,12 +50,14 @@ def note(request):
 	n_id = request.GET.get('id')
 	print(n_id)
 	seed_note = Note.objects.filter(id=n_id)[0]
+	tag_list = Tag.objects.all()
 	branch_notes = Note.objects.filter(seed_note=seed_note).order_by('created_at')
 	template_name = "note.html"
 	data = {'seed_note': seed_note, 
 			'branch_notes': branch_notes, 
 			'note_form': NoteForm,
-			'seed_note_id': n_id
+			'seed_note_id': n_id,
+			'tag_list': tag_list,
 			}
 
 	return render(request, template_name, data)
