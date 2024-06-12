@@ -138,7 +138,7 @@ def send_note(request):
 
 @login_required
 def account_consent_boundary(request):
-	template_name = "consent_boundary.html"
+	template_name = "account_consent_boundary.html"
 	author = request.user
 	tag_list = Tag.objects.all()
 	data = {'consent_form': AccountConsentBoundaryForm,
