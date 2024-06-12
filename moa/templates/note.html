@@ -140,56 +140,14 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
   {% endblock %}
 
-<br>
+  <div class="container">
+    Participate in the conversation -- while making sure to choose your boundary.
+    <div class="">
+      <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
+    </div>
 
-<div class="container message">
-	Participate in the conversation -- while making sure to choose your boundary.
-<!-- 	<form action="send-note/?id={{ note.id }}" method="post">
-        {% csrf_token %} -->
-        <div class="">
-          <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
-        </div>
-        <br>
-        <div class="audience-customize experience">
-          <h6>I want to ONLY show this note to people...</h6>
-          <div>
-            <!-- <form action="set/" method="post"> -->
-              <!-- {% csrf_token %} -->
-              <label for="phd_year">{{ note_form.phd_year.label }}</label>
-              <fieldset>
-                <label for="id_phd_year_0"><input class="phd_year" type="checkbox" name="phd_year" value="1" id="id_phd_year_0" {% if '1' in phd_year_boundary %} checked {% endif %}>1</label>
-                <label for="id_phd_year_1"><input class="phd_year" type="checkbox" name="phd_year" value="2" id="id_phd_year_1" {% if '2' in phd_year_boundary %} checked {% endif %}>2</label>
-                <label for="id_phd_year_2"><input class="phd_year" type="checkbox" name="phd_year" value="3" id="id_phd_year_2" {% if '3' in phd_year_boundary %} checked {% endif %}>3</label>
-                <label for="id_phd_year_3"><input class="phd_year" type="checkbox" name="phd_year" value="4" id="id_phd_year_3" {% if '4' in phd_year_boundary %} checked {% endif %}>4</label>
-                <label for="id_phd_year_4"><input class="phd_year" type="checkbox" name="phd_year" value="5" id="id_phd_year_4" {% if '5' in phd_year_boundary %} checked {% endif %}>5</label>
-                <label for="id_phd_year_5"><input class="phd_year" type="checkbox" name="phd_year" value="6" id="id_phd_year_5" {% if '6' in phd_year_boundary %} checked {% endif %}>6</label>
-                <label for="id_phd_year_6"><input class="phd_year" type="checkbox" name="phd_year" value="7" id="id_phd_year_6" {% if '7' in phd_year_boundary %} checked {% endif %}>7</label>
-                <label for="id_phd_year_7"><input class="phd_year" type="checkbox" name="phd_year" value="8" id="id_phd_year_7" {% if '8' in phd_year_boundary %} checked {% endif %}>8</label>
-                <label for="id_phd_year_8"><input class="phd_year" type="checkbox" name="phd_year" value="9" id="id_phd_year_8" {% if '9' in phd_year_boundary %} checked {% endif %}>9</label>
-                <label for="id_phd_year_9"><input class="phd_year" type="checkbox" name="phd_year" value="10" id="id_phd_year_9" {% if '10' in phd_year_boundary %} checked {% endif %}>10</label>
-              </fieldset>
-                     
+    {% include "note_consent_boundary.html" %}
 
-              <label for="international_student">{{ note_form.international_student.label }}</label>
-              <input id="international_student" type="checkbox" name="international_student" {% if international_student %} checked {% endif %}/>
-            
-              <br>
-
-              <label for="first_gen">{{ note_form.first_gen.label }}</label>
-              <input id="first_gen" type="checkbox" name="first_gen" {% if first_gen %} checked {% endif %}/>
-
-              <br>
-
-              who have experienced the following in their advising relationship(s)
-              <br>
-              {% for tag in tag_list %}
-                <button class="tag advising-experience">{{ tag.keyword }}</button>
-              {% endfor %}
-              <br>
-              <input type="submit" value="send" id="note-submit">
-          </div>
-        </div>
-      <!-- </form> -->
+    <input type="submit" value="send" id="note-submit">
   </div>
-
 {% endblock %}
