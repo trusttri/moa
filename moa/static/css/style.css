@@ -90,6 +90,7 @@ b {
 button:hover {
 	background-color: #004085;
 	color: white;
+	cursor: pointer;
 }
 
 .message {
@@ -113,7 +114,27 @@ button:hover {
 	font-weight: 500;
 }
 
-.reply {
+.reply-toggle {
 	font-size: 13px;
 	font-weight: 400;
+	padding: 0px 2px 0px 2px;
+}
+
+button .reply-toggle:hover {
+	cursor: pointer;
+}
+
+.reply-notebox {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.reply-cancel {
+	padding: 0.5px 2px 0.5px 2px;
+	font-size: 11px;
+}
+
+.reply-send {
+	padding: 0.5px 2px 0.5px 2px;
+	font-size: 11px;
 }

@@ -8,6 +8,9 @@
     </div>
     <div>
       <span class="datetime"> {{ note.created_at }} </span>
-      <span class="reply"> reply </span>
+      <button role="button" class="btn btn-light reply-toggle"> reply </button>
+      {% include "branch_note_consent_boundary.html"%}
     </div>
+
+    
 </div>

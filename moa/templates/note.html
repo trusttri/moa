@@ -112,6 +112,14 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
           });
         });
 
+        $('.reply-toggle').click(function(event) {
+            console.log(this.parentElement.querySelector(".reply-notebox"));
+            if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
+              this.parentElement.querySelector(".reply-notebox").style.display = 'none';
+            else
+              this.parentElement.querySelector(".reply-notebox").style.display = 'block';
+        });
+
     </script>
   {% endblock %}
 
