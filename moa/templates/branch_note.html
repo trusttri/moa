@@ -1,16 +1,17 @@
 {% load static %}
 <div class="container note" style="margin-left: {{ note.level }}em;">
-    <div class="author">
-      {{ note.author }} 
-    </div>
-    <div>
-      {{ note.text }} 
-    </div>
-    <div>
-      <span class="datetime"> {{ note.created_at }} </span>
-      <button role="button" class="btn btn-light reply-toggle"> reply </button>
-      {% include "branch_note_consent_boundary.html"%}
-    </div>
+  <input type="hidden" id="note_id" name="note_id" value="{{ note.id }}">
+  <div class="author">
+    {{ note.author }} 
+  </div>
+  <div>
+    {{ note.text }} 
+  </div>
+  <div>
+    <span class="datetime"> {{ note.created_at }} </span>
+    <button role="button" class="btn btn-light reply-toggle"> reply </button>
+    {% include "branch_note_consent_boundary.html"%}
+  </div>
 
     
 </div>

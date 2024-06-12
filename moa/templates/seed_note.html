@@ -1,12 +1,11 @@
 {% load static %}
 
 <div class="container note">
-    <div>
-        <div class="title"> {{ seed_note.title }} </div>
-        {% for tag in seed_note.tags.all %}
-            <button class="tag advising-experience">{{ tag.keyword }}</button>
-        {% endfor %}
-    </div>
+    <input type="hidden" id="note_id" name="note_id" value="{{ seed_note.id }}">
+    <div class="title"> {{ seed_note.title }} </div>    
+    {% for tag in seed_note.tags.all %}
+        <button class="tag advising-experience">{{ tag.keyword }}</button>
+    {% endfor %}
     <div class="author">
         {{ seed_note.author }}
     </div>
