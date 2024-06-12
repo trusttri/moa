@@ -57,7 +57,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
           chatSocket.onmessage = function(e) {
               const data = JSON.parse(e.data);
-              var new_note_html = '<div class="container message" style="margin-left:' + data.level + 'em;">'
+              var new_note_html = '<div class="container note" style="margin-left:' + data.level + 'em;">'
                                   + '<div class="author">' + data.user + "</div>" 
                                   + '<div>' + data.note + '</div>'
                                   + '<div><span class="datetime">' + data.createdAt + '</span>'
