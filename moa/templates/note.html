@@ -27,12 +27,22 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
     <script>
     // Code for toggling the reply box for each note
       $('.reply-toggle').click(function(event) {
-        console.log('click!');
-        console.log(this.parentElement);
         if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
           this.parentElement.querySelector(".reply-notebox").style.display = 'none';
         else
           this.parentElement.querySelector(".reply-notebox").style.display = 'block';
+      });
+
+      $('.reply-send').click(function(event) {
+        console.log('click submit');
+        console.log(this.parentElement);
+
+      });
+
+      $('.reply-cancel').click(function(event) {
+        if(this.parentElement.style.display == 'block')
+          this.parentElement.style.display = 'none';
+          this.parentElement.querySelector('.reply-note-text').value = '';
       });
     
     </script>
