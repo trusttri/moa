@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="container message">
+    <div>
+        <div class="title"> {{ seed_note.title }} </div>
+        {% for tag in seed_note.tags.all %}
+            <button class="tag advising-experience">{{ tag.keyword }}</button>
+        {% endfor %}
+    </div>
+    <div class="author">
+        {{ seed_note.author }}
+    </div>
+    <div>
+        {{ seed_note.text }}
+    </div>
+    <div>
+    <span class="datetime"> {{ seed_note.created_at }} </span>
+    </div>
+</div>

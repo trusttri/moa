@@ -10,37 +10,10 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 <br>
 
 <div class="container" id="notes-container">
-  <div class="container message">
-  	<div>
-  	   <div class="title"> {{ seed_note.title }} </div>
-  	   {% for tag in seed_note.tags.all %}
-  	   	<button class="tag advising-experience">{{ tag.keyword }}</button>
-  	   {% endfor %}
-  	</div>
-     <div class="author">
-     	{{ seed_note.author }}
-     </div>
-     <div>
-     	{{ seed_note.text }}
-     </div>
-     <div>
-      <span class="datetime"> {{ seed_note.created_at }} </span>
-     </div>
-  </div>
+  {% include "seed_note.html" %}
 
   {% for note in branch_notes %}
-    <div class="container message" style="margin-left: {{ note.level }}em;">
-      <div class="author">
-        {{ note.author }} 
-      </div>
-      <div>
-        {{ note.text }} 
-      </div>
-      <div>
-        <span class="datetime"> {{ note.created_at }} </span>
-        <span class="reply"> reply </span>
-      </div>
-    </div>
+    {% include "branch_note.html" with note=note %}
   {% endfor %}
 
 </div>
