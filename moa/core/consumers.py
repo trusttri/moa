@@ -3,7 +3,7 @@ import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 
-class ConversationConsumer(AsyncWebsocketConsumer):
+class NoteConsumer(AsyncWebsocketConsumer):
 	async def connect(self):
 		self.conversation_seed_name = self.scope["url_route"]["kwargs"]["seed_note_id"]
 		self.conversation_group_name = f"conversation_{self.conversation_seed_name}"
