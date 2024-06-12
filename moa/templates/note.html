@@ -23,6 +23,20 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
 {% block scripts %}
     <script src="{% static 'js/jquery.min.js' %}"></script>
+
+    <script>
+    // Code for toggling the reply box for each note
+      $('.reply-toggle').click(function(event) {
+        console.log('click!');
+        console.log(this.parentElement);
+        if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
+          this.parentElement.querySelector(".reply-notebox").style.display = 'none';
+        else
+          this.parentElement.querySelector(".reply-notebox").style.display = 'block';
+      });
+    
+    </script>
+
     <script>
       function getCookie(name) {
         let cookieValue = null;

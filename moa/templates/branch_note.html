@@ -12,20 +12,5 @@
     <button role="button" class="btn btn-light reply-toggle"> reply </button>
     {% include "branch_note_consent_boundary.html"%}
   </div>
-
     
 </div>
-
-{% block scripts %}
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script>
-  
-  $('.reply-toggle').click(function(event) {
-    if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
-      this.parentElement.querySelector(".reply-notebox").style.display = 'none';
-    else
-      this.parentElement.querySelector(".reply-notebox").style.display = 'block';
-  });
-
-</script>
-{% endblock %}
