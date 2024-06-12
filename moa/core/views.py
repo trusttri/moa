@@ -55,7 +55,7 @@ def note(request):
 	data = {'seed_note': seed_note, 
 			'branch_notes': branch_notes, 
 			'note_form': NoteForm,
-			'conversation_name': n_id
+			'seed_note_id': n_id
 			}
 
 	return render(request, template_name, data)

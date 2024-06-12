@@ -5,8 +5,8 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class ConversationConsumer(AsyncWebsocketConsumer):
 	async def connect(self):
-		self.conversation_name = self.scope["url_route"]["kwargs"]["conversation_name"]
-		self.conversation_group_name = f"conversation_{self.conversation_name}"
+		self.conversation_seed_name = self.scope["url_route"]["kwargs"]["seed_note_id"]
+		self.conversation_group_name = f"conversation_{self.conversation_seed_name}"
 
 		# Join room group
 		await self.channel_layer.group_add(self.conversation_group_name, self.channel_name)

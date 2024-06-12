@@ -18,7 +18,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
 </div>
 
-{{ conversation_name|json_script:"conversation-name" }}
+{{ seed_note_id|json_script:"seedNoteID" }}
 {{ user.username|json_script:"username" }}
 
 {% block scripts %}
@@ -58,14 +58,14 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
       $(document).ready(function() {
         $("#notes")[0].classList.add("tab-selected");
 
-        const conversationName = JSON.parse(document.getElementById('conversation-name').textContent);
+        const seedNoteID = JSON.parse(document.getElementById('seedNoteID').textContent);
         const userName = JSON.parse(document.getElementById('username').textContent);
 
         const chatSocket = new WebSocket(
             'ws://'
             + window.location.host
             + '/note/'
-            + conversationName
+            + seedNoteID
             + '/'
         );
 
@@ -104,7 +104,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
             url: "send-note/",
             data: {
               'note': note,
-              'seed_id': conversationName,
+              'seed_id': seedNoteID,
               'user': userName,
               'created_at': date.toDateString(),
             },
