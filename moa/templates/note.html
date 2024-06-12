@@ -61,7 +61,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
                                   + '<div class="author">' + data.user + "</div>" 
                                   + '<div>' + data.note + '</div>'
                                   + '<div><span class="datetime">' + data.createdAt + '</span>'
-                                  + '<span class="reply"> reply </span></div>';
+                                  + '<span class="reply-toggle"> reply </span></div>';
               document.querySelector('#notes-container').innerHTML += new_note_html;
           };
 
@@ -105,20 +105,16 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
             
           });
 
-          $('#note-submit').keyup(function(event) {
-              if (e.key === 'Enter') {  // enter, return
-                  $('#note-submit').click();
-              }
-          });
-        });
-
-        $('.reply-toggle').click(function(event) {
-            console.log(this.parentElement.querySelector(".reply-notebox"));
+          $('.reply-toggle').click(function(event) {
             if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
               this.parentElement.querySelector(".reply-notebox").style.display = 'none';
             else
               this.parentElement.querySelector(".reply-notebox").style.display = 'block';
+          });
+
         });
+
+        
 
     </script>
   {% endblock %}
