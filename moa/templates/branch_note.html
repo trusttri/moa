@@ -14,3 +14,17 @@
 
     
 </div>
+
+{% block scripts %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>
+  
+  $('.reply-toggle').click(function(event) {
+    if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
+      this.parentElement.querySelector(".reply-notebox").style.display = 'none';
+    else
+      this.parentElement.querySelector(".reply-notebox").style.display = 'block';
+  });
+
+</script>
+{% endblock %}
