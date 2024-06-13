@@ -18,6 +18,18 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
 </div>
 
+<div class="container">
+  Participate in the conversation -- while making sure to choose your boundary.
+  <div class="reply-notebox">
+    <textarea class="form-control reply-note-text" id="description" type="text" name="description" value="" rows="3"></textarea>
+  </div>
+
+  {% include "note_consent_boundary.html" %}
+
+  <input type="submit" value="send" id="note-submit">
+</div>
+
+
 {{ seed_note_id|json_script:"seedNoteID" }}
 {{ user.username|json_script:"username" }}
 
@@ -70,10 +82,32 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
             console.error('Chat socket closed unexpectedly');
         };
 
-        function submitNote(parentID, parentLevel, noteInputDom) {
+        function getConsentBoundary(noteDom) {
+          var phd_year = [];
+          var first_gen = noteDom.querySelector('#first_gen').checked;
+          var international_student = noteDom.querySelector('#international_student').checked;
+          var advising_experience = [];
+          var tags = noteDom.querySelectorAll('.advising-experience');
+          tags.forEach(tag => {
+            if(tag.classList.contains('selected'))
+              advising_experience.push(tag.innerText);
+          });
+
+          var data = {
+                      'phd_year': phd_year,
+                      'first_gen': first_gen,
+                      'international_student': international_student,
+                      'advising_experience': advising_experience,
+                    };
+       
+          return data;
+        }
+
+        function submitNote(parentID, parentLevel, noteDom) {
           var date = new Date();
-          var note = noteInputDom.value;
-          console.log(note);
+          var note = noteDom.querySelector('.reply-note-text').value;
+          var consentBoundary = getConsentBoundary(noteDom);
+          
           chatSocket.send(JSON.stringify({
               'note': note,
               'user': userName,
@@ -81,9 +115,11 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
                                                           hour:"numeric", minute:"numeric"}),
               'parentID': parentID,
               'parentLevel': parentLevel,
+              'internationalStudent': consentBoundary['international_student'],
+              'firstGen': consentBoundary['first_gen']
           }));
 
-          noteInputDom.value = '';
+          noteDom.querySelector('.reply-note-text').value = '';
 
           $.ajax({
             type: 'POST',
@@ -96,6 +132,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
               'parent_id': parentID,
               'user': userName,
               'created_at': date.toDateString(),
+              'international_student': consentBoundary['international_student'],
+              'first_gen': consentBoundary['first_gen']
             },
             success: function(res){
               console.log('success!');
@@ -104,8 +142,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
         }
 
         $('#note-submit').click(function(event) {
-          var noteInputDom = $('#description')[0];
-          submitNote(seedNoteID, 0, noteInputDom);
+          console.log(this.parentElement);
+          submitNote(seedNoteID, 0, this.parentElement);
         });
 
         // Code for toggling the reply box for each note
@@ -117,12 +155,9 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
         });
   
         $('.reply-send').click(function(event) {
-          console.log('click submit');
           var parentID = this.parentElement.parentElement.querySelector('#note_id').value;
           var parentLevel = this.parentElement.parentElement.querySelector('#note_level').value;
-          console.log(parentID, parentLevel);
-          var noteInputDom = this.parentElement.querySelector('.reply-note-text');
-          submitNote(parentID, parentLevel, noteInputDom)
+          submitNote(parentID, parentLevel, this.parentElement)
         });
   
         $('.reply-cancel').click(function(event) {
@@ -140,14 +175,4 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
   {% endblock %}
 
-  <div class="container">
-    Participate in the conversation -- while making sure to choose your boundary.
-    <div class="">
-      <textarea class="form-control" id="description" type="text" name="description" value="" rows="3"></textarea>
-    </div>
-
-    {% include "note_consent_boundary.html" %}
-
-    <input type="submit" value="send" id="note-submit">
-  </div>
 {% endblock %}

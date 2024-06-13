@@ -110,9 +110,14 @@ def send_note(request):
 		note_seed_id = request.POST['seed_id']
 		created_at = request.POST['created_at']
 		parent_id = request.POST['parent_id']
+
+		print(request.POST)
+	
 		n = Note.objects.create(text=note_text, author=request.user, created_at=datetime.datetime.now())
 		n.seed_note = Note.objects.get(id=parent_id)
 		n.level = n.seed_note.level + 1
+		n.international_student = request.POST['international_student'] == 'true'
+		n.first_gen = request.POST['first_gen'] == 'true'
 		n.save()
 		data = {'state': 'SUCCESS', 'result': 'Successfully stored.'}
 		# form = NoteForm(request.POST)

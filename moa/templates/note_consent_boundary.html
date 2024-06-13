@@ -3,8 +3,8 @@
 <div class="container note-consent-boundary">
     <b>I want to ONLY show this note to people in this conversation who...</b>
     <div>
-    <form action="set/" method="post">
-        {% csrf_token %}
+    <!-- <form action="set/" method="post">
+        {% csrf_token %} -->
         <div class="note-consent-boundary-row">
             <label for="phd_year">{{ note_form.phd_year.label }}</label>
             <fieldset>
@@ -36,7 +36,7 @@
             <button class="tag advising-experience">{{ tag.keyword }}</button>
             {% endfor %}
         </div>
-    </form>
+    <!-- </form> -->
     </div>
 </div>
      
