@@ -56,17 +56,6 @@ b {
 	width: 40px; 
 }
 
-.tag {
-    font-size: 12px;
-    background-color: white;
-    color: black;
-    cursor: pointer;
-    border-style: #007bff;
-    border-radius: 0.4rem;
-    padding: 2.5px 3px 2.5px 3px;
-    margin: 2px;
-}
-
 .selected {
     font-size: 14px;
     background-color: #007bff;
@@ -80,11 +69,6 @@ b {
 .tab-selected {
 	background-color: #007bff;
     color: rgb(241, 241, 241);
-}
- 
-.phd_year input {
-	margin-left: 5px;
-	margin-right: 5px;
 }
 
 button:hover {
@@ -114,6 +98,22 @@ button:hover {
 	font-weight: 500;
 }
 
+.phd_year input {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.tag {
+    font-size: 12px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border-style: #007bff;
+    border-radius: 0.4rem;
+    padding: 2.5px 3px 2.5px 3px;
+    margin: 2px;
+}
+
 .reply-toggle {
 	font-size: 13px;
 	font-weight: 400;
@@ -141,4 +141,12 @@ button .reply-toggle:hover {
 
 .reply-note-text {
 	width: 80%;
+}
+
+.note-consent-boundary {
+	font-size: 14px;
+}
+
+.note-consent-boundary-row {
+	margin-left: 15px;
 }
