@@ -84,22 +84,27 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
         function getConsentBoundary(noteDom) {
           var phd_year = [];
+          for(var i = 0; i < 8; i++) {
+            if(noteDom.querySelector('#id_phd_year_' + i).checked)
+              phd_year.push(i+1);
+          }
           var first_gen = noteDom.querySelector('#first_gen').checked;
           var international_student = noteDom.querySelector('#international_student').checked;
           var advising_experience = [];
           var tags = noteDom.querySelectorAll('.advising-experience');
-          tags.forEach(tag => {
-            if(tag.classList.contains('selected'))
-              advising_experience.push(tag.innerText);
-          });
+          // tags.forEach(tag => {
+          //   if(tag.classList.contains('selected'))
+          //     advising_experience.push(tag.innerText);
+          // });
 
           var data = {
-                      'phd_year': phd_year,
+                      'phd_year': phd_year.toString(),
                       'first_gen': first_gen,
                       'international_student': international_student,
                       'advising_experience': advising_experience,
                     };
-       
+          
+          console.log(data);
           return data;
         }
 
@@ -107,6 +112,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
           var date = new Date();
           var note = noteDom.querySelector('.reply-note-text').value;
           var consentBoundary = getConsentBoundary(noteDom);
+          console.log(consentBoundary);
           
           chatSocket.send(JSON.stringify({
               'note': note,
@@ -115,6 +121,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
                                                           hour:"numeric", minute:"numeric"}),
               'parentID': parentID,
               'parentLevel': parentLevel,
+              'phdYear': consentBoundary['phd_year'],
               'internationalStudent': consentBoundary['international_student'],
               'firstGen': consentBoundary['first_gen']
           }));
@@ -123,6 +130,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
           $.ajax({
             type: 'POST',
+            traditional: true,
             mode: 'same-origin',
             headers: {'X-CSRFToken': csrftoken},
             url: "send-note/",
@@ -132,6 +140,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
               'parent_id': parentID,
               'user': userName,
               'created_at': date.toDateString(),
+              'phd_year': consentBoundary['phd_year'],
               'international_student': consentBoundary['international_student'],
               'first_gen': consentBoundary['first_gen']
             },

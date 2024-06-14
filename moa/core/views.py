@@ -82,12 +82,12 @@ def send_seed_note(request):
 			title = form.cleaned_data["title"]
 			description = form.cleaned_data["description"]
 			print(title, description)
-			e = Note.objects.create(title=title, text=description, author=request.user, level=0, created_at=datetime.datetime.now())
-			e.phd_year_boundary = form.cleaned_data["phd_year"]
-			e.other_info = form.cleaned_data["other_info"]
-			e.international_student = form.cleaned_data["international_student"]
-			e.first_gen = form.cleaned_data["first_gen"]
-			e.save()
+			n = Note.objects.create(title=title, text=description, author=request.user, level=0, created_at=datetime.datetime.now())
+			n.phd_year = form.cleaned_data["phd_year"]
+			n.other_info = form.cleaned_data["other_info"]
+			n.international_student = form.cleaned_data["international_student"]
+			n.first_gen = form.cleaned_data["first_gen"]
+			n.save()
 		else:
 			for field in form:
 				print("Field Error:", field.name,  field.errors)
@@ -110,12 +110,11 @@ def send_note(request):
 		note_seed_id = request.POST['seed_id']
 		created_at = request.POST['created_at']
 		parent_id = request.POST['parent_id']
-
-		print(request.POST)
 	
 		n = Note.objects.create(text=note_text, author=request.user, created_at=datetime.datetime.now())
 		n.seed_note = Note.objects.get(id=parent_id)
 		n.level = n.seed_note.level + 1
+		n.phd_year = request.POST['phd_year'].split(",")
 		n.international_student = request.POST['international_student'] == 'true'
 		n.first_gen = request.POST['first_gen'] == 'true'
 		n.save()

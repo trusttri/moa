@@ -25,7 +25,7 @@ class Note(models.Model):
 	tags = models.ManyToManyField(Tag)
 	created_at = models.DateTimeField(null=True, blank=True)
 
-	phd_year = models.IntegerField(null=True, blank=True)
+	phd_year = models.JSONField(null=True, blank=True)
 	international_student = models.BooleanField(null=True, blank=True)
 	first_gen = models.BooleanField(null=True, blank=True)
 	other_info = models.TextField(null=True, blank=True)
