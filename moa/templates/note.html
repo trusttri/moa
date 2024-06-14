@@ -166,7 +166,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
         $('.reply-send').click(function(event) {
           var parentID = this.parentElement.parentElement.querySelector('#note_id').value;
           var parentLevel = this.parentElement.parentElement.querySelector('#note_level').value;
-          submitNote(parentID, parentLevel, this.parentElement)
+          submitNote(parentID, parentLevel, this.parentElement);
+          this.parentElement.parentElement.querySelector(".reply-notebox").style.display = 'none';
         });
   
         $('.reply-cancel').click(function(event) {
