@@ -61,7 +61,7 @@ b {
     background-color: #007bff;
     color: rgb(241, 241, 241);
     cursor: pointer;
-    border-style: #007bff;
+    border-color: #007bff;
     border-radius: 0.4rem;
     padding: 5px 10px 5px 10px;
 }
@@ -104,14 +104,23 @@ button:hover {
 }
 
 .tag {
-    font-size: 12px;
-    background-color: white;
+    font-size: 13px;
+    background-color: rgba(114, 0, 255, 0.1);
     color: black;
     cursor: pointer;
-    border-style: #007bff;
+    border-color: #808080;
     border-radius: 0.4rem;
-    padding: 2.5px 3px 2.5px 3px;
+    padding: 3px 4px 3px 4px;
     margin: 2px;
+}
+
+.tag:hover {
+	background-color: rgba(114, 0, 255, 0.2);
+}
+
+.selected {
+	background-color: #a900ff;
+	color: rgb(241, 241, 241);
 }
 
 .reply-toggle {

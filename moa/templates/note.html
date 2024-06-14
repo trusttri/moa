@@ -92,16 +92,16 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
           var international_student = noteDom.querySelector('#international_student').checked;
           var advising_experience = [];
           var tags = noteDom.querySelectorAll('.advising-experience');
-          // tags.forEach(tag => {
-          //   if(tag.classList.contains('selected'))
-          //     advising_experience.push(tag.innerText);
-          // });
+          tags.forEach(tag => {
+            if(tag.classList.contains('selected'))
+              advising_experience.push(tag.innerText);
+          });
 
           var data = {
                       'phd_year': phd_year.toString(),
                       'first_gen': first_gen,
                       'international_student': international_student,
-                      'advising_experience': advising_experience,
+                      'advising_experience': advising_experience.toString(),
                     };
           
           console.log(data);
@@ -123,7 +123,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
               'parentLevel': parentLevel,
               'phdYear': consentBoundary['phd_year'],
               'internationalStudent': consentBoundary['international_student'],
-              'firstGen': consentBoundary['first_gen']
+              'firstGen': consentBoundary['first_gen'],
+              'advisingExperience': consentBoundary['advising_experience']
           }));
 
           noteDom.querySelector('.reply-note-text').value = '';
@@ -142,7 +143,8 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
               'created_at': date.toDateString(),
               'phd_year': consentBoundary['phd_year'],
               'international_student': consentBoundary['international_student'],
-              'first_gen': consentBoundary['first_gen']
+              'first_gen': consentBoundary['first_gen'],
+              'advising_experience': consentBoundary['advising_experience']
             },
             success: function(res){
               console.log('success!');
@@ -175,7 +177,12 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
             this.parentElement.style.display = 'none';
             this.parentElement.querySelector('.reply-note-text').value = '';
         });
-      
+        
+        $(".advising-experience").click(function() {
+          console.log('clicked');
+          console.log($(this));
+          $(this).toggleClass("selected");
+        });
 
       });
 
