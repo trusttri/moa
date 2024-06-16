@@ -70,12 +70,19 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            var new_note_html = '<div class="container note" style="margin-left:' + data.level + 'em;">'
-                                + '<div class="author">' + data.user + "</div>" 
-                                + '<div>' + data.note + '</div>'
-                                + '<div><span class="datetime">' + data.createdAt + '</span>'
-                                + '<span class="reply-toggle"> reply </span></div>';
-            document.querySelector('#note-' + data.parentID).innerHTML += new_note_html;
+            console.log("---chatSocket on message---")
+
+            $.ajax({
+              url: '/branch_note_view/' + data.noteID + '/', // Replace with the actual URL of the branch_note.html template
+              type: 'GET',
+              success: function(response) {
+                // Append the fetched HTML to the note container
+                document.querySelector('#note-' + data.parentID).innerHTML += response;
+              },
+              error: function(error) {
+                console.error('Failed to fetch branch note:', error);
+              }
+            });
         };
 
         chatSocket.onclose = function(e) {
@@ -113,20 +120,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
           var note = noteDom.querySelector('.reply-note-text').value;
           var consentBoundary = getConsentBoundary(noteDom);
           console.log(consentBoundary);
-          
-          chatSocket.send(JSON.stringify({
-              'note': note,
-              'user': userName,
-              'createdAt': date.toLocaleString('en-us', { month:"long", day:"numeric", year:"numeric", 
-                                                          hour:"numeric", minute:"numeric"}),
-              'parentID': parentID,
-              'parentLevel': parentLevel,
-              'phdYear': consentBoundary['phd_year'],
-              'internationalStudent': consentBoundary['international_student'],
-              'firstGen': consentBoundary['first_gen'],
-              'advisingExperience': consentBoundary['advising_experience']
-          }));
-
+    
           noteDom.querySelector('.reply-note-text').value = '';
 
           $.ajax({
@@ -148,6 +142,21 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
             },
             success: function(res){
               console.log('success!');
+              console.log(res);
+              chatSocket.send(JSON.stringify({
+                  'noteID': res.noteID,
+                  'note': note,
+                  'seedID': seedNoteID,
+                  'user': userName,
+                  'createdAt': date.toLocaleString('en-us', { month:"long", day:"numeric", year:"numeric", 
+                                                              hour:"numeric", minute:"numeric"}),
+                  'parentID': parentID,
+                  'parentLevel': parentLevel,
+                  'phdYear': consentBoundary['phd_year'],
+                  'internationalStudent': consentBoundary['international_student'],
+                  'firstGen': consentBoundary['first_gen'],
+                  'advisingExperience': consentBoundary['advising_experience']
+              }));
             }
           });
         }

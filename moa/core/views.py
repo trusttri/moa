@@ -7,6 +7,15 @@ from .models import Note, Tag
 import json
 from .forms import NoteForm, AccountConsentBoundaryForm
 import datetime
+from uuid import UUID
+
+
+class UUIDEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, UUID):
+            # if the obj is uuid, we simply return the value of uuid
+            return obj.hex
+        return json.JSONEncoder.default(self, obj)
 
 def index(request):
 	return render(request, "core/index.html")
@@ -68,7 +77,6 @@ def note(request):
 
 	return render(request, template_name, data)
 
-
 @login_required
 def send_seed_note(request):
 	# if this is a POST request we need to process the form data
@@ -101,6 +109,13 @@ def send_seed_note(request):
 	return redirect("/notes")
 
 
+def branch_note_view(request, note_id):
+	note = Note.objects.get(id=note_id)
+	render_result = render(request, 'branch_note.html', {'note': note})
+	print(render_result)
+	return render_result
+
+
 
 @login_required
 def send_note(request):
@@ -119,7 +134,7 @@ def send_note(request):
 		n.international_student = request.POST['international_student'] == 'true'
 		n.first_gen = request.POST['first_gen'] == 'true'
 		n.save()
-		data = {'state': 'SUCCESS', 'result': 'Successfully stored.'}
+		data = {'state': 'SUCCESS', 'noteID': str(n.id), 'parentID': str(parent_id)}
 		# form = NoteForm(request.POST)
 		# if form.is_valid():
 		# 	description = form.cleaned_data["description"]
@@ -138,6 +153,7 @@ def send_note(request):
 		form = NoteForm()
 		
 	json_data = json.dumps(data)
+	print(json_data)
 	return HttpResponse(json_data, content_type='application/json')
 
 # @login_required
