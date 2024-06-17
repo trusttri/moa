@@ -2,13 +2,27 @@
 
 <div class="container note">
     <input type="hidden" id="note_id" name="note_id" value="{{ seed_note.id }}">
-    <div class="title"> {{ seed_note.title }} </div>    
-    {% for tag in seed_note.tags.all %}
-        <button class="tag advising-experience">{{ tag.keyword }}</button>
-    {% endfor %}
+    <div class="title"> {{ seed_note.title }} </div>  
+
     <div class="author">
         {{ seed_note.author }}
     </div>
+    
+    <div>
+        {% for tag in seed_note.tags.all %}
+            <span class="topic-tag">{{ tag.keyword }}</span>
+        {% endfor %}
+    </div>
+    <div class="note-consent-render">
+        only visible to people who identified as:
+        {% if seed_note.international_student %} <span class="tag note-consent-render-tag">international student</span> {% endif %}
+        {% if seed_note.first_gen %} <span class="tag note-consent-render-tag">first-gen student</span> {% endif %}
+        {% for year in note.phd_year %}
+            <span class="tag note-consent-render-tag">{{ year }} year</span>
+        {% endfor %}
+    </div>  
+    
+    
     <div>
         {{ seed_note.text }}
     </div>

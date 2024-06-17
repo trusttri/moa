@@ -6,6 +6,14 @@
     <div class="author">
       {{ note.author }} 
     </div>
+    <div class="note-consent-render">
+      only visible to people who identified as:
+      {% if note.international_student %} <span class="tag note-consent-render-tag">international student</span> {% endif %}
+      {% if note.first_gen %} <span class="tag note-consent-render-tag">first-gen student</span> {% endif %}
+        {% for year in note.phd_year %}
+          <span class="tag note-consent-render-tag">{{ year }} year</span>
+        {% endfor %}
+    </div>
     <div>
       {{ note.text }} 
     </div>
@@ -13,7 +21,7 @@
     <span class="datetime"> {{ note.created_at }} </span>
     <button role="button" class="btn btn-light reply-toggle"> reply </button>
     
-    <div class="reply-notebox" style="display: none;">
+    <div class="reply-notebox" id="reply-notebox-{{ note.id }}" style="display: none;">
       <textarea class="reply-note-text" id="" type="text" name="" value="" rows="2"></textarea>
       <button role="button" class="btn btn-light reply-cancel"> cancel </button>
       <button role="button" class="btn btn-light reply-send"> send </button>
@@ -26,3 +34,4 @@
     {% include 'branch_note.html' with note=reply %}
   {% endfor %}
 </div>
+

@@ -110,11 +110,26 @@ button:hover {
     cursor: pointer;
     border-color: #808080;
     border-radius: 0.4rem;
-    padding: 3px 4px 3px 4px;
+    padding: 2px 3px 2px 3px;
     margin: 2px;
 }
 
 .tag:hover {
+	background-color: rgba(114, 0, 255, 0.2);
+}
+
+.topic-tag {
+	font-size: 13px;
+    background-color: rgba(114, 0, 255, 0.1);
+    color: black;
+    cursor: pointer;
+    border-color: #808080;
+    border-radius: 0.4rem;
+    padding: 2px 3px 2px 3px;
+	box-shadow: 0 2px 3px 0 rgba(22, 142, 228, 0.16), 0 2px 6px 0 rgba(0, 0, 0, 0.12);
+}
+
+.topic-tag:hover {
 	background-color: rgba(114, 0, 255, 0.2);
 }
 
@@ -158,4 +173,18 @@ button .reply-toggle:hover {
 
 .note-consent-boundary-row {
 	margin-left: 15px;
+}
+
+.note-consent-render {
+	font-size: 13px;
+	margin-top: 2px;
+	margin-bottom: 8px;
+}
+
+.note-consent-render-tag {
+	background-color: #d0fbdd;
+}
+
+.note-consent-render-tag:hover {
+	background-color: #98edb2;
 }
