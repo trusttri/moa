@@ -6,14 +6,18 @@
     <div class="author">
       {{ note.author }} 
     </div>
-    <div class="note-consent-render">
-      only visible to people who identified as:
-      {% if note.international_student %} <span class="tag note-consent-render-tag">international student</span> {% endif %}
-      {% if note.first_gen %} <span class="tag note-consent-render-tag">first-gen student</span> {% endif %}
+    {% if note.author == user %}
+      <div class="note-consent-render">
+        only visible to people who identified as:
+        {% if note.international_student %} <span class="tag note-consent-render-tag">international student</span> {% endif %}
+        {% if note.first_gen %} <span class="tag note-consent-render-tag">first-gen student</span> {% endif %}
         {% for year in note.phd_year %}
-          <span class="tag note-consent-render-tag">{{ year }} year</span>
+          {% if year != "" %}
+            <span class="tag note-consent-render-tag">{{ year }} year</span>
+          {% endif %}
         {% endfor %}
-    </div>
+      </div>
+    {% endif %}
     <div>
       {{ note.text }} 
     </div>
