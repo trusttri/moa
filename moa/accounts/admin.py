@@ -18,7 +18,8 @@ class CustomUserAdmin(UserAdmin):
 		"phd_year_boundary",
 		"international_student",
 		"first_gen",
-		"other_info"
+		"get_experience_tags",
+		"other_info",
 	]
 
 admin.site.register(CustomUser, CustomUserAdmin)
