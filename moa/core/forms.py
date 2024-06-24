@@ -69,6 +69,16 @@ class AccountConsentBoundaryForm(forms.Form):
         (10, 10)
     ]
 
+    EXPERIENCE_CHOICES= [
+        ("credit issue", "credit issue"),
+        ("fraud", "fraud"),
+        ("ghosting", "ghosting"),
+        ("harassment", "harassment"),
+        ("microaggression", "microaggression"),
+        ("micromanagement", "micromanagement"),
+        ("threat", "threat")   
+    ]
+
     username = forms.CharField()
 
     phd_year = forms.MultipleChoiceField(
@@ -89,6 +99,14 @@ class AccountConsentBoundaryForm(forms.Form):
     first_gen = forms.BooleanField(
         widget=forms.CheckboxInput,
         label="who is an first-gen student",
+        required=False,
+        initial=False
+    )
+
+    experience_tags = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        label="who have experienced the following (select from below)",
+        choices=EXPERIENCE_CHOICES,
         required=False,
         initial=False
     )
