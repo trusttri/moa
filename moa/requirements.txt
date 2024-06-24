@@ -28,8 +28,11 @@ django-crispy-forms==2.1
 django-mysql==4.2.0
 docopt==0.6.2
 environs==11.0.0
+exceptiongroup==1.2.1
 executing==2.0.1
+Faker==25.9.1
 fastjsonschema==2.19.1
+h11==0.14.0
 hyperlink==21.0.0
 idna==3.6
 importlib_metadata==7.1.0
@@ -53,6 +56,7 @@ nbclient==0.10.0
 nbconvert==7.16.3
 nbformat==5.10.3
 oauthlib==3.2.2
+outcome==1.3.0.post0
 packaging==24.0
 pandocfilters==1.5.1
 parso==0.8.3
@@ -73,6 +77,7 @@ PyJWT==2.8.0
 PyMySQL==1.1.0
 pyOpenSSL==24.1.0
 pyproject_hooks==1.0.0
+PySocks==1.7.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 python3-openid==3.2.0
@@ -82,8 +87,11 @@ referencing==0.34.0
 requests==2.31.0
 requests-oauthlib==2.0.0
 rpds-py==0.18.0
+selenium==4.21.0
 service-identity==24.1.0
 six==1.16.0
+sniffio==1.3.1
+sortedcontainers==2.4.0
 soupsieve==2.5
 sqlparse==0.4.1
 stack-data==0.6.3
@@ -91,12 +99,15 @@ tinycss2==1.2.1
 tomli==2.0.1
 tornado==6.4
 traitlets==5.14.2
+trio==0.25.1
+trio-websocket==0.11.1
 Twisted==24.3.0
 txaio==23.1.1
 typing_extensions==4.10.0
 urllib3==2.2.1
 wcwidth==0.2.13
 webencodings==0.5.1
+wsproto==1.2.0
 yarg==0.1.9
 zipp==3.18.1
 zope.interface==6.4.post2
