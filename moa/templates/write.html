@@ -82,7 +82,7 @@
               who have experienced the following in their advising relationship(s)
               <br>
               {% for tag in tag_list %}
-                <button class="tag advising-experience">{{ tag.keyword }}</button>
+                <span class="tag advising-experience">{{ tag.keyword }}</span>
               {% endfor %}
               <br>
               <br>
@@ -125,6 +125,13 @@
       $(document).ready(function() {
 
         $("#write")[0].classList.add("tab-selected");
+
+        $(".advising-experience").click(function() {
+          console.log('clicked');
+          console.log($(this));
+          $(this).toggleClass("selected");
+        });
+
           
       });
 

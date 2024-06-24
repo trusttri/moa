@@ -59,7 +59,7 @@ def note(request):
 	n_id = request.GET.get('id')
 	print(n_id)
 	seed_note = Note.objects.filter(id=n_id)[0]
-	tag_list = Tag.objects.all()
+	experience_tag_list = Tag.objects.all()
 	branch_notes = Note.objects.filter(seed_note=seed_note).order_by('created_at')
 	author = request.user
 
@@ -68,7 +68,7 @@ def note(request):
 			'branch_notes': branch_notes, 
 			'note_form': NoteForm,
 			'seed_note_id': n_id,
-			'tag_list': tag_list,
+			'experience_tag_list': experience_tag_list,
 			'phd_year': author.phd_year,
 			'phd_year_boundary': author.phd_year_boundary,
 			'international_student': author.international_student,
@@ -125,7 +125,7 @@ def send_note(request):
 		note_seed_id = request.POST['seed_id']
 		created_at = request.POST['created_at']
 		parent_id = request.POST['parent_id']
-		advising_experience_tags = request.POST['advising_experience']
+		advising_experience_tags = request.POST['advising_experience'].split(",")
 	
 		n = Note.objects.create(text=note_text, author=request.user, created_at=datetime.datetime.now())
 		n.seed_note = Note.objects.get(id=parent_id)
@@ -133,6 +133,9 @@ def send_note(request):
 		n.phd_year = request.POST['phd_year'].split(",")
 		n.international_student = request.POST['international_student'] == 'true'
 		n.first_gen = request.POST['first_gen'] == 'true'
+		for experience_tag in advising_experience_tags:
+			tag = Tag.objects.get(keyword=experience_tag)
+			n.experience_tags.add(tag)
 		n.save()
 		data = {'state': 'SUCCESS', 'noteID': str(n.id), 'parentID': str(parent_id)}
 		# form = NoteForm(request.POST)

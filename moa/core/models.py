@@ -22,7 +22,7 @@ class Note(models.Model):
 		)
 	title = models.CharField(max_length=200, null=True, blank=True)
 	text = models.TextField(blank=True)
-	tags = models.ManyToManyField(Tag)
+	experience_tags = models.ManyToManyField(Tag)
 	created_at = models.DateTimeField(null=True, blank=True)
 
 	phd_year = models.JSONField(null=True, blank=True)
