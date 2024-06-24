@@ -27,7 +27,6 @@ def room(request, room_name):
 @login_required
 def write_seed_note(request):
 	template_name = "write.html"
-	tag_list = Tag.objects.all()
 
 	author = request.user
 	data = {'consent_form': AccountConsentBoundaryForm,
@@ -36,7 +35,7 @@ def write_seed_note(request):
 			'international_student': author.international_student,
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
-			'tag_list': tag_list
+			'experience_tags': author.experience_tags.all(),
 	}
 
 	# return render(request, template_name, {'tag_list': tag_list, 'identity_list': identity_list})
@@ -95,6 +94,11 @@ def send_seed_note(request):
 			n.other_info = form.cleaned_data["other_info"]
 			n.international_student = form.cleaned_data["international_student"]
 			n.first_gen = form.cleaned_data["first_gen"]
+			experiences = form.cleaned_data["experience_tags"]
+			for e in experiences:
+				print(e)
+				t = Tag.objects.get(keyword=e)
+				n.experience_tags.add(t)
 			n.save()
 		else:
 			for field in form:
@@ -172,15 +176,14 @@ def send_note(request):
 def account_consent_boundary(request):
 	template_name = "account_consent_boundary.html"
 	author = request.user
-	tag_list = Tag.objects.all()
+	print(author.get_experience_tags())
 	data = {'consent_form': AccountConsentBoundaryForm,
 			'phd_year': author.phd_year,
 			'phd_year_boundary': author.phd_year_boundary,
 			'international_student': author.international_student,
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
-			'tag_list': tag_list,
-
+			'experience_tags': author.get_experience_tags(),
 	}
 
 	return render(request, template_name, data)
@@ -190,6 +193,7 @@ def set_account_consent_boundary(request):
 	if request.method == "POST":
 		form = AccountConsentBoundaryForm(request.POST)
 		if form.is_valid():
+			print("---SET ACCOUNT CONSENT BOUNDARY---")
 			print(form.cleaned_data)
 			author = request.user
 			author.username = form.cleaned_data["username"]
@@ -198,10 +202,18 @@ def set_account_consent_boundary(request):
 			author.international_student = form.cleaned_data["international_student"]
 			author.first_gen = form.cleaned_data["first_gen"]
 
+			advising_experience_tags = form.cleaned_data['experience_tags']
+			for tag_id in advising_experience_tags:
+				tag = Tag.objects.get(choice_id=int(tag_id))
+				author.experience_tags.add(tag)
+
 			author.save()
-			return redirect("/consent_boundary")
+		else:
+			for field in form:
+				print("Field Error:", field.name,  field.errors)
+		return redirect("/consent_boundary")
 	else:
 		form = AccountConsentBoundaryForm()
-	return render(request, "consent_boundary.html", {"form": form})
+	return render(request, "account_consent_boundary.html", {"form": form})
 
 

@@ -36,15 +36,11 @@
 	        <label for="phd_year">{{ consent_form.phd_year.label }}</label>
 	        <br>
 			<fieldset class="phd_year">
-		        <label for="id_phd_year_0"><input type="checkbox" name="phd_year" value="1" id="id_phd_year_0" {% if '1' in phd_year_boundary %} checked {% endif %}>1</label>
-		        <label for="id_phd_year_1"><input type="checkbox" name="phd_year" value="2" id="id_phd_year_1" {% if '2' in phd_year_boundary %} checked {% endif %}>2</label>
-		    	<label for="id_phd_year_2"><input type="checkbox" name="phd_year" value="3" id="id_phd_year_2" {% if '3' in phd_year_boundary %} checked {% endif %}>3</label>
-		    	<label for="id_phd_year_3"><input type="checkbox" name="phd_year" value="4" id="id_phd_year_3" {% if '4' in phd_year_boundary %} checked {% endif %}>4</label>
-		    	<label for="id_phd_year_4"><input type="checkbox" name="phd_year" value="5" id="id_phd_year_4" {% if '5' in phd_year_boundary %} checked {% endif %}>5</label>
-		    	<label for="id_phd_year_5"><input type="checkbox" name="phd_year" value="6" id="id_phd_year_5" {% if '6' in phd_year_boundary %} checked {% endif %}>6</label>
-		    	<label for="id_phd_year_6"><input type="checkbox" name="phd_year" value="7" id="id_phd_year_6" {% if '7' in phd_year_boundary %} checked {% endif %}>7</label>
-		    	<label for="id_phd_year_7"><input type="checkbox" name="phd_year" value="8" id="id_phd_year_7" {% if '8' in phd_year_boundary %} checked {% endif %}>8</label>
-		    </fieldset>
+				{% for x, y in consent_form.fields.phd_year.choices %}
+					<input type="checkbox" name="phd_year" id="id_phd_year_{{ x }}" value="{{ x }}" {% if y in phd_year_boundary %} checked {% endif %}>{{ y }}
+					<label for="id_phd_year_{{ x }}"></label>
+				{% endfor %}
+			</fieldset>
 			<br>
 			    <!-- {% for y in consent_form.phd_year %}
 			        {{ y }}
@@ -64,12 +60,16 @@
 		    <br>
 
 			who have experienced the following in their advising relationship(s)
-          	<br>
-	        {% for tag in tag_list %}
-	        	<span class="tag advising-experience">{{ tag.keyword }}</span>
-	        {% endfor %}
-	        <br>
-	        <br>
+			<br>
+			<fieldset class="experience_tags"></fieldset>
+				{% for x,y in consent_form.fields.experience_tags.choices %}
+					<input type="checkbox" name="experience_tags" id="id_experience_tags_{{ x }}" value="{{ x }}" {% if y in experience_tags %} checked {% endif %}>{{ y }}
+					<label for="id_experience_tags_{{ x }}"></label>
+				{% endfor %}
+		  	</fieldset>
+		  
+			<br>
+			<br>
 	        
 	        <label for="other_info">other information you would like the moderator to reference</label>
 	        <textarea class="form-control" id="other_info" type="text" name="other_info" value="" rows="3">{{ other_info }}</textarea>      
@@ -111,6 +111,7 @@
 			console.log($(this));
 	    	$(this).toggleClass("selected");
 	    });
+
 	  });
 
 	</script>

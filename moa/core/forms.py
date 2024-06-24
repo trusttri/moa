@@ -11,16 +11,26 @@ class NoteForm(forms.Form):
     description = forms.CharField(label="experience description", widget=forms.Textarea)
 
     YEAR_CHOICES = [
-        (1, 1),
-        (2, 2),
-        (3, 3),
-        (4, 4),
-        (5, 5),
-        (6, 6), 
-        (7, 7),
-        (8, 8),
-        (9, 9),
-        (10, 10)
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'), 
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10')
+    ]
+
+    EXPERIENCE_CHOICES= [
+        (1, "credit issue"),
+        (2, "fraud"),
+        (3, "ghosting"),
+        (4, "harassment"),
+        (5, "microaggression"),
+        (6, "micromanagement"),
+        (7, "threat")   
     ]
 
     phd_year = forms.MultipleChoiceField(
@@ -45,6 +55,14 @@ class NoteForm(forms.Form):
         initial=False
     )
 
+    experience_tags = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        label="who have experienced the following (select from below)",
+        choices=EXPERIENCE_CHOICES,
+        required=False,
+        initial=False
+    )
+
     other_info = forms.CharField(
         required=False,
         initial=False
@@ -57,26 +75,26 @@ class AccountConsentBoundaryForm(forms.Form):
     # phd_year = forms.IntegerField()
 
     YEAR_CHOICES = [
-        (1, 1),
-        (2, 2),
-        (3, 3),
-        (4, 4),
-        (5, 5),
-        (6, 6), 
-        (7, 7),
-        (8, 8),
-        (9, 9),
-        (10, 10)
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'), 
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10')
     ]
 
     EXPERIENCE_CHOICES= [
-        ("credit issue", "credit issue"),
-        ("fraud", "fraud"),
-        ("ghosting", "ghosting"),
-        ("harassment", "harassment"),
-        ("microaggression", "microaggression"),
-        ("micromanagement", "micromanagement"),
-        ("threat", "threat")   
+        (1, "credit issue"),
+        (2, "fraud"),
+        (3, "ghosting"),
+        (4, "harassment"),
+        (5, "microaggression"),
+        (6, "micromanagement"),
+        (7, "threat")   
     ]
 
     username = forms.CharField()

@@ -14,6 +14,6 @@ class TagInline(admin.TabularInline):
 	model = Tag
 
 class TagAdmin(admin.ModelAdmin):
-	list_display = ("keyword", "explanation")
+	list_display = ("keyword", "explanation", "choice_id")
 
 admin.site.register(Tag, TagAdmin)

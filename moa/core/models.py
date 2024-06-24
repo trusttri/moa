@@ -7,7 +7,8 @@ class Tag(models.Model):
 	keyword = models.CharField(max_length=100)
 	explanation = models.TextField(blank=True)
 	created_at = models.DateTimeField(null=True, blank=True)
-	
+	choice_id = models.IntegerField(null=True, blank=True) 
+
 	class Meta:
 		ordering = ["keyword"]
 
