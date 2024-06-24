@@ -69,6 +69,8 @@ class AccountConsentBoundaryForm(forms.Form):
         (10, 10)
     ]
 
+    username = forms.CharField()
+
     phd_year = forms.MultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,
         label="who are in their X year in PhD (select from below)",

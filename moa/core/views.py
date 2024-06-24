@@ -189,6 +189,7 @@ def set_account_consent_boundary(request):
 		if form.is_valid():
 			print(form.cleaned_data)
 			author = request.user
+			author.username = form.cleaned_data["username"]
 			author.phd_year_boundary = form.cleaned_data["phd_year"]
 			author.other_info = form.cleaned_data["other_info"]
 			author.international_student = form.cleaned_data["international_student"]

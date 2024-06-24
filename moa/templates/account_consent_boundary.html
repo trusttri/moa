@@ -10,13 +10,29 @@
 	</div>
 	<br>
 	<br>
+	
+	
 	<div>
-		<b>I want to ONLY show my experience posts and comments to people...</b>
-	</div>
-	<br>
-	<div>
+		
+
 		<form action="set/" method="post">
 	        {% csrf_token %}
+			<div>
+				<b>Set username</b>
+				<br>
+				<label for="username">This is your default username that will be shown to other users. You can also select a pseudonymous username per discussion.
+				</label>
+				<textarea class="form-control" id="username" type="text" name="username" value="" rows="1">{{ user.username }}</textarea>      
+			</div>
+
+			<br>
+			<br>
+			<br>
+
+			<div>
+				<b>I want to ONLY show my experience posts and comments to people...</b>
+			</div>
+			<br>
 	        <label for="phd_year">{{ consent_form.phd_year.label }}</label>
 	        <br>
 			<fieldset class="phd_year">
