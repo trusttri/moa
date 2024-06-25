@@ -22,6 +22,12 @@
                 <span class="tag note-consent-render-tag">{{ year }} year</span>
             {% endfor %}
         </div>  
+        <div class="note-consent-render">
+            only visible to people who experienced:
+            {% for tag in seed_note.experience_tags.all %}
+            <span class="tag advising-experience">{{ tag.keyword }}</span>
+            {% endfor %}`
+          </div>
     {% endif %}
     
     

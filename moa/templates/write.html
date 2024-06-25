@@ -76,11 +76,11 @@
               who have experienced the following in their advising relationship(s)
               <br>
               <fieldset class="experience_tags"></fieldset>
-                {% for x,y in consent_form.fields.experience_tags.choices %}
-                <input type="checkbox" name="experience_tags" id="id_experience_tags_{{ x }}" value="{{ x }}" {% if y in experience_tags %} checked {% endif %}>{{ y }}
-                <label for="id_experience_tags_{{ x }}"></label>
-                {% endfor %}
-            </fieldset>
+				        {% for x, y in consent_form.fields.experience_tags.choices %}
+					        <input type="checkbox" name="experience_tags" id="id_experience_tags_{{ x }}" value="{{ x }}" {% if y in experience_tags %} checked {% endif %}>{{ y }}
+					        <label for="id_experience_tags_{{ x }}"></label>
+				        {% endfor %}
+		  	      </fieldset>
               <br>
               <br>
               

@@ -35,7 +35,7 @@ def write_seed_note(request):
 			'international_student': author.international_student,
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
-			'experience_tags': author.experience_tags.all(),
+			'experience_tags': author.get_experience_tags(),
 			'all_experience_tag': Tag.objects.all(),
 	}
 
@@ -95,11 +95,10 @@ def send_seed_note(request):
 			n.other_info = form.cleaned_data["other_info"]
 			n.international_student = form.cleaned_data["international_student"]
 			n.first_gen = form.cleaned_data["first_gen"]
-			experiences = form.cleaned_data["experience_tags"]
-			for e in experiences:
-				print(e)
-				t = Tag.objects.get(keyword=e)
-				n.experience_tags.add(t)
+			advising_experience_tags = form.cleaned_data['experience_tags']
+			for tag_id in advising_experience_tags:
+				tag = Tag.objects.get(choice_id=int(tag_id))
+				n.experience_tags.add(tag)
 			n.save()
 		else:
 			for field in form:
