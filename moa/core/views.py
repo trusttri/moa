@@ -36,6 +36,7 @@ def write_seed_note(request):
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
 			'experience_tags': author.experience_tags.all(),
+			'all_experience_tag': Tag.objects.all(),
 	}
 
 	# return render(request, template_name, {'tag_list': tag_list, 'identity_list': identity_list})
