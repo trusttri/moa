@@ -30,10 +30,10 @@
         </div>
 
         <div>
-          <label for="tags">Tags </label>
+          <label for="tags">Tags to show others </label>
           <br>
           {% for tag in all_experience_tag %}
-            <button class="tag advising-experience">{{ tag.keyword }}</button>
+            <span class="tag advising-experience">{{ tag.keyword }}</span>
           {% endfor %}
         </div>
         
