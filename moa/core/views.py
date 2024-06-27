@@ -8,6 +8,7 @@ import json
 from .forms import NoteForm, AccountConsentBoundaryForm
 import datetime
 from uuid import UUID
+from accounts.models import CustomUser
 
 
 class UUIDEncoder(json.JSONEncoder):
@@ -42,10 +43,51 @@ def write_seed_note(request):
 	# return render(request, template_name, {'tag_list': tag_list, 'identity_list': identity_list})
 	return render(request, template_name, data)
 
+
+def is_visible_to_user(note, user):
+	phd_year_boundary = note.phd_year
+	international_student = note.international_student
+	first_gen = note.first_gen
+	experience_tags = [ e.keyword for e in note.experience_tags.all() ]
+	if phd_year_boundary:
+		if str(user.phd_year) not in phd_year_boundary:
+			return False
+	if international_student:
+		if user.is_international_student != international_student:
+			return False
+	if first_gen:
+		if user.is_first_gen != first_gen:
+			return False
+	if experience_tags:
+		if not any(tag in user.get_experience_tags() for tag in experience_tags):
+			return False
+	return True
+
 @login_required
-def notifications(request):
-	template_name = "notifications.html"
-	return render(request, template_name)
+def search_phd_students(note):
+	author = note.author
+	phd_year_boundary = note.phd_year_boundary
+	international_student = note.international_student
+	first_gen = note.first_gen
+	experience_tags = [ e.keyword for e in note.experience_tags.all() ]
+	students_to_notify = list()
+	for student in CustomUser.objects.all():
+		if student.author == author:
+			continue
+		if phd_year_boundary:
+			if str(student.phd_year) not in phd_year_boundary:
+				continue
+		if international_student:
+			if student.is_international_student != international_student:
+				continue
+		if first_gen:
+			if student.is_first_gen != first_gen:
+				continue
+		if experience_tags:
+			if not any(tag in student.get_experience_tags() for tag in experience_tags):
+				continue
+		students_to_notify.append(student)
+	return(students_to_notify)
 
 @login_required
 def notes(request):
@@ -57,23 +99,26 @@ def notes(request):
 @login_required
 def note(request):
 	n_id = request.GET.get('id')
-	print(n_id)
 	seed_note = Note.objects.filter(id=n_id)[0]
-	experience_tag_list = Tag.objects.all()
-	branch_notes = Note.objects.filter(seed_note=seed_note).order_by('created_at')
-	author = request.user
+	if is_visible_to_user(seed_note, request.user):
+		experience_tag_list = Tag.objects.all()
+		branch_notes = Note.objects.filter(seed_note=seed_note).order_by('created_at')
+		author = seed_note.author
 
-	template_name = "note.html"
-	data = {'seed_note': seed_note, 
-			'branch_notes': branch_notes, 
-			'note_form': NoteForm,
-			'seed_note_id': n_id,
-			'experience_tag_list': experience_tag_list,
-			'phd_year': author.phd_year,
-			'phd_year_boundary': author.phd_year_boundary,
-			'international_student': author.international_student,
-			'first_gen': author.first_gen,
-			}
+		template_name = "note.html"
+		data = {'seed_note': seed_note, 
+				'branch_notes': branch_notes, 
+				'note_form': NoteForm,
+				'seed_note_id': n_id,
+				'experience_tag_list': experience_tag_list,
+				'phd_year': author.phd_year,
+				'phd_year_boundary': author.phd_year_boundary,
+				'international_student': author.international_student,
+				'first_gen': author.first_gen,
+				}
+	else:
+		template_name = "restricted.html"
+		data = {'message': 'You do not have access to this note.'}
 
 	return render(request, template_name, data)
 
@@ -81,7 +126,6 @@ def note(request):
 def send_seed_note(request):
 	# if this is a POST request we need to process the form data
 	if request.method == "POST":
-		print("here")
 		# create a form instance and populate it with data from the request:
 		form = NoteForm(request.POST)
 		# check whether it's valid:
@@ -116,9 +160,7 @@ def send_seed_note(request):
 def branch_note_view(request, note_id):
 	note = Note.objects.get(id=note_id)
 	render_result = render(request, 'branch_note.html', {'note': note})
-	print(render_result)
 	return render_result
-
 
 
 @login_required
@@ -163,20 +205,23 @@ def send_note(request):
 	print(json_data)
 	return HttpResponse(json_data, content_type='application/json')
 
-# @login_required
-# def search_phd_students(notes):
+
+@login_required
+def notifications(request):
+	template_name = "notifications.html"
+	return render(request, template_name)
+
+
+@login_required
+def notify_message(note):
+	students_to_notify = search_phd_students(note)
 # 	pass
 
-# @login_required
-# def send_message(notes):
-# 	search_phd_students(notes)
-# 	pass
 
 @login_required
 def account_consent_boundary(request):
 	template_name = "account_consent_boundary.html"
 	author = request.user
-	print(author.get_experience_tags())
 	data = {'consent_form': AccountConsentBoundaryForm,
 			'phd_year': author.phd_year,
 			'phd_year_boundary': author.phd_year_boundary,
@@ -187,6 +232,7 @@ def account_consent_boundary(request):
 	}
 
 	return render(request, template_name, data)
+
 
 @login_required
 def set_account_consent_boundary(request):
