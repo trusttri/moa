@@ -52,10 +52,10 @@ def is_visible_to_user(note, user):
 	if phd_year_boundary:
 		if str(user.phd_year) not in phd_year_boundary:
 			return False
-	if international_student:
+	if international_student and international_student is True:
 		if user.is_international_student != international_student:
 			return False
-	if first_gen:
+	if first_gen and first_gen is True:
 		if user.is_first_gen != first_gen:
 			return False
 	if experience_tags:
@@ -77,10 +77,10 @@ def search_phd_students(note):
 		if phd_year_boundary:
 			if str(student.phd_year) not in phd_year_boundary:
 				continue
-		if international_student:
+		if international_student and international_student is True:
 			if student.is_international_student != international_student:
 				continue
-		if first_gen:
+		if first_gen and first_gen is True:
 			if student.is_first_gen != first_gen:
 				continue
 		if experience_tags:
