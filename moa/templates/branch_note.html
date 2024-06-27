@@ -8,7 +8,7 @@
     </div>
     {% if note.author == user %}
       <div class="note-consent-render">
-        only visible to people who identified as:
+        only visible to people who are/experienced:
         {% if note.international_student %} <span class="tag note-consent-render-tag">international student</span> {% endif %}
         {% if note.first_gen %} <span class="tag note-consent-render-tag">first-gen student</span> {% endif %}
         {% for year in note.phd_year %}
@@ -16,9 +16,6 @@
             <span class="tag note-consent-render-tag">{{ year }} year</span>
           {% endif %}
         {% endfor %}
-      </div>
-      <div class="note-consent-render">
-        only visible to people who experienced:
         {% for tag in note.experience_tags.all %}
         <span class="tag advising-experience">{{ tag.keyword }}</span>
         {% endfor %}`
