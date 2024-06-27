@@ -102,7 +102,11 @@ def note(request):
 	seed_note = Note.objects.filter(id=n_id)[0]
 	if is_visible_to_user(seed_note, request.user):
 		experience_tag_list = Tag.objects.all()
-		branch_notes = Note.objects.filter(seed_note=seed_note).order_by('created_at')
+		branch_notes_candidates = Note.objects.filter(seed_note=seed_note).order_by('created_at')
+		branch_notes = []
+		for branch_note in branch_notes_candidates:
+			if is_visible_to_user(branch_note, request.user):
+				branch_notes.append(branch_note)
 		author = seed_note.author
 
 		template_name = "note.html"
