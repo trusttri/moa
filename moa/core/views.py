@@ -149,7 +149,7 @@ def send_seed_note(request):
 			advising_experience_tags = form.cleaned_data['experience_tags']
 			for e_id in advising_experience_tags:
 				e = Experience.objects.get(choice_id=int(e_id))
-				n.experience_tags.add(e)
+				n.experiences.add(e)
 			n.save()
 		else:
 			for field in form:

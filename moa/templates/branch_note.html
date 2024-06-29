@@ -16,8 +16,8 @@
             <span class="tag note-consent-render-tag">{{ year }} year</span>
           {% endif %}
         {% endfor %}
-        {% for tag in note.experience_tags.all %}
-        <span class="tag advising-experience">{{ tag.keyword }}</span>
+        {% for e in note.experiences.all %}
+        <span class="tag advising-experience">{{ e.keyword }}</span>
         {% endfor %}`
       </div>
     {% endif %}
