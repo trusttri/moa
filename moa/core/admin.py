@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Note, Experience
+from .models import Note, Experience, Topic
 
 # Register your models here.
 class NoteInline(admin.TabularInline):
@@ -17,3 +17,11 @@ class ExperienceAdmin(admin.ModelAdmin):
 	list_display = ("keyword", "explanation", "choice_id")
 
 admin.site.register(Experience, ExperienceAdmin)
+
+class TopicInline(admin.TabularInline):
+	model = Topic
+
+class TopicAdmin(admin.ModelAdmin):
+	list_display = ("name", "description")
+
+admin.site.register(Topic, TopicAdmin)

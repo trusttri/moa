@@ -32,8 +32,8 @@
         <div>
           <label for="tags">Tags to show others </label>
           <br>
-          {% for experience in all_experience_tag %}
-            <span class="tag advising-experience">{{ experience.keyword }}</span>
+          {% for topic in all_topic_tags %}
+            <span class="tag advising-experience">{{ topic.name }}</span>
           {% endfor %}
         </div>
         

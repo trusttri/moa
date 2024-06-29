@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Note, Experience
+from .models import Note, Experience, Topic
 import json
 from .forms import NoteForm, AccountConsentBoundaryForm
 import datetime
@@ -37,7 +37,7 @@ def write_seed_note(request):
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
 			'experience_tags': author.get_experiences(),
-			'all_experience_tag': Experience.objects.all(),
+			'all_topic_tags': Topic.objects.all(),
 	}
 
 	# return render(request, template_name, {'tag_list': tag_list, 'identity_list': identity_list})
