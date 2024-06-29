@@ -178,7 +178,9 @@ def send_note(request):
 		note_seed_id = request.POST['seed_id']
 		created_at = request.POST['created_at']
 		parent_id = request.POST['parent_id']
-		advising_experience_tags = request.POST['advising_experience'].split(",")
+		advising_experience_tags = []
+		if request.POST['advising_experience'] != "":
+			advising_experience_tags = request.POST['advising_experience'].split(",")
 	
 		n = Note.objects.create(text=note_text, author=request.user, created_at=datetime.datetime.now())
 		n.seed_note = Note.objects.get(id=parent_id)
@@ -186,6 +188,8 @@ def send_note(request):
 		n.phd_year = request.POST['phd_year'].split(",")
 		n.international_student = request.POST['international_student'] == 'true'
 		n.first_gen = request.POST['first_gen'] == 'true'
+		print("debugging")
+		print(advising_experience_tags)
 		for experience_tag in advising_experience_tags:
 			e = Experience.objects.get(keyword=experience_tag)
 			n.experiences.add(e)
