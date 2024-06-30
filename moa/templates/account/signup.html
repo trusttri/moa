@@ -1,13 +1,44 @@
 {% extends "_base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %} Sign Up {% endblock title %}
 
 {% block content %}
 	<form method="post">
 		{% csrf_token %}
-		{{ form|crispy }}
-
+		{{ signup_form|crispy }}
 		<button class="btn btn-success" type="submit">Sign Up</button>
 	</form>
+   
+
+    {% block scripts %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+      }
+      const csrftoken = getCookie('csrftoken');
+
+      $(document).ready(function() {
+
+     
+          
+      });
+
+    </script>
+    {% endblock %}
+
 {% endblock content %}

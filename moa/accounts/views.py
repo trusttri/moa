@@ -13,11 +13,8 @@ from django.contrib import messages
 
 def signup(request):
 	template_name = "account/signup.html"
-	if request.method == 'POST':
-		form = CustomUserCreationForm(request.POST)
-		if form.is_valid():
-			form.save()
-	return render(request, template_name)
+
+	return render(request, template_name, {'signup_form': CustomUserCreationForm})
 
 
 class ConfirmEmailPageView(generic.CreateView):
