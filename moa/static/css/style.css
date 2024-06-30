@@ -188,3 +188,11 @@ button .reply-toggle:hover {
 .note-consent-render-tag:hover {
 	background-color: #98edb2;
 }
+
+.checkbox-inv {
+	position: fixed;
+	z-index: -10;
+	opacity: 0;
+	left: 0;
+	top: 0;
+}
