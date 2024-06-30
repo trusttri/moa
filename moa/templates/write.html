@@ -30,12 +30,12 @@
         </div>
 
         <div>
-          <label for="tags">Tags to show others </label>
+          <label for="tags">Topic tags to show others </label>
           <br>
           <fieldset class="experience_tags">
             {% for x, y in note_form.fields.topic_tags.choices %}
               <input type="checkbox" class="btn-check checkbox-inv" name="topic_tags" id="id_topic_tags_{{ x }}" value="{{ x }}">
-					    <label for="id_topic_tags_{{ x }}" class="btn btn-outline-primary tag advising-experience">{{ y }}</label>
+					    <label for="id_topic_tags_{{ x }}" class="btn btn-outline-primary topic-tag">{{ y }}</label>
             {% endfor %}
           </fieldset>
         </div>
@@ -130,6 +130,12 @@
           console.log('clicked');
           console.log($(this));
           $(this).toggleClass("selected");
+        });
+
+        $(".topic-tag").click(function() {
+          console.log('clicked');
+          console.log($(this));
+          $(this).toggleClass("topic-tag-selected");
         });
 
           
