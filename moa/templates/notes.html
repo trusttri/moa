@@ -37,8 +37,8 @@
   {% for note in note_list %}
     <div>
       <h4><a href="/note?id={{ note.id }}"> {{ note.title}} </a></h4>
-      {% for tag in note.tags.all %}
-        <button class="tag advising-experience">{{ tag.keyword }}</button>
+      {% for t in note.topics.all %}
+        <button class="tag advising-experience">{{ t.name }}</button>
       {% endfor %}
       <div class="datetime">
         {{ note.created_at }}

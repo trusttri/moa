@@ -35,7 +35,8 @@ class Note(models.Model):
 	title = models.CharField(max_length=200, null=True, blank=True)
 	text = models.TextField(blank=True)
 	created_at = models.DateTimeField(null=True, blank=True)
-
+	topics = models.ManyToManyField(Topic)
+	
 	experiences = models.ManyToManyField(Experience)
 	phd_year = models.JSONField(null=True, blank=True)
 	international_student = models.BooleanField(null=True, blank=True)

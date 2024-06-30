@@ -31,6 +31,7 @@ def write_seed_note(request):
 
 	author = request.user
 	data = {'consent_form': AccountConsentBoundaryForm,
+		 	'note_form': NoteForm,
 			'phd_year': author.phd_year,
 			'phd_year_boundary': author.phd_year_boundary,
 			'international_student': author.international_student,
@@ -147,9 +148,13 @@ def send_seed_note(request):
 			n.international_student = form.cleaned_data["international_student"]
 			n.first_gen = form.cleaned_data["first_gen"]
 			advising_experience_tags = form.cleaned_data['experience_tags']
+			topic_tags = form.cleaned_data['topic_tags']
 			for e_id in advising_experience_tags:
 				e = Experience.objects.get(choice_id=int(e_id))
 				n.experiences.add(e)
+			for t_id in topic_tags:
+				t = Topic.objects.get(id=int(t_id))
+				n.topics.add(t)
 			n.save()
 		else:
 			for field in form:

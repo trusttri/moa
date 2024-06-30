@@ -32,9 +32,12 @@
         <div>
           <label for="tags">Tags to show others </label>
           <br>
-          {% for topic in all_topic_tags %}
-            <span class="tag advising-experience">{{ topic.name }}</span>
-          {% endfor %}
+          <fieldset class="experience_tags">
+            {% for x, y in note_form.fields.topic_tags.choices %}
+              <input type="checkbox" class="btn-check checkbox-inv" name="topic_tags" id="id_topic_tags_{{ x }}" value="{{ x }}">
+					    <label for="id_topic_tags_{{ x }}" class="btn btn-outline-primary tag advising-experience">{{ y }}</label>
+            {% endfor %}
+          </fieldset>
         </div>
         
         <br>
