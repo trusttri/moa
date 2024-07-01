@@ -24,7 +24,7 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
     <textarea class="form-control reply-note-text" id="description" type="text" name="description" value="" rows="3"></textarea>
   </div>
 
-  {% include "note_consent_boundary.html" %}
+  {% include "note_consent_boundary.html" with id=seed_note_id %}
 
   <input type="submit" value="send" id="note-submit">
 </div>

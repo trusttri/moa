@@ -33,7 +33,7 @@
       <button role="button" class="btn btn-light reply-boundary"> customize consent boundary for this note  </button>
       <button role="button" class="btn btn-light reply-cancel"> cancel </button>
       <button role="button" class="btn btn-light reply-send"> send </button>
-      {% include "note_consent_boundary.html"%}
+      {% include "note_consent_boundary.html" with id=note.id %}
     </div>
       
   </div>
