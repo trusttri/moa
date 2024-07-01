@@ -26,13 +26,13 @@
     </div>
 
     <span class="datetime"> {{ note.created_at }} </span>
-    <button role="button" class="btn btn-light reply-toggle"> reply </button>
+    <button role="button" class="btn btn-light reply-toggle" id="reply-toggle-{{ note.id }}"> reply </button>
     
     <div class="reply-notebox" id="reply-notebox-{{ note.id }}" style="display: none;">
       <textarea class="reply-note-text" id="" type="text" name="" value="" rows="2"></textarea>
-      <button role="button" class="btn btn-light reply-boundary"> customize consent boundary for this note  </button>
-      <button role="button" class="btn btn-light reply-cancel"> cancel </button>
-      <button role="button" class="btn btn-light reply-send"> send </button>
+      <button role="button" class="btn btn-light reply-boundary" id="reply-boundary-{{ note.id }}"> customize consent boundary for this note  </button>
+      <button role="button" class="btn btn-light reply-cancel" id="reply-cancel-{{ note.id }}"> cancel </button>
+      <button role="button" class="btn btn-light reply-send" id="reply-send-{{ note.id }}"> send </button>
       {% include "note_consent_boundary.html" with id=note.id display="none"%}
     </div>
       
@@ -42,4 +42,3 @@
     {% include 'branch_note.html' with note=reply %}
   {% endfor %}
 </div>
-

@@ -78,6 +78,31 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
               success: function(response) {
                 // Append the fetched HTML to the note container
                 document.querySelector('#note-' + data.parentID).innerHTML += response;
+                // Add event listener to the reply toggle button
+                $('#reply-toggle-' + data.noteID).click(function(event) {
+                  if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
+                    this.parentElement.querySelector(".reply-notebox").style.display = 'none';
+                  else
+                    this.parentElement.querySelector(".reply-notebox").style.display = 'block';
+                });
+                $('#reply-send-' + data.noteID).click(function(event) {
+                  var parentID = this.parentElement.parentElement.querySelector('#note_id').value;
+                  var parentLevel = this.parentElement.parentElement.querySelector('#note_level').value;
+                  submitNote(parentID, parentLevel, this.parentElement);
+                  this.parentElement.parentElement.querySelector(".reply-notebox").style.display = 'none';
+                });
+                $('#reply-cancel-' + data.noteID).click(function(event) {
+                  if(this.parentElement.style.display == 'block')
+                    this.parentElement.style.display = 'none';
+                    this.parentElement.querySelector('.reply-note-text').value = '';
+                });
+                $('#reply-boundary-' + data.noteID).click(function(event) {
+                  if(this.parentElement.querySelector(".note-consent-boundary").style.display == 'block')
+                    this.parentElement.querySelector(".note-consent-boundary").style.display = 'none';
+                  else
+                    this.parentElement.querySelector(".note-consent-boundary").style.display = 'block';
+                });
+
               },
               error: function(error) {
                 console.error('Failed to fetch branch note:', error);
@@ -162,7 +187,6 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
         }
 
         $('#note-submit').click(function(event) {
-          console.log(this.parentElement);
           submitNote(seedNoteID, 0, this.parentElement);
         });
 
@@ -173,14 +197,14 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
           else
             this.parentElement.querySelector(".reply-notebox").style.display = 'block';
         });
-  
+
         $('.reply-send').click(function(event) {
           var parentID = this.parentElement.parentElement.querySelector('#note_id').value;
           var parentLevel = this.parentElement.parentElement.querySelector('#note_level').value;
           submitNote(parentID, parentLevel, this.parentElement);
           this.parentElement.parentElement.querySelector(".reply-notebox").style.display = 'none';
         });
-  
+
         $('.reply-cancel').click(function(event) {
           if(this.parentElement.style.display == 'block')
             this.parentElement.style.display = 'none';
@@ -201,8 +225,6 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
         });
 
       });
-
-        
 
     </script>
 
