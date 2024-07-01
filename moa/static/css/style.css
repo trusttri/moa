@@ -120,7 +120,7 @@ button:hover {
 
 .topic-tag {
 	font-size: 13px;
-    background-color: rgba(114, 0, 255, 0.1);
+    background-color: rgba(0, 172, 255, 0.22);
     color: black;
     cursor: pointer;
     border-color: #808080;
@@ -129,8 +129,9 @@ button:hover {
 	box-shadow: 0 2px 3px 0 rgba(22, 142, 228, 0.16), 0 2px 6px 0 rgba(0, 0, 0, 0.12);
 }
 
-.topic-tag:hover {
-	background-color: rgba(114, 0, 255, 0.2);
+.topic-tag:hover, .topic-tag-selected {
+	background-color: rgba(0, 110, 226, 0.78);
+	color: rgb(241, 241, 241);
 }
 
 .selected {
@@ -189,6 +190,14 @@ button .reply-toggle:hover {
 	background-color: #98edb2;
 }
 
+.checkbox-inv {
+	position: fixed;
+	z-index: -10;
+	opacity: 0;
+	left: 0;
+	top: 0;
+}
+
 .modal {
 	display: none; 
 	position: fixed; 
@@ -203,10 +212,10 @@ button .reply-toggle:hover {
 	background-color: rgba(0,0,0,0.4); 
   }
   
-  .modal-content {
+.modal-content {
 	background-color: #fefefe;
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #888;
 	width: 80%;
-  }
+}

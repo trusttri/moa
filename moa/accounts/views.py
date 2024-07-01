@@ -11,12 +11,11 @@ from django.utils import timezone
 from django.contrib import messages
 
 
+def signup(request):
+	template_name = "account/signup.html"
 
-# Create your views here.
-class SignupPageView(generic.CreateView):
-	form_class = CustomUserCreationForm
-	success_url = reverse_lazy("account_consent_boundary")
-	# template_name = "account/signup.html" # double check this
+	return render(request, template_name, {'signup_form': CustomUserCreationForm})
+
 
 class ConfirmEmailPageView(generic.CreateView):
 	success_url = reverse_lazy("account_consent_boundary")
