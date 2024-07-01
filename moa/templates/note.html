@@ -186,6 +186,13 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
             this.parentElement.style.display = 'none';
             this.parentElement.querySelector('.reply-note-text').value = '';
         });
+
+        $('.reply-boundary').click(function(event) {
+          if(this.parentElement.querySelector(".note-consent-boundary").style.display == 'block')
+            this.parentElement.querySelector(".note-consent-boundary").style.display = 'none';
+          else
+            this.parentElement.querySelector(".note-consent-boundary").style.display = 'block';
+        });
         
         $(".advising-experience").click(function() {
           console.log('clicked');

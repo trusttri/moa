@@ -154,12 +154,7 @@ button .reply-toggle:hover {
 	margin-bottom: 3px;
 }
 
-.reply-cancel {
-	padding: 0.5px 2px 0.5px 2px;
-	font-size: 13px;
-}
-
-.reply-send {
+.reply-notebox button {
 	padding: 0.5px 2px 0.5px 2px;
 	font-size: 13px;
 }
@@ -170,6 +165,7 @@ button .reply-toggle:hover {
 
 .note-consent-boundary {
 	font-size: 14px;
+	display: none;
 }
 
 .note-consent-boundary-row {
