@@ -36,7 +36,7 @@
 
   {% for note in note_list %}
     <div>
-      <h4><a href="/note?id={{ note.id }}"> {{ note.title}} </a></h4>
+      <h4><a href="/note?id={{ note.id }}"> {{ note.title }} </a></h4>
       {% for t in note.topics.all %}
         <button class="topic-tag">{{ t.name }}</button>
       {% endfor %}
