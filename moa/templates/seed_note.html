@@ -21,8 +21,8 @@
             {% for year in note.phd_year %}
                 <span class="tag note-consent-render-tag">{{ year }} year</span>
             {% endfor %}
-            {% for tag in seed_note.experience_tags.all %}
-            <span class="tag advising-experience">{{ tag.keyword }}</span>
+            {% for e in seed_note.experiences.all %}
+            <span class="tag advising-experience">{{ e.keyword }}</span>
             {% endfor %}`
           </div>
     {% endif %}

@@ -23,6 +23,16 @@ class NoteForm(forms.Form):
         (10, '10')
     ]
 
+    TOPIC_CHOICES= [
+        (1, "credit issue"),
+        (2, "fraud"),
+        (3, "ghosting"),
+        (4, "harassment"),
+        (5, "microaggression"),
+        (6, "micromanagement"),
+        (7, "threat")   
+    ]
+
     EXPERIENCE_CHOICES= [
         (1, "credit issue"),
         (2, "fraud"),
@@ -32,6 +42,14 @@ class NoteForm(forms.Form):
         (6, "micromanagement"),
         (7, "threat")   
     ]
+
+    topic_tags = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        label="Tag(s) for informing other users about the topic",
+        choices=TOPIC_CHOICES,
+        required=False,
+        initial=False
+    )
 
     phd_year = forms.MultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Note, Tag
+from .models import Note, Experience, Topic
 import json
 from .forms import NoteForm, AccountConsentBoundaryForm
 import datetime
@@ -31,13 +31,14 @@ def write_seed_note(request):
 
 	author = request.user
 	data = {'consent_form': AccountConsentBoundaryForm,
+		 	'note_form': NoteForm,
 			'phd_year': author.phd_year,
 			'phd_year_boundary': author.phd_year_boundary,
 			'international_student': author.international_student,
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
-			'experience_tags': author.get_experience_tags(),
-			'all_experience_tag': Tag.objects.all(),
+			'experience_tags': author.get_experiences(),
+			'all_topic_tags': Topic.objects.all(),
 	}
 
 	# return render(request, template_name, {'tag_list': tag_list, 'identity_list': identity_list})
@@ -48,7 +49,7 @@ def is_visible_to_user(note, user):
 	phd_year_boundary = note.phd_year
 	international_student = note.international_student
 	first_gen = note.first_gen
-	experience_tags = [ e.keyword for e in note.experience_tags.all() ]
+	experience_tags = [ e.keyword for e in note.experiences.all() ]
 	if phd_year_boundary:
 		if str(user.phd_year) not in phd_year_boundary:
 			return False
@@ -59,7 +60,7 @@ def is_visible_to_user(note, user):
 		if user.is_first_gen != first_gen:
 			return False
 	if experience_tags:
-		if not any(tag in user.get_experience_tags() for tag in experience_tags):
+		if not any(e in user.get_experiences() for e in experience_tags):
 			return False
 	return True
 
@@ -69,7 +70,7 @@ def search_phd_students(note):
 	phd_year_boundary = note.phd_year_boundary
 	international_student = note.international_student
 	first_gen = note.first_gen
-	experience_tags = [ e.keyword for e in note.experience_tags.all() ]
+	experience_tags = [ e.keyword for e in note.experiences.all() ]
 	students_to_notify = list()
 	for student in CustomUser.objects.all():
 		if student.author == author:
@@ -84,7 +85,7 @@ def search_phd_students(note):
 			if student.is_first_gen != first_gen:
 				continue
 		if experience_tags:
-			if not any(tag in student.get_experience_tags() for tag in experience_tags):
+			if not any(e in student.get_experiences() for e in experience_tags):
 				continue
 		students_to_notify.append(student)
 	return(students_to_notify)
@@ -101,7 +102,7 @@ def note(request):
 	n_id = request.GET.get('id')
 	seed_note = Note.objects.filter(id=n_id)[0]
 	if request.user.is_superuser or is_visible_to_user(seed_note, request.user):
-		experience_tag_list = Tag.objects.all()
+		experience_tag_list = Experience.objects.all()
 		branch_notes_candidates = Note.objects.filter(seed_note=seed_note).order_by('created_at')
 		branch_notes = []
 		if request.user.is_superuser:
@@ -147,9 +148,13 @@ def send_seed_note(request):
 			n.international_student = form.cleaned_data["international_student"]
 			n.first_gen = form.cleaned_data["first_gen"]
 			advising_experience_tags = form.cleaned_data['experience_tags']
-			for tag_id in advising_experience_tags:
-				tag = Tag.objects.get(choice_id=int(tag_id))
-				n.experience_tags.add(tag)
+			topic_tags = form.cleaned_data['topic_tags']
+			for e_id in advising_experience_tags:
+				e = Experience.objects.get(choice_id=int(e_id))
+				n.experiences.add(e)
+			for t_id in topic_tags:
+				t = Topic.objects.get(id=int(t_id))
+				n.topics.add(t)
 			n.save()
 		else:
 			for field in form:
@@ -178,7 +183,9 @@ def send_note(request):
 		note_seed_id = request.POST['seed_id']
 		created_at = request.POST['created_at']
 		parent_id = request.POST['parent_id']
-		advising_experience_tags = request.POST['advising_experience'].split(",")
+		advising_experience_tags = []
+		if request.POST['advising_experience'] != "":
+			advising_experience_tags = request.POST['advising_experience'].split(",")
 	
 		n = Note.objects.create(text=note_text, author=request.user, created_at=datetime.datetime.now())
 		n.seed_note = Note.objects.get(id=parent_id)
@@ -186,9 +193,11 @@ def send_note(request):
 		n.phd_year = request.POST['phd_year'].split(",")
 		n.international_student = request.POST['international_student'] == 'true'
 		n.first_gen = request.POST['first_gen'] == 'true'
+		print("debugging")
+		print(advising_experience_tags)
 		for experience_tag in advising_experience_tags:
-			tag = Tag.objects.get(keyword=experience_tag)
-			n.experience_tags.add(tag)
+			e = Experience.objects.get(keyword=experience_tag)
+			n.experiences.add(e)
 		n.save()
 		data = {'state': 'SUCCESS', 'noteID': str(n.id), 'parentID': str(parent_id)}
 		# form = NoteForm(request.POST)
@@ -235,7 +244,7 @@ def account_consent_boundary(request):
 			'international_student': author.international_student,
 			'first_gen': author.first_gen,
 			'other_info': author.other_info,
-			'experience_tags': author.get_experience_tags(),
+			'experience_tags': author.get_experiences(),
 	}
 
 	return render(request, template_name, data)
@@ -256,9 +265,9 @@ def set_account_consent_boundary(request):
 			author.first_gen = form.cleaned_data["first_gen"]
 
 			advising_experience_tags = form.cleaned_data['experience_tags']
-			for tag_id in advising_experience_tags:
-				tag = Tag.objects.get(choice_id=int(tag_id))
-				author.experience_tags.add(tag)
+			for e_id in advising_experience_tags:
+				e = Experience.objects.get(choice_id=int(e_id))
+				author.experiences.add(e)
 
 			author.save()
 		else:

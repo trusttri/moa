@@ -22,7 +22,7 @@ class CustomUserAdmin(UserAdmin):
 					"phd_year_boundary",
 					"international_student",
 					"first_gen",
-					"experience_tags",
+					"experiences",
 					"other_info",
                 ),
             },
@@ -39,7 +39,7 @@ class CustomUserAdmin(UserAdmin):
 		"phd_year_boundary",
 		"international_student",
 		"first_gen",
-		"get_experience_tags",
+		"get_experiences",
 		"other_info",
 	]
 

@@ -30,11 +30,14 @@
         </div>
 
         <div>
-          <label for="tags">Tags to show others </label>
+          <label for="tags">Topic tags to show others </label>
           <br>
-          {% for tag in all_experience_tag %}
-            <span class="tag advising-experience">{{ tag.keyword }}</span>
-          {% endfor %}
+          <fieldset class="experience_tags">
+            {% for x, y in note_form.fields.topic_tags.choices %}
+              <input type="checkbox" class="btn-check checkbox-inv" name="topic_tags" id="id_topic_tags_{{ x }}" value="{{ x }}">
+					    <label for="id_topic_tags_{{ x }}" class="btn btn-outline-primary topic-tag">{{ y }}</label>
+            {% endfor %}
+          </fieldset>
         </div>
         
         <br>
@@ -75,10 +78,10 @@
 
               who have experienced the following in their advising relationship(s)
               <br>
-              <fieldset class="experience_tags"></fieldset>
+              <fieldset class="experience_tags">
 				        {% for x, y in consent_form.fields.experience_tags.choices %}
-					        <input type="checkbox" name="experience_tags" id="id_experience_tags_{{ x }}" value="{{ x }}" {% if y in experience_tags %} checked {% endif %}>{{ y }}
-					        <label for="id_experience_tags_{{ x }}"></label>
+				          <input type="checkbox" class="btn-check checkbox-inv" name="experience_tags" id="id_experience_tags_{{ x }}" value="{{ x }}" {% if y in experience_tags %} checked {% endif %}>
+					        <label for="id_experience_tags_{{ x }}" class="btn btn-outline-primary tag advising-experience {% if y in experience_tags %} selected {% endif %}">{{ y }}</label>
 				        {% endfor %}
 		  	      </fieldset>
               <br>
@@ -127,6 +130,12 @@
           console.log('clicked');
           console.log($(this));
           $(this).toggleClass("selected");
+        });
+
+        $(".topic-tag").click(function() {
+          console.log('clicked');
+          console.log($(this));
+          $(this).toggleClass("topic-tag-selected");
         });
 
           
