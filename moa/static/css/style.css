@@ -143,6 +143,7 @@ button:hover {
 	font-size: 13px;
 	font-weight: 400;
 	padding: 0px 2px 0px 2px;
+	background: #94bfb13d;
 }
 
 button .reply-toggle:hover {
@@ -157,6 +158,7 @@ button .reply-toggle:hover {
 .reply-notebox button {
 	padding: 0.5px 2px 0.5px 2px;
 	font-size: 13px;
+	background: #94bfb13d;
 }
 
 .reply-note-text {
