@@ -15,7 +15,6 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
   {% for note in branch_notes %}
     {% include "branch_note.html" with note=note %}
   {% endfor %}
-
 </div>
 
 <div class="container">
@@ -192,10 +191,13 @@ Keep in mind that again, *everyone's consent boundaries are different*. Because 
 
         // Code for toggling the reply box for each note
         $('.reply-toggle').click(function(event) {
-          if(this.parentElement.querySelector(".reply-notebox").style.display == 'block')
+          if(this.parentElement.querySelector(".reply-notebox").style.display == 'block') {
+            console.log("toggle none");
             this.parentElement.querySelector(".reply-notebox").style.display = 'none';
-          else
+          } else {
+            console.log("toggle block");
             this.parentElement.querySelector(".reply-notebox").style.display = 'block';
+          }
         });
 
         $('.reply-send').click(function(event) {
