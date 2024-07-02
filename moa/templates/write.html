@@ -44,9 +44,19 @@
         <br>
         <!-- <input type="submit" value="submit">
       </form> -->
+        <div>
+          <h5>2. Set username</h5>
+            <label for="username_pseudo">Feel free to select another username for this note. Once you choose a username, it will remain the same per note.
+				    </label>
+				    <textarea class="form-control" id="username_pseudo" type="text" name="username_pseudo" value="" rows="1">{{ user.username }}</textarea>      
+
+        </div>
+
+        <br>
+        <br>
 
         <div class="audience-customize experience">
-          <h5>2. Set consent boundary for this note</h5>
+          <h5>3. Set consent boundary for this note</h5>
           <br>
           <!-- Feel free to customize your consent boundary for this individual experience. -->
           <h6>I want to ONLY show this note to people...</h6>

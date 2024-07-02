@@ -81,6 +81,8 @@ class NoteForm(forms.Form):
         initial=False
     )
 
+    username_pseudo = forms.CharField(required=False, initial=False)
+
     other_info = forms.CharField(
         required=False,
         initial=False

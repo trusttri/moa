@@ -113,6 +113,11 @@ def note(request):
 					branch_notes.append(branch_note)
 		author = seed_note.author
 
+		if seed_note.username_pseudo:
+			username = seed_note.username_pseudo
+		else:
+			username = seed_note.author.username
+
 		template_name = "note.html"
 		data = {'seed_note': seed_note, 
 				'branch_notes': branch_notes, 
@@ -123,6 +128,7 @@ def note(request):
 				'phd_year_boundary': author.phd_year_boundary,
 				'international_student': author.international_student,
 				'first_gen': author.first_gen,
+				'username': username
 				}
 	else:
 		template_name = "restricted.html"
@@ -147,6 +153,7 @@ def send_seed_note(request):
 			n.other_info = form.cleaned_data["other_info"]
 			n.international_student = form.cleaned_data["international_student"]
 			n.first_gen = form.cleaned_data["first_gen"]
+			n.username_pseudo = form.cleaned_data["username_pseudo"]
 			advising_experience_tags = form.cleaned_data['experience_tags']
 			topic_tags = form.cleaned_data['topic_tags']
 			for e_id in advising_experience_tags:
